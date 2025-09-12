@@ -223,3 +223,26 @@ jekyll-archives:
   permalinks:
     tag: /tags/:name/
     category: /categories/:name/
+
+# 使用 kramdown 作为 Markdown 解析器，它支持更多扩展
+markdown: kramdown
+
+# kramdown 的配置
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  # 启用扩展语法
+  parse_block_html: true
+  enable_coderay: false
+
+# Chirpy 主题扩展配置（如果存在）
+chirpy:
+  # 尝试启用提示框支持
+  admonition: true
+
+# 数学公式支持
+math: true
+math_engine: mathjax  # 或者 katex
+
+# 在需要数学公式的文章Front Matter中添加：
+# math: true
