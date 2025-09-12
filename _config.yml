@@ -246,3 +246,11 @@ math_engine: mathjax  # 或者 katex
 
 # 在需要数学公式的文章Front Matter中添加：
 # math: true
+
+# 启用插件
+plugins:
+  - jekyll-notes  # 添加这一行
+
+# 配置提示框样式
+notes:
+  style: github  # 使用GitHub风格的样式
