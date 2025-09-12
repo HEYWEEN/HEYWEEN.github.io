@@ -15,5 +15,5 @@ gem "wdm", "~> 0.2.0", :platforms => [:mingw, :x64_mingw, :mswin]
 
 group :jekyll_plugins do
   # ... 其他插件 ...
-  gem "jekyll-notes", "~> 0.2.0"  # 添加这一行
+  gem "jekyll-notes", "~> 0.1.1"  # 改为这个存在的版本
 end
