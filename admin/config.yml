@@ -2,7 +2,8 @@ backend:
   name: github
   repo: HEYWEEN/HEYWEEN.github.io # 你的仓库地址
   branch: master # 你的分支名
-
+  site_domain: heyween-blog.netlify.app # 你的 Netlify 站点域名
+  
 media_folder: "assets/images/uploads" # 上传图片的存放目录
 public_folder: "/assets/images/uploads" # 网站访问图片的路径
 
