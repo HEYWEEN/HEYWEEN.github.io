@@ -64,3 +64,19 @@ div.highlight pre,
 pre {
     overflow-x: auto; /* 改为自动而不是隐藏 */
 }
+
+/* append your custom style below */
+
+/* 精确针对你网站上的Prism代码块 */
+.language-plaintext code,
+.language-sql code, 
+pre[class*="language-"] code[class*="language-"] {
+    white-space: pre-wrap !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+}
+
+/* 只针对代码内容，不影响其他元素 */
+.token {
+    white-space: pre-wrap !important;
+}
