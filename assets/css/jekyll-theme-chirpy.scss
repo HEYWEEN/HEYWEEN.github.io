@@ -9,3 +9,8 @@
 ';
 
 /* append your custom style below */
+
+pre, code, [class*="language-"] {
+  white-space: pre-wrap !important;
+  word-wrap: break-word !important;
+}
