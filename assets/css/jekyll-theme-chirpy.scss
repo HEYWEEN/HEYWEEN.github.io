@@ -34,3 +34,33 @@ code:not([class*="language-"]) {
   white-space: normal !important;
   word-break: break-word !important;
 }
+
+/* append your custom style below */
+
+/* 针对Prism.js代码块的核心解决方案 */
+pre[class*="language-"] code[class*="language-"],
+pre code {
+    white-space: pre-wrap !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+}
+
+/* 确保所有代码相关的元素都能换行 */
+code, pre, .token {
+    white-space: pre-wrap !important;
+}
+
+/* 针对代码块容器的强制换行 */
+.highlight pre,
+div.highlight pre,
+.language-plaintext highlighter-rouge pre {
+    white-space: pre-wrap !important;
+    code {
+        white-space: pre-wrap !important;
+    }
+}
+
+/* 移除可能阻止换行的属性 */
+pre {
+    overflow-x: auto; /* 改为自动而不是隐藏 */
+}
