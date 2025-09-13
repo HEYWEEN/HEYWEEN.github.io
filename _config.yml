@@ -16,10 +16,10 @@ timezone: Asia/Shanghai
 
 title: 何翌闻的博客 # the main title
 
-tagline: 记录在南京大学软件学院的学习笔记与思考
+tagline: 当时只记入山深，青溪几度到云林
 
 description: >- # used by seo meta and the atom feed
-  何翌闻在南京大学软件学院学习时的课堂笔记，以及一些生活随笔和思考等内容
+   南京大学软件学院本科生何翌闻的博客，分享数据结构、算法、计算机组成等课程笔记，编程实践技巧与项目经验，记录大学生活思考。
 
 # Fill in the protocol & hostname for your site.
 # E.g. 'https://username.github.io', note that it does not end with a '/'.
