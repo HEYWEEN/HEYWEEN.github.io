@@ -14,3 +14,23 @@ pre, code, [class*="language-"] {
   white-space: pre-wrap !important;
   word-wrap: break-word !important;
 }
+
+/* 新增针对Prism.js的更具体规则 */
+pre[class*="language-"],
+code[class*="language-"] {
+  white-space: pre-wrap !important;
+  word-break: break-word !important;
+  overflow-wrap: break-word !important;
+}
+
+/* 确保代码容器也能换行 */
+pre.code-container,
+pre {
+  white-space: pre-wrap !important;
+}
+
+/* 针对行内代码 */
+code:not([class*="language-"]) {
+  white-space: normal !important;
+  word-break: break-word !important;
+}
