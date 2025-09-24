@@ -248,3 +248,39 @@ math_engine: mathjax  # 或者 katex
 # 在需要数学公式的文章Front Matter中添加：
 # math: true
 
+// 修复带行号的代码块换行问题
+.highlight {
+  overflow-x: auto;
+  
+  table {
+    width: auto !important;
+    
+    pre {
+      code {
+        white-space: pre-wrap !important;
+        word-wrap: break-word !important;
+        word-break: break-word !important;
+      }
+    }
+  }
+  
+  // 确保行号列固定宽度
+  .rouge-gutter {
+    width: 3em !important;
+    min-width: 3em !important;
+  }
+  
+  // 代码内容区域自适应
+  .rouge-code {
+    width: auto !important;
+    
+    pre {
+      margin: 0;
+      
+      code {
+        white-space: pre-wrap !important;
+        word-wrap: break-word !important;
+      }
+    }
+  }
+}
