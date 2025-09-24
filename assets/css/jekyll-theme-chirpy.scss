@@ -1,7 +1,23 @@
+// ---
+// ---
+
+// /* prettier-ignore */
+// @use 'main
+// {%- if jekyll.environment == 'production' -%}
+//   .bundle
+// {%- endif -%}
+// ';
+
+// /* append your custom style below */
+
+// pre, code, [class*="language-"] {
+//   white-space: pre-wrap !important;
+//   word-wrap: break-word !important;
+// }
+
 ---
 ---
 
-/* prettier-ignore */
 @use 'main
 {%- if jekyll.environment == 'production' -%}
   .bundle
@@ -9,74 +25,84 @@
 ';
 
 /* append your custom style below */
+@use 'colors/light';
+@use 'colors/dark';
+@use "animation.scss";    // 背景动画样式
+@use "colorbox.scss";     // colorbox 样式
+@use "details.scss";      // details 元素样式
 
-pre, code, [class*="language-"] {
-  white-space: pre-wrap !important;
-  word-wrap: break-word !important;
+/* 首页预览 post 标题字体加粗 */
+// #post-list .card-title {
+//   font-weight: bold;
+// }
+
+/* 主页 post 列表加阴影 */
+// #post-list .card {
+//     border-radius: 0.7rem;
+//     box-shadow: var(--language-border-color) 1px 1px 2px 1px;
+// }
+
+// prompt 边框阴影
+blockquote[class^='prompt-']{
+    box-shadow: var(--language-border-color) 1px 1px 2px 1px; /* 借用了代码框的边框颜色变量 */
 }
 
-/* 新增针对Prism.js的更具体规则 */
-pre[class*="language-"],
-code[class*="language-"] {
-  white-space: pre-wrap !important;
-  word-break: break-word !important;
-  overflow-wrap: break-word !important;
+// 代码框左上角颜色
+// div[class^=language-] .code-header::before{
+//   background-color: #fc625d;
+//   box-shadow: 1.25rem 0 0 #fdbc40, 2.5rem 0 0 #35cd4b;
+// }
+
+
+/* 侧边栏背景图片添加 */
+#sidebar {
+    background-image: url(https://cdn.jsdelivr.net/gh/huanyushi/blog-images@main/img/background2.png); /* <- change background image */
+    background-size: cover; /* <- customize the image size */
+    background-repeat: no-repeat; /* <- no-repeat */
+    background-position: top; /* <- image position */
 }
 
-/* 确保代码容器也能换行 */
-pre.code-container,
-pre {
-  white-space: pre-wrap !important;
+/* 侧边栏相关文字样式设置 */
+#sidebar .site-title {
+    color: #ffffff; 
+    text-shadow: 5px 5px 10px rgba(0,0,0,0.5);
+}
+#sidebar .site-subtitle {
+    color: #ffffff;
+    text-shadow: 2px 2px 3px rgba(0,0,0, 0.7);
+}
+#sidebar ul li.nav-item a.nav-link span{
+    font-size: 100%;
+}
+#sidebar ul li.nav-item a.nav-link {
+    color: #ffffff;
 }
 
-/* 针对行内代码 */
-code:not([class*="language-"]) {
-  white-space: normal !important;
-  word-break: break-word !important;
+// 让目录不产生折叠效果
+.is-collapsed {
+  max-height: none !important;
 }
 
-/* append your custom style below */
-
-/* 针对Prism.js代码块的核心解决方案 */
-pre[class*="language-"] code[class*="language-"],
-pre code {
-    white-space: pre-wrap !important;
-    word-break: break-word !important;
-    overflow-wrap: break-word !important;
-}
-
-/* 确保所有代码相关的元素都能换行 */
-code, pre, .token {
-    white-space: pre-wrap !important;
-}
-
-/* 针对代码块容器的强制换行 */
-.highlight pre,
-div.highlight pre,
-.language-plaintext highlighter-rouge pre {
-    white-space: pre-wrap !important;
-    code {
-        white-space: pre-wrap !important;
+html {
+  @media (prefers-color-scheme: light) {
+    &:not([data-mode]),
+    &[data-mode='light'] {
+      @include light.styles;
     }
-}
 
-/* 移除可能阻止换行的属性 */
-pre {
-    overflow-x: auto; /* 改为自动而不是隐藏 */
-}
+    &[data-mode='dark'] {
+      @include dark.styles;
+    }
+  }
 
-/* append your custom style below */
+  @media (prefers-color-scheme: dark) {
+    &:not([data-mode]),
+    &[data-mode='dark'] {
+      @include dark.styles;
+    }
 
-/* 精确针对你网站上的Prism代码块 */
-.language-plaintext code,
-.language-sql code, 
-pre[class*="language-"] code[class*="language-"] {
-    white-space: pre-wrap !important;
-    word-break: break-word !important;
-    overflow-wrap: break-word !important;
-}
-
-/* 只针对代码内容，不影响其他元素 */
-.token {
-    white-space: pre-wrap !important;
+    &[data-mode='light'] {
+      @include light.styles;
+    }
+  }
 }
