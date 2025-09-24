@@ -6,9 +6,9 @@
 # - type: twitter
 #   icon: "fa-brands fa-x-twitter"
 
-- type: zhihu
-  icon: "fab fa-zhihu"
-  url: 'https://www.zhihu.com/people/za-ran-zhu-fu-liu-xing'
+- type: bilibili
+  icon: "fab fa-bilibili"  # 如果有这个图标
+  url: "https://space.bilibili.com/322603862?spm_id_from=333.1007.0.0"
 
 
 # - type: stack-exchange
