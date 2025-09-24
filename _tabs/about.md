@@ -4,8 +4,6 @@ icon: fas fa-info-circle
 order: 4
 ---
 
-# About Me
-
 Hi there! I'm Yiwen He, an undergraduate student in Software Engineering at Nanjing University's Software Institute, enrolled in 2024.
 
 ## 🎓 Education:
