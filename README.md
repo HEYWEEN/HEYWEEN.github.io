@@ -1,84 +1,67 @@
-<!-- markdownlint-disable-next-line -->
-<div align="center">
+# Theory of Everything | [Huanyu Shi's Blog](https://huanyushi.github.io/) 
 
-  <!-- markdownlint-disable-next-line -->
-  # Chirpy Jekyll Theme
+This site is made with [Jekyll](https://jekyllrb.com/) using the beautiful [Chirpy](https://github.com/cotes2020/jekyll-theme-chirpy/) theme. Thanks to the contributors for their work.
 
-  A minimal, responsive, and feature-rich Jekyll theme for technical writing.
+## Customization
+Based on Chipy, I've made lots of customization, and I have blogged about these changes. You can see [Chirpy Blog Customization](https://huanyushi.github.io/posts/Chirpy-Blog-Customization/) to get more details (Note that it was written in Chinese).
 
-  [![CI](https://img.shields.io/github/actions/workflow/status/cotes2020/jekyll-theme-chirpy/ci.yml?logo=github)][ci]&nbsp;
-  [![Codacy Badge](https://img.shields.io/codacy/grade/4e556876a3c54d5e8f2d2857c4f43894?logo=codacy)][codacy]&nbsp;
-  [![GitHub license](https://img.shields.io/github/license/cotes2020/jekyll-theme-chirpy?color=goldenrod)][license]&nbsp;
-  [![Gem Version](https://img.shields.io/gem/v/jekyll-theme-chirpy?&logo=RubyGems&logoColor=ghostwhite&label=gem&color=orange)][gem]&nbsp;
-  [![Open in Dev Containers](https://img.shields.io/badge/Dev_Containers-Open-deepskyblue?logo=linuxcontainers)][open-container]
+What I have done:
+- Modify the MathJax config file to load the physics package.
+- Add a background image to the sidebar and modify the associated text styles.
+- Add friend links in the sidebar (see this [discussion](https://github.com/cotes2020/jekyll-theme-chirpy/discussions/1677)).
+- <del>Make Further Reading display the latest posts (see this [PR](https://github.com/cotes2020/jekyll-theme-chirpy/pull/1699)).</del> (This PR has been merged after Chirpy v6.5.5)
+- Add site statistics from 'buanzi'([不蒜子](https://busuanzi.ibruce.info/)) in the footer.
+- Add background animation (refer to [@NichtsHsu](https://nihil.cc/)).
+- Add GitHub contribution graph (via [gh-contrib-graph](https://github.com/lengthylyova/gh-contrib-graph)).
 
-  [**Live Demo** →][demo]
+- Add 4 new prompts (see this [discussion](https://github.com/cotes2020/jekyll-theme-chirpy/discussions/1707)).
 
-  [![Devices Mockup](https://chirpy-img.netlify.app/commons/devices-mockup.png)][demo]
+<table>
+<tr>
+   <th>Light</th>
+   <th>Dark</th>
+</tr>
+<tr>
+<td><img src="assets/img/readme/colorbox-light.PNG" alt="colorbox-light"></td>
+<td><img src="assets/img/readme/colorbox-dark.PNG" alt="colorbox-dark"></td>
+</tr>
+<tr>
+<td><img src="assets/img/readme/colorbox-notitle-light.PNG" alt="colorbox-notitle-light"></td>
+<td><img src="assets/img/readme/colorbox-notitle-dark.PNG" alt="colorbox-notitle-dark"></td>
+</tr>
+</table>
 
-</div>
+- Modified the style of the `details` element.
 
-## Features
+<table>
+    <tr>
+        <th>Close</th>
+        <td><img src="assets/img/readme/details-close.PNG" alt="details-close"></td>
+    </tr>
+    <tr>
+        <th>Open</th>
+        <td><img src="assets/img/readme/details-open.PNG" alt="details-open"></td>
+    </tr>
+</table>
 
-- Dark Theme
-- Localized UI language
-- Pinned Posts on Home Page
-- Hierarchical Categories
-- Trending Tags
-- Table of Contents
-- Last Modified Date
-- Syntax Highlighting
-- Mathematical Expressions
-- Mermaid Diagrams & Flowcharts
-- Dark Mode Images
-- Embed Media
-- Comment Systems
-- Built-in Search
-- Atom Feeds
-- PWA
-- Web Analytics
-- SEO & Performance Optimization
+- Python implementation for LQIP (Low Quality Image Placeholders) (see this [discussion](https://github.com/cotes2020/jekyll-theme-chirpy/discussions/1685)).
+- Python implementation for Inverted image.
 
-## Documentation
+## Introduction
+Here, I share study notes and ideas related to my research journey. While updates may be irregular, feel free to drop by anytime to explore. Your visit is appreciated!
 
-To learn how to use, develop, and upgrade the project, please refer to the [Wiki][wiki].
+Some study notes include:
 
-## Contributing
+- [Quantum Many-Particle Theory](https://huanyushi.github.io/categories/quantum-many-particle-theory/)
+- [Python Study Notes](https://huanyushi.github.io/categories/python/)
+- ...
 
-Contributions (_pull requests_, _issues_, and _discussions_) are what make the open-source community such an amazing place
-to learn, inspire, and create. Any contributions you make are greatly appreciated.
-For details, see the "[Contributing Guidelines][contribute-guide]".
-
-## Credits
-
-### Contributors
-
-Thanks to [all the contributors][contributors] involved in the development of the project!
-
-[![all-contributors](https://contrib.rocks/image?repo=cotes2020/jekyll-theme-chirpy&columns=16)][contributors]
-<sub> — Made with [contrib.rocks](https://contrib.rocks)</sub>
-
-### Third-Party Assets
-
-This project is built on the [Jekyll][jekyllrb] ecosystem and some [great libraries][lib], and is developed using [VS Code][vscode] as well as tools provided by [JetBrains][jetbrains] under a non-commercial open-source software license.
-
-The avatar and favicon for the project's website are from [ClipartMAX][clipartmax].
+PDFs:
+- [Summaries of Zhihu Answers](https://huanyushi.github.io/posts/Mathematics-For-Zhihu/)
+- [LaTeX Lab Report Template](https://huanyushi.github.io/posts/LabReport-Template/)
+- [TikZ Examples](https://huanyushi.github.io/posts/Tikz-Example-Contour-Integration/)
+- ...
 
 ## License
 
-This project is published under [MIT License][license].
-
-[gem]: https://rubygems.org/gems/jekyll-theme-chirpy
-[ci]: https://github.com/cotes2020/jekyll-theme-chirpy/actions/workflows/ci.yml?query=event%3Apush+branch%3Amaster
-[codacy]: https://app.codacy.com/gh/cotes2020/jekyll-theme-chirpy/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade
-[license]: https://github.com/cotes2020/jekyll-theme-chirpy/blob/master/LICENSE
-[open-container]: https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/cotes2020/jekyll-theme-chirpy
-[jekyllrb]: https://jekyllrb.com/
-[clipartmax]: https://www.clipartmax.com/middle/m2i8b1m2K9Z5m2K9_ant-clipart-childrens-ant-cute/
-[demo]: https://cotes2020.github.io/chirpy-demo/
-[wiki]: https://github.com/cotes2020/jekyll-theme-chirpy/wiki
-[contribute-guide]: https://github.com/cotes2020/jekyll-theme-chirpy/blob/master/docs/CONTRIBUTING.md
-[contributors]: https://github.com/cotes2020/jekyll-theme-chirpy/graphs/contributors
-[lib]: https://github.com/cotes2020/chirpy-static-assets
-[vscode]: https://code.visualstudio.com/
-[jetbrains]: https://www.jetbrains.com/?from=jekyll-theme-chirpy
+This work is published under [MIT](LICENSE) License.
