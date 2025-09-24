@@ -91,4 +91,21 @@ html {
 }
 
 
+/* 调整头像尺寸 */
+#avatar {
+  width: 120px !important;
+  height: 120px !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+}
 
+/* 确保头像容器也调整 */
+.site-avatar {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.site-avatar img {
+  border: 3px solid var(--avatar-border-color) !important;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3) !important;
+}
