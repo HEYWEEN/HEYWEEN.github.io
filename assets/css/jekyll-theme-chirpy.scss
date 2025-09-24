@@ -39,10 +39,10 @@ blockquote[class^='prompt-']{
 
 /* 侧边栏背景图片添加 */
 #sidebar {
-    background-image: "assets/css/favicons/ground.png"; /* <- change background image */
-    background-size: cover; /* <- customize the image size */
-    background-repeat: no-repeat; /* <- no-repeat */
-    background-position: top; /* <- image position */
+    background-image: url("https://cdn.jsdelivr.net/gh/HEYWEEN/images@main/images/ground.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top;
 }
 
 /* 侧边栏相关文字样式设置 */
@@ -88,24 +88,4 @@ html {
       @include light.styles;
     }
   }
-}
-
-
-/* 调整头像尺寸 */
-#avatar {
-  width: 120px !important;
-  height: 120px !important;
-  border-radius: 50% !important;
-  object-fit: cover !important;
-}
-
-/* 确保头像容器也调整 */
-.site-avatar {
-  text-align: center;
-  margin-bottom: 1rem;
-}
-
-.site-avatar img {
-  border: 3px solid var(--avatar-border-color) !important;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3) !important;
 }
