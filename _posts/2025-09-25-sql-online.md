@@ -6,7 +6,9 @@ tags: [插件]     # 你的标签
 math: true
 ---
 
-<!-- SQL 在线练习 -->
-
-<iframe src="https://sqliteonline.com/" width="100%" height="400px"></iframe>
-
+<iframe
+  src="http://sqlfiddle.com/"
+  width="100%"
+  height="600px"
+  style="border: 1px solid #ccc;">
+</iframe>
