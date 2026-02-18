@@ -9,14 +9,6 @@ Hi there! I'm Yiwen He, an undergraduate student in Software Engineering at Nanj
 ## 🎓 Education:
 - 2024/09 - Present: B.E. in Software Engineering, Software Institute, Nanjing University, China
 
-## 🔍 Keywords:
-
-* Software Engineering Undergraduate
-* Programming Enthusiast / Technology Explorer
-* C++ / Python / Web Development
-* Chinese / English
-* Open Source Contributor
-
 ## 🌐 Online Presence:
 
 * [GitHub](https://github.com/HEYWEEN)
@@ -26,13 +18,10 @@ Hi there! I'm Yiwen He, an undergraduate student in Software Engineering at Nanj
 
 * Email: [yiwenhe@smail.nju.edu.cn](mailto:yiwenhe@smail.nju.edu.cn)
 
-## 🚀 Currently Focusing On:
+## 🚀 Publications:
 
-* PA of ICS,NJUCS
-* Algorithms and Data Structures
-* Front-end and Back-end Development
-* Development of Education
-* My Blog : HEYWEEN.github.io
+Co-author:[IF-VidCap: Can Video Caption Models Follow Instructions?](https://arxiv.org/abs/2510.18726) accepted by ICLR2026
 
----
+
+
 ⭐️ From [@HEYWEEN](https://github.com/HEYWEEN) 
