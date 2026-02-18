@@ -78,7 +78,7 @@ Word Embedding：给每一个词汇一个向量，包含语义资讯
 
 可以理解成：
 
-```mathematica
+```
 Query 去匹配 Key
 匹配成功后，取对应 Value
 ```
@@ -113,7 +113,27 @@ Query 去匹配 Key
 
 
 
+用一个简单的图例表示，就是这样的：
+
+![截屏2026-02-18 16.32.05](https://cdn.jsdelivr.net/gh/HEYWEEN/images@main/images%E6%88%AA%E5%B1%8F2026-02-18%2016.32.05.png)
+
 而这个过程可以总结为一个公式：
 $$
 \text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V
 $$
+
+
+# Multi-head Self-attention
+
+![截屏2026-02-18 16.30.52](https://cdn.jsdelivr.net/gh/HEYWEEN/images@main/images%E6%88%AA%E5%B1%8F2026-02-18%2016.30.52.png)
+
+
+
+# Positional Encoding
+
+|            | Token Embedding | Positional Encoding |
+| ---------- | --------------- | ------------------- |
+| 作用       | 表示语义        | 表示顺序            |
+| 是否可训练 | 是              | 可以是固定或可训练  |
+| 维度       | d               | d                   |
+| 获取方式   | 查 embedding 表 | 查位置表或公式生成  |
