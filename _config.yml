@@ -120,10 +120,10 @@ comments:
     issue_term: # < url | pathname | title | ...>
   # Giscus options › https://giscus.app
   giscus:
-    repo: huanyushi/huanyushi.github.io # <gh-username>/<repo>
-    repo_id: R_kgDOLnc4kg
+    repo: HEYWEEN/HEYWEEN.github.io # <gh-username>/<repo>
+    repo_id: R_kgDOPufVsA
     category: Announcements
-    category_id: DIC_kwDOLnc4ks4CeX5Y
+    category_id: DIC_kwDOPufVsM4C2sYP
     mapping: # optional, default to 'pathname'
     strict: # optional, default to '0'
     input_position: # optional, default to 'bottom'
