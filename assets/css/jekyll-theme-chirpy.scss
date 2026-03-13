@@ -198,3 +198,82 @@ samp {
     'Courier New',
     monospace;
 }
+
+/* 标题显式使用自定义字体，避免被主题的 h1~h6 设置覆盖 */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.post-title,
+.card-title {
+  font-family:
+    'Cascadia Code',
+    'LXGW WenKai',
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    'SF Pro Text',
+    'Segoe UI',
+    'PingFang SC',
+    'Hiragino Sans GB',
+    'Microsoft YaHei',
+    sans-serif;
+}
+
+/* 提高代码块里中文的优先级，覆盖主题内更具体的选择器 */
+.post-content code,
+.post-content pre code,
+.highlight pre code {
+  font-family:
+    'Cascadia Code',
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    'Liberation Mono',
+    'Courier New',
+    monospace !important;
+}
+
+/* ---------------- 一些简单的美化调整 ---------------- */
+
+/* 首页文章卡片：增加圆角和悬停阴影 */
+#post-list .card {
+  border-radius: 0.8rem;
+  transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
+}
+
+#post-list .card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+}
+
+/* 首页文章标题稍微放大一点 */
+#post-list .card-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+/* 文章页正文行高略微增大，提升可读性 */
+.post-content {
+  line-height: 1.85;
+  font-size: 1.02rem;
+}
+
+/* Tags 显示成圆角小胶囊 */
+.tag {
+  border-radius: 999px;
+  padding: 0.1rem 0.6rem;
+  font-size: 0.85rem;
+}
+
+.tag a {
+  text-decoration: none;
+}
+
+.tag:hover {
+  filter: brightness(1.05);
+}
