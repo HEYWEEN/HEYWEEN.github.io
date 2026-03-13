@@ -162,33 +162,15 @@ details.details-block[open] > summary{
 
 /* ---------------- 自定义字体：英文 Cascadia Code，中文 LXGW WenKai ---------------- */
 
-/* 英文/拉丁字符使用 Cascadia Code */
-@font-face {
-  font-family: 'Cascadia Code Custom';
-  src: url('https://cdn.jsdelivr.net/gh/microsoft/cascadia-code@latest/fonts/woff2/CascadiaCode-Regular.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-  /* 大致覆盖基础拉丁、扩展拉丁和常用符号范围 */
-  unicode-range: U+0000-024F, U+1E00-1EFF, U+2000-206F;
-}
-
-/* 中文（中日韩统一表意文字等）使用 LXGW WenKai */
-@font-face {
-  font-family: 'LXGW WenKai Custom';
-  src: url('https://cdn.jsdelivr.net/gh/lxgw/LxgwWenKai@latest/WebFonts/LXGWWenKai-Regular.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-  /* 覆盖 CJK 统一表意文字、兼容表意文字以及全角标点等 */
-  unicode-range: U+2E80-9FFF, U+F900-FAFF, U+FF00-FFEF;
-}
+/* 引入官方切片好的 WebFont CSS，保证地址正确可用 */
+@import url('https://cdn.jsdelivr.net/npm/@fontsource/cascadia-code@5.2.3/400.css');
+@import url('https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.css');
 
 /* 全站默认字体栈：英文优先用 Cascadia Code，中文优先用 LXGW WenKai */
 body {
   font-family:
-    'Cascadia Code Custom',
-    'LXGW WenKai Custom',
+    'Cascadia Code',
+    'LXGW WenKai',
     system-ui,
     -apple-system,
     BlinkMacSystemFont,
@@ -206,7 +188,6 @@ code,
 kbd,
 samp {
   font-family:
-    'Cascadia Code Custom',
     'Cascadia Code',
     ui-monospace,
     SFMono-Regular,
