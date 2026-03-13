@@ -49,10 +49,42 @@ blockquote[class^='prompt-']{
 #sidebar .site-title {
     color: #ffffff; 
     text-shadow: 5px 5px 10px rgba(0,0,0,0.5);
+    /* 主页英文名用干净的无衬线字体，而不是等宽字体 */
+    font-family:
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      'SF Pro Text',
+      'Segoe UI',
+      'PingFang SC',
+      'Hiragino Sans GB',
+      'Microsoft YaHei',
+      sans-serif;
+    letter-spacing: 0.12em;      /* 稍微拉开字距，更有 Logo 感 */
+    font-weight: 800;            /* 比默认再重一点 */
+    font-size: 1.9rem;           /* 稍微放大 */
+    margin-top: 0.6rem;          /* 和头像之间留一点呼吸空间 */
 }
+
 #sidebar .site-subtitle {
     color: #ffffff;
     text-shadow: 2px 2px 3px rgba(0,0,0, 0.7);
+    /* 标语用中文优先的字体栈（保留 LXGW WenKai） */
+    font-family:
+      'LXGW WenKai',
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      'SF Pro Text',
+      'Segoe UI',
+      'PingFang SC',
+      'Hiragino Sans GB',
+      'Microsoft YaHei',
+      sans-serif;
+    max-width: 12rem;            /* 限制一下宽度，形成两行/三行的竖向排版 */
+    line-height: 1.6;            /* 行距舒展一点 */
+    letter-spacing: 0.08em;      /* 稍微加一点字间距 */
+    margin-top: 0.4rem;          /* 和主标题拉开一点 */
 }
 #sidebar ul li.nav-item a.nav-link span{
     font-size: 100%;
