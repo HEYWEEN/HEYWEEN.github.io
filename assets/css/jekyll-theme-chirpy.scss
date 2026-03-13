@@ -60,7 +60,7 @@ blockquote[class^='prompt-']{
       'Hiragino Sans GB',
       'Microsoft YaHei',
       sans-serif;
-    letter-spacing: 0.12em;      /* 稍微拉开字距，更有 Logo 感 */
+    letter-spacing: 0.06em;      /* 稍微拉开一点就好 */
     font-weight: 800;            /* 比默认再重一点 */
     font-size: 1.9rem;           /* 稍微放大 */
     margin-top: 0.6rem;          /* 和头像之间留一点呼吸空间 */
@@ -81,10 +81,10 @@ blockquote[class^='prompt-']{
       'Hiragino Sans GB',
       'Microsoft YaHei',
       sans-serif;
-    max-width: 12rem;            /* 限制一下宽度，形成两行/三行的竖向排版 */
-    line-height: 1.6;            /* 行距舒展一点 */
-    letter-spacing: 0.08em;      /* 稍微加一点字间距 */
-    margin-top: 0.4rem;          /* 和主标题拉开一点 */
+    max-width: 14rem;            /* 稍微放宽一点，不要太挤 */
+    line-height: 1.55;           /* 行距略小一点，更紧凑 */
+    letter-spacing: 0.02em;      /* 只保留很轻微的字间距 */
+    margin-top: 0.35rem;         /* 与主标题距离略收一点 */
 }
 #sidebar ul li.nav-item a.nav-link span{
     font-size: 100%;
