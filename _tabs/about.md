@@ -20,7 +20,7 @@ Hi there! I'm Yiwen He, an undergraduate student in Software Engineering at Nanj
 
 ## 🚀 Publications:
 
-Co-author:[IF-VidCap: Can Video Caption Models Follow Instructions?](https://arxiv.org/abs/2510.18726) accepted by ICLR2026
+* Co-author:[IF-VidCap: Can Video Caption Models Follow Instructions?](https://arxiv.org/abs/2510.18726) accepted by ICLR2026
 
 
 
