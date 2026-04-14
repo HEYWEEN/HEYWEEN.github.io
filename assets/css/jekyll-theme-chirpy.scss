@@ -254,6 +254,60 @@ h6,
     sans-serif;
 }
 
+/* 文章页大标题：更醒目，与正文层次拉开 */
+.post-title {
+  font-weight: 800;
+  font-size: clamp(1.85rem, 2.8vw + 1rem, 2.45rem);
+  line-height: 1.28;
+  margin-bottom: 0.35rem;
+}
+
+/* 正文内标题：逐级加粗、加大，和段落区分明显 */
+.post-content {
+  h1 {
+    font-weight: 800;
+    font-size: 1.75rem;
+    margin-top: 2.25rem;
+    margin-bottom: 0.9rem;
+    line-height: 1.3;
+  }
+
+  h2 {
+    font-weight: 800;
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.32;
+    padding-bottom: 0.35rem;
+    border-bottom: 1px solid var(--language-border-color, rgba(0, 0, 0, 0.12));
+  }
+
+  h3 {
+    font-weight: 700;
+    font-size: 1.28rem;
+    margin-top: 1.65rem;
+    margin-bottom: 0.65rem;
+    line-height: 1.35;
+  }
+
+  h4 {
+    font-weight: 700;
+    font-size: 1.12rem;
+    margin-top: 1.4rem;
+    margin-bottom: 0.55rem;
+  }
+
+  h5,
+  h6 {
+    font-weight: 700;
+    font-size: 1.05rem;
+    margin-top: 1.2rem;
+    margin-bottom: 0.45rem;
+    text-transform: none;
+    letter-spacing: normal;
+  }
+}
+
 /* 提高代码块里中文的优先级，覆盖主题内更具体的选择器 */
 .post-content code,
 .post-content pre code,
@@ -289,10 +343,10 @@ h6,
   font-weight: 700;
 }
 
-/* 文章页正文行高略微增大，提升可读性 */
+/* 文章页正文：字号略大于默认，行高舒适 */
 .post-content {
   line-height: 1.85;
-  font-size: 1.02rem;
+  font-size: 1.125rem;
 }
 
 /* Tags 显示成圆角小胶囊 */
