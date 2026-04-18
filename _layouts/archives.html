@@ -1,0 +1,56 @@
+---
+layout: page
+# Journal/手账 style archive — groups posts by year, then month
+---
+
+{% include lang.html %}
+
+{%- capture _en_months -%}
+January|February|March|April|May|June|July|August|September|October|November|December
+{%- endcapture -%}
+{% assign en_months = _en_months | split: '|' %}
+
+{%- capture _zh_months -%}
+一月|二月|三月|四月|五月|六月|七月|八月|九月|十月|十一月|十二月
+{%- endcapture -%}
+{% assign zh_months = _zh_months | split: '|' %}
+
+<div id="archives" class="journal-archive">
+  {% assign posts_by_year = site.posts | group_by_exp: "post", "post.date | date: '%Y'" %}
+
+  {% for year_group in posts_by_year %}
+    <section class="ja-year">
+      <header class="ja-year-head">
+        <span class="ja-year-ornament" aria-hidden="true">❧</span>
+        <h2 class="ja-year-num">{{ year_group.name }}</h2>
+        <span class="ja-year-count">· {{ year_group.items.size }} entries</span>
+      </header>
+
+      {% assign posts_by_month = year_group.items | group_by_exp: "post", "post.date | date: '%-m'" %}
+
+      {% for month_group in posts_by_month %}
+        {% assign m_index = month_group.name | minus: 1 %}
+        <section class="ja-month">
+          <header class="ja-month-head">
+            <span class="ja-month-num">{{ month_group.name | prepend: '0' | slice: -2, 2 }}</span>
+            <span class="ja-month-en">{{ en_months[m_index] }}</span>
+            <span class="ja-month-zh">{{ zh_months[m_index] }}</span>
+            <span class="ja-month-rule" aria-hidden="true"></span>
+            <span class="ja-month-count">{{ month_group.items.size }} 篇</span>
+          </header>
+
+          <ul class="ja-entries">
+            {% for post in month_group.items %}
+              <li class="ja-entry">
+                <time class="ja-entry-date" datetime="{{ post.date | date_to_xmlschema }}">
+                  <span class="ja-day">{{ post.date | date: "%d" }}</span>
+                </time>
+                <a class="ja-entry-link" href="{{ post.url | relative_url }}">{{ post.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        </section>
+      {% endfor %}
+    </section>
+  {% endfor %}
+</div>

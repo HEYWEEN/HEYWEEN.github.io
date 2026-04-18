@@ -202,6 +202,9 @@ details.details-block[open] > summary{
 @import url('https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font/fonts.css');
 @import url('https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400;0,500;0,700;1,400;1,700&family=Noto+Serif+SC:wght@400;500;700;900&display=swap');
 
+/* 手账 archive 用的展示字体：Fraunces（可变：opsz/wght/ital，作为年号和月份的 display face） */
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&display=swap');
+
 /* 全站默认字体栈：英文优先用 Cascadia Code，中文优先用 LXGW WenKai */
 body {
   font-family:
@@ -1046,7 +1049,7 @@ html[data-mode='dark'] {
 @mixin latex-paper {
 
   /* ---------- 正文基调 ---------- */
-  article .content {
+  article:not(:has(h1.dynamic-title)) .content {
     font-family:
       'Computer Modern Serif',
       'Latin Modern Roman',
@@ -1068,30 +1071,30 @@ html[data-mode='dark'] {
   }
 
   /* 段落：首行缩进 2em，紧密垂直节奏 —— LaTeX book class 默认 */
-  article .content p {
+  article:not(:has(h1.dynamic-title)) .content p {
     margin: 0 0 0.35em;
     text-indent: 2em;
     orphans: 3;
     widows: 3;
   }
   /* 需要取消缩进的语义环境 */
-  article .content li p,
-  article .content blockquote p,
-  article .content figure p,
-  article .content .footnotes p,
-  article .content td p,
-  article .content th p,
-  article .content details p {
+  article:not(:has(h1.dynamic-title)) .content li p,
+  article:not(:has(h1.dynamic-title)) .content blockquote p,
+  article:not(:has(h1.dynamic-title)) .content figure p,
+  article:not(:has(h1.dynamic-title)) .content .footnotes p,
+  article:not(:has(h1.dynamic-title)) .content td p,
+  article:not(:has(h1.dynamic-title)) .content th p,
+  article:not(:has(h1.dynamic-title)) .content details p {
     text-indent: 0;
   }
 
   /* ---------- 章节标题：LaTeX book class 体量 ---------- */
-  article .content h1,
-  article .content h2,
-  article .content h3,
-  article .content h4,
-  article .content h5,
-  article .content h6 {
+  article:not(:has(h1.dynamic-title)) .content h1,
+  article:not(:has(h1.dynamic-title)) .content h2,
+  article:not(:has(h1.dynamic-title)) .content h3,
+  article:not(:has(h1.dynamic-title)) .content h4,
+  article:not(:has(h1.dynamic-title)) .content h5,
+  article:not(:has(h1.dynamic-title)) .content h6 {
     font-family: inherit !important;
     color: #111;
     border-bottom: none !important;
@@ -1101,33 +1104,33 @@ html[data-mode='dark'] {
     letter-spacing: 0;
     -webkit-font-smoothing: antialiased;
   }
-  article .content h1 {
+  article:not(:has(h1.dynamic-title)) .content h1 {
     font-size: 1.78rem !important;
     font-weight: 700 !important;
     margin: 2.6em 0 0.7em !important;
     line-height: 1.28 !important;
   }
-  article .content h2 {
+  article:not(:has(h1.dynamic-title)) .content h2 {
     font-size: 1.46rem !important;
     font-weight: 700 !important;
     margin: 2em 0 0.55em !important;
     line-height: 1.32 !important;
   }
-  article .content h3 {
+  article:not(:has(h1.dynamic-title)) .content h3 {
     font-size: 1.22rem !important;
     font-weight: 700 !important;
     margin: 1.5em 0 0.45em !important;
     line-height: 1.35 !important;
   }
-  article .content h4 {
+  article:not(:has(h1.dynamic-title)) .content h4 {
     font-size: 1.08rem !important;
     font-weight: 700 !important;
     font-style: italic !important;
     margin: 1.2em 0 0.35em !important;
     line-height: 1.4 !important;
   }
-  article .content h5,
-  article .content h6 {
+  article:not(:has(h1.dynamic-title)) .content h5,
+  article:not(:has(h1.dynamic-title)) .content h6 {
     font-size: 1rem !important;
     font-weight: 700 !important;
     font-style: italic !important;
@@ -1135,20 +1138,20 @@ html[data-mode='dark'] {
   }
 
   /* ---------- 链接：arXiv navy ---------- */
-  article .content a:not(.anchor):not(.img-link) {
+  article:not(:has(h1.dynamic-title)) .content a:not(.anchor):not(.img-link) {
     color: #0b3d91;
     text-decoration: underline;
     text-decoration-thickness: 0.5pt;
     text-underline-offset: 2px;
     transition: color 0.15s ease;
   }
-  article .content a:not(.anchor):not(.img-link):hover {
+  article:not(:has(h1.dynamic-title)) .content a:not(.anchor):not(.img-link):hover {
     color: #7a1a1a;
     text-decoration-thickness: 1pt;
   }
 
   /* ---------- 引用块：LaTeX quotation（italic, 两侧缩进，无左竖线） ---------- */
-  article .content blockquote {
+  article:not(:has(h1.dynamic-title)) .content blockquote {
     font-style: italic;
     border-left: none !important;
     background: transparent !important;
@@ -1158,11 +1161,11 @@ html[data-mode='dark'] {
     color: #2a2a2a !important;
     font-size: 0.98em;
   }
-  article .content blockquote p {
+  article:not(:has(h1.dynamic-title)) .content blockquote p {
     margin: 0.3em 0;
   }
   /* Chirpy 的 prompt 块保持可用，但在 LaTeX 下降权重 */
-  article .content blockquote[class^='prompt-'] {
+  article:not(:has(h1.dynamic-title)) .content blockquote[class^='prompt-'] {
     font-style: normal;
     padding: 0.9em 1.2em !important;
     box-shadow: none !important;
@@ -1171,24 +1174,24 @@ html[data-mode='dark'] {
   }
 
   /* ---------- 列表 ---------- */
-  article .content ul,
-  article .content ol {
+  article:not(:has(h1.dynamic-title)) .content ul,
+  article:not(:has(h1.dynamic-title)) .content ol {
     padding-left: 2.4em;
     margin: 0.5em 0 0.9em;
   }
-  article .content ul { list-style: disc outside; }
-  article .content ol { list-style: decimal outside; }
-  article .content li {
+  article:not(:has(h1.dynamic-title)) .content ul { list-style: disc outside; }
+  article:not(:has(h1.dynamic-title)) .content ol { list-style: decimal outside; }
+  article:not(:has(h1.dynamic-title)) .content li {
     margin: 0.22em 0;
     line-height: 1.68;
   }
-  article .content li::marker {
+  article:not(:has(h1.dynamic-title)) .content li::marker {
     color: #111;
     font-variant-numeric: oldstyle-nums;
   }
 
   /* ---------- HR：细线 ---------- */
-  article .content hr {
+  article:not(:has(h1.dynamic-title)) .content hr {
     border: none;
     border-top: 0.5pt solid #111;
     margin: 2.4em auto;
@@ -1197,7 +1200,7 @@ html[data-mode='dark'] {
   }
 
   /* ---------- 表格：booktabs (top-rule / mid-rule / bottom-rule) ---------- */
-  article .content table {
+  article:not(:has(h1.dynamic-title)) .content table {
     border-collapse: collapse;
     margin: 1.8em auto;
     font-size: 0.96em;
@@ -1206,7 +1209,7 @@ html[data-mode='dark'] {
     background: transparent !important;
     caption-side: top;
   }
-  article .content table caption {
+  article:not(:has(h1.dynamic-title)) .content table caption {
     font-style: italic;
     font-size: 0.94em;
     color: #333;
@@ -1214,48 +1217,48 @@ html[data-mode='dark'] {
     caption-side: top;
     text-align: center;
   }
-  article .content table caption::before {
+  article:not(:has(h1.dynamic-title)) .content table caption::before {
     content: "Table: ";
     font-style: normal;
   }
-  article .content table th,
-  article .content table td {
+  article:not(:has(h1.dynamic-title)) .content table th,
+  article:not(:has(h1.dynamic-title)) .content table td {
     padding: 0.5em 1em;
     border: none !important;
     text-align: left;
     vertical-align: baseline;
     background: transparent !important;
   }
-  article .content table th {
+  article:not(:has(h1.dynamic-title)) .content table th {
     font-weight: 700;
     font-style: italic;
   }
-  article .content table thead {
+  article:not(:has(h1.dynamic-title)) .content table thead {
     border-top: 1.5pt solid #111;
     border-bottom: 0.75pt solid #111;
   }
-  article .content table tbody {
+  article:not(:has(h1.dynamic-title)) .content table tbody {
     border-bottom: 1.5pt solid #111;
   }
-  article .content table tbody tr:nth-child(odd),
-  article .content table tbody tr:nth-child(even) {
+  article:not(:has(h1.dynamic-title)) .content table tbody tr:nth-child(odd),
+  article:not(:has(h1.dynamic-title)) .content table tbody tr:nth-child(even) {
     background: transparent !important;
   }
 
   /* ---------- 图：居中 + italic figcaption ---------- */
-  article .content img {
+  article:not(:has(h1.dynamic-title)) .content img {
     display: block;
     margin: 1.4em auto 0.35em;
     max-width: 100%;
     box-shadow: none;
     border: none;
   }
-  article .content figure {
+  article:not(:has(h1.dynamic-title)) .content figure {
     margin: 1.6em auto;
     text-align: center;
   }
-  article .content figure figcaption,
-  article .content img + em {
+  article:not(:has(h1.dynamic-title)) .content figure figcaption,
+  article:not(:has(h1.dynamic-title)) .content img + em {
     display: block;
     text-align: center;
     font-style: italic;
@@ -1266,18 +1269,18 @@ html[data-mode='dark'] {
     max-width: 88%;
     line-height: 1.55;
   }
-  article .content figure figcaption::before,
-  article .content img + em::before {
+  article:not(:has(h1.dynamic-title)) .content figure figcaption::before,
+  article:not(:has(h1.dynamic-title)) .content img + em::before {
     content: "Figure: ";
     font-style: normal;
     font-weight: 600;
   }
 
   /* ---------- 代码：Cascadia Code（原全站风格）+ 更大字号 ---------- */
-  article .content code,
-  article .content pre,
-  article .content kbd,
-  article .content samp {
+  article:not(:has(h1.dynamic-title)) .content code,
+  article:not(:has(h1.dynamic-title)) .content pre,
+  article:not(:has(h1.dynamic-title)) .content kbd,
+  article:not(:has(h1.dynamic-title)) .content samp {
     font-family:
       'Cascadia Code',
       'JetBrains Mono',
@@ -1288,7 +1291,7 @@ html[data-mode='dark'] {
       monospace !important;
     font-size: 0.95rem !important;
   }
-  article .content code.highlighter-rouge {
+  article:not(:has(h1.dynamic-title)) .content code.highlighter-rouge {
     background: #f4f1e8 !important;
     border: none !important;
     padding: 0 4px !important;
@@ -1297,7 +1300,7 @@ html[data-mode='dark'] {
     color: #111 !important;
   }
   /* 代码块：保留细框 + 奶油底；内部完全交给 Chirpy 默认 */
-  article .content div[class^='language-'] {
+  article:not(:has(h1.dynamic-title)) .content div[class^='language-'] {
     background: #faf7ee !important;
     border: 0.75pt solid #c9c0a8 !important;
     border-radius: 2px !important;
@@ -1305,16 +1308,16 @@ html[data-mode='dark'] {
     margin: 1.5em 0 !important;
     overflow: hidden;
   }
-  article .content div[class^='language-'] .code-header {
+  article:not(:has(h1.dynamic-title)) .content div[class^='language-'] .code-header {
     background: #f1ecdc !important;
     border-bottom: 0.5pt solid #c9c0a8 !important;
   }
   /* 关键：LaTeX 表格/段落规则不要误伤代码块里的 rouge-table */
-  article .content table.rouge-table,
-  article .content table.rouge-table thead,
-  article .content table.rouge-table tbody,
-  article .content table.rouge-table tr,
-  article .content table.rouge-table td {
+  article:not(:has(h1.dynamic-title)) .content table.rouge-table,
+  article:not(:has(h1.dynamic-title)) .content table.rouge-table thead,
+  article:not(:has(h1.dynamic-title)) .content table.rouge-table tbody,
+  article:not(:has(h1.dynamic-title)) .content table.rouge-table tr,
+  article:not(:has(h1.dynamic-title)) .content table.rouge-table td {
     border: none !important;
     border-top: none !important;
     border-bottom: none !important;
@@ -1325,64 +1328,64 @@ html[data-mode='dark'] {
     line-height: inherit !important;
   }
   /* 代码块内部留白：上下 0.85em，左右由两列 td 各自控制 */
-  article .content table.rouge-table td.rouge-gutter {
+  article:not(:has(h1.dynamic-title)) .content table.rouge-table td.rouge-gutter {
     padding: 0.85em 0.7em 0.85em 1.1em !important;
   }
-  article .content table.rouge-table td.rouge-code {
+  article:not(:has(h1.dynamic-title)) .content table.rouge-table td.rouge-code {
     padding: 0.85em 1.1em 0.85em 0.5em !important;
   }
-  article .content table.rouge-table pre,
-  article .content table.rouge-table code {
+  article:not(:has(h1.dynamic-title)) .content table.rouge-table pre,
+  article:not(:has(h1.dynamic-title)) .content table.rouge-table code {
     margin: 0 !important;
     padding: 0 !important;
     text-indent: 0 !important;
   }
   /* 内层 .highlight 透明，让外层 #faf7ee 奶油底透上来 */
-  article .content div[class^='language-'] .highlight,
-  article .content div[class^='language-'] .highlight pre {
+  article:not(:has(h1.dynamic-title)) .content div[class^='language-'] .highlight,
+  article:not(:has(h1.dynamic-title)) .content div[class^='language-'] .highlight pre {
     background: transparent !important;
     box-shadow: none !important;
   }
 
   /* ---------- 公式：MathJax / KaTeX display 居中 ---------- */
-  article .content .katex-display,
-  article .content mjx-container[display="true"] {
+  article:not(:has(h1.dynamic-title)) .content .katex-display,
+  article:not(:has(h1.dynamic-title)) .content mjx-container[display="true"] {
     margin: 1.5em 0 !important;
     text-align: center !important;
   }
-  article .content mjx-container[display="true"] {
+  article:not(:has(h1.dynamic-title)) .content mjx-container[display="true"] {
     padding: 0.4em 0;
   }
-  article .content .katex,
-  article .content mjx-container {
+  article:not(:has(h1.dynamic-title)) .content .katex,
+  article:not(:has(h1.dynamic-title)) .content mjx-container {
     font-size: 1.02em !important;
   }
 
   /* ---------- 脚注：thematic break + smaller ---------- */
-  article .content .footnotes {
+  article:not(:has(h1.dynamic-title)) .content .footnotes {
     margin-top: 3em;
     padding-top: 0.9em;
     border-top: 0.5pt solid #111;
     font-size: 0.88em;
     line-height: 1.6;
   }
-  article .content .footnotes ol {
+  article:not(:has(h1.dynamic-title)) .content .footnotes ol {
     padding-left: 1.8em;
   }
-  article .content .footnotes li {
+  article:not(:has(h1.dynamic-title)) .content .footnotes li {
     margin: 0.3em 0;
   }
-  article .content sup a {
+  article:not(:has(h1.dynamic-title)) .content sup a {
     color: #0b3d91 !important;
     text-decoration: none !important;
   }
 
   /* ---------- strong / em ---------- */
-  article .content strong {
+  article:not(:has(h1.dynamic-title)) .content strong {
     color: #111;
     font-weight: 700;
   }
-  article .content em {
+  article:not(:has(h1.dynamic-title)) .content em {
     font-style: italic;
     color: inherit;
   }
@@ -1443,12 +1446,12 @@ html[data-mode='dark'] {
   }
 
   /* ---------- 细节：段首无缩进规则的清理 ---------- */
-  article .content > *:first-child {
+  article:not(:has(h1.dynamic-title)) .content > *:first-child {
     text-indent: 0;
   }
 
   /* ---------- 选中色：克制的墨色 ---------- */
-  article .content ::selection {
+  article:not(:has(h1.dynamic-title)) .content ::selection {
     background: #ffe58a;
     color: #111;
   }
@@ -1461,6 +1464,261 @@ html[data-mode='light'] {
 html:not([data-mode]) {
   @media (prefers-color-scheme: light) {
     @include latex-paper;
+  }
+}
+
+/* ======================================================================
+   Archive · Journal / 手账风
+   结构：#archives.journal-archive > .ja-year > .ja-month > .ja-entries
+   基础结构对两种主题通用；颜色 / 字体通过 CSS 变量按 mode 切换
+   ====================================================================== */
+
+#archives.journal-archive {
+  /* --- 默认（亮色）调色板：墨色 + 米白 + 砖红点缀 --- */
+  --ja-ink: #1c1a17;
+  --ja-ink-muted: #8c8177;
+  --ja-ink-faint: #bcb3a5;
+  --ja-accent: #a34632;
+  --ja-rule: #d8d0c1;
+  --ja-year-color: #3a352e;
+
+  --ja-font-display: 'Fraunces', 'STIX Two Text', 'Cormorant Garamond', 'Noto Serif SC', serif;
+  --ja-font-mono: 'Cascadia Code', ui-monospace, monospace;
+  --ja-font-cn: 'LXGW WenKai', 'Noto Serif SC', 'Songti SC', serif;
+
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0.5rem 0 4rem;
+  color: var(--ja-ink);
+  font-family: var(--ja-font-display);
+}
+
+/* --- 年份章节头 --- */
+#archives.journal-archive .ja-year { margin-bottom: 3.5rem; }
+
+#archives.journal-archive .ja-year-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  padding: 0.75rem 0 1.1rem;
+  border-bottom: 1.5pt solid var(--ja-ink);
+  margin-bottom: 1.75rem;
+  position: relative;
+}
+
+#archives.journal-archive .ja-year-ornament {
+  font-family: var(--ja-font-display);
+  color: var(--ja-accent);
+  font-size: 1.7rem;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1;
+  transform: translateY(-0.25rem);
+}
+
+#archives.journal-archive .ja-year-num {
+  font-family: var(--ja-font-display);
+  font-size: 3.8rem;
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1;
+  margin: 0;
+  color: var(--ja-year-color);
+  letter-spacing: -0.025em;
+  font-feature-settings: "lnum", "tnum", "ss01";
+  border: none !important;
+  padding: 0 !important;
+}
+
+#archives.journal-archive .ja-year-count {
+  font-family: var(--ja-font-mono);
+  font-size: 0.78rem;
+  color: var(--ja-ink-muted);
+  margin-left: auto;
+  letter-spacing: 0.04em;
+  text-transform: lowercase;
+  font-style: normal;
+}
+
+/* --- 月份小节 --- */
+#archives.journal-archive .ja-month {
+  margin: 0 0 1.75rem;
+  padding-left: 1rem;
+  border-left: 0.5pt solid var(--ja-rule);
+}
+
+#archives.journal-archive .ja-month-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  margin-bottom: 0.7rem;
+  padding: 0.1rem 0 0.25rem;
+}
+
+#archives.journal-archive .ja-month-num {
+  font-family: var(--ja-font-display);
+  font-size: 1.55rem;
+  font-weight: 400;
+  color: var(--ja-ink);
+  font-feature-settings: "lnum", "tnum";
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+
+#archives.journal-archive .ja-month-en {
+  font-family: var(--ja-font-display);
+  font-size: 1.1rem;
+  font-style: italic;
+  font-weight: 300;
+  color: var(--ja-ink-muted);
+}
+
+#archives.journal-archive .ja-month-zh {
+  font-family: var(--ja-font-cn);
+  font-size: 0.95rem;
+  color: var(--ja-ink-faint);
+}
+
+#archives.journal-archive .ja-month-rule {
+  flex: 1;
+  height: 0;
+  border-bottom: 0.5pt dotted var(--ja-ink-faint);
+  margin: 0 0.5rem;
+  transform: translateY(-4px);
+}
+
+#archives.journal-archive .ja-month-count {
+  font-family: var(--ja-font-mono);
+  font-size: 0.7rem;
+  color: var(--ja-ink-faint);
+  letter-spacing: 0.05em;
+  font-style: normal;
+}
+
+/* --- 条目 --- */
+#archives.journal-archive .ja-entries {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+#archives.journal-archive .ja-entry {
+  display: flex;
+  align-items: baseline;
+  gap: 1.2rem;
+  padding: 0.36rem 0;
+  margin: 0;
+  border: none;
+  transition: transform 0.18s ease;
+}
+
+#archives.journal-archive .ja-entry::before {
+  content: none !important;
+}
+
+#archives.journal-archive .ja-entry:hover { transform: translateX(3px); }
+
+#archives.journal-archive .ja-entry-date {
+  font-family: var(--ja-font-display);
+  font-size: 1.28rem;
+  font-weight: 300;
+  color: var(--ja-ink-muted);
+  min-width: 2rem;
+  text-align: right;
+  font-feature-settings: "lnum", "tnum";
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  font-style: italic;
+  flex-shrink: 0;
+}
+
+#archives.journal-archive .ja-entry-link {
+  font-family: var(--ja-font-cn), 'Cascadia Code', serif;
+  font-size: 1.02rem;
+  color: var(--ja-ink) !important;
+  text-decoration: none !important;
+  line-height: 1.45;
+  border: none !important;
+  background-image: linear-gradient(var(--ja-accent), var(--ja-accent));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0 1px;
+  transition: background-size 0.3s ease, color 0.18s ease;
+  padding-bottom: 2px;
+}
+
+#archives.journal-archive .ja-entry-link:hover {
+  color: var(--ja-accent) !important;
+  background-size: 100% 1px;
+}
+
+/* --- Archives 大标题也做成手账风（dynamic-title 在 #archives 之外） --- */
+article:has(#archives.journal-archive) > h1.dynamic-title,
+article:has(#archives.journal-archive) .dynamic-title {
+  font-family: 'Fraunces', 'STIX Two Text', 'Noto Serif SC', serif !important;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 2.6rem;
+  letter-spacing: -0.015em;
+  color: #3a352e;
+  padding-left: 0 !important;
+  margin: 0.2rem 0 1.8rem !important;
+}
+
+/* ====== 暗色（终端）模式：翻用终端配色 + 等宽字体 ====== */
+@mixin journal-archive-dark {
+  #archives.journal-archive {
+    --ja-ink: var(--term-fg, #e6e3dc);
+    --ja-ink-muted: var(--term-mint, #8cd3b1);
+    --ja-ink-faint: rgba(230, 227, 220, 0.35);
+    --ja-accent: var(--term-amber, #e6b86c);
+    --ja-rule: rgba(230, 227, 220, 0.12);
+    --ja-year-color: var(--term-rose, #e58ca0);
+    --ja-font-display: 'Cascadia Code', 'Fraunces', monospace;
+    --ja-font-cn: 'LXGW WenKai', 'Cascadia Code', monospace;
+  }
+
+  #archives.journal-archive .ja-year-num {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 2.6rem;
+    letter-spacing: 0;
+  }
+  #archives.journal-archive .ja-year-ornament {
+    font-style: normal;
+  }
+  #archives.journal-archive .ja-year-head {
+    border-bottom: 0.5pt dashed var(--ja-ink-muted);
+  }
+  #archives.journal-archive .ja-month-num,
+  #archives.journal-archive .ja-month-en,
+  #archives.journal-archive .ja-entry-date {
+    font-style: normal;
+  }
+  #archives.journal-archive .ja-month-en::before { content: "· "; opacity: 0.5; }
+
+  article:has(#archives.journal-archive) > h1.dynamic-title,
+  article:has(#archives.journal-archive) .dynamic-title {
+    font-family: 'Cascadia Code', monospace !important;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1.8rem;
+    color: var(--term-mint, #8cd3b1);
+  }
+  article:has(#archives.journal-archive) > h1.dynamic-title::before {
+    content: "$ ls -lt archives/";
+    display: block;
+    font-size: 0.85rem;
+    color: var(--term-faint, #6c6a64);
+    margin-bottom: 0.3rem;
+    font-weight: 400;
+  }
+}
+
+html[data-mode='dark'] { @include journal-archive-dark; }
+html:not([data-mode]) {
+  @media (prefers-color-scheme: dark) {
+    @include journal-archive-dark;
   }
 }
 
