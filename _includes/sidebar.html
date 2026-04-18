@@ -42,16 +42,8 @@
       {% endfor %}
     </ul>
 
-    <!-- terminal-only: faux 静态文件区 -->
-    <div class="term-files" aria-hidden="true">
-      <div class="tf-divider"></div>
-      <ul>
-        <li><span class="tf-name">README.md</span></li>
-        <li><span class="tf-name">Gemfile</span></li>
-        <li><span class="tf-name">_config.yml</span></li>
-        <li><span class="tf-name">.gitignore</span></li>
-      </ul>
-    </div>
+    <!-- terminal-only: STATS + BUILD（替代原来的 faux 文件区，从右栏搬过来） -->
+    {% include terminal-inspector.html %}
   </nav>
 
   <div class="sidebar-bottom d-flex flex-wrap align-items-center w-100">
