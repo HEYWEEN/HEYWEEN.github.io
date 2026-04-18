@@ -1380,33 +1380,44 @@ html[data-mode='dark'] {
     border-radius: 0 !important;
     color: #111 !important;
   }
-  /* 代码块：LaTeX listings 风格 —— 仅上下细边 */
+  /* 代码块：LaTeX listings 风格 —— 完整细框 */
   article .content div[class^='language-'] {
-    background: #faf8f2 !important;
-    border: none !important;
-    border-top: 0.5pt solid #111 !important;
-    border-bottom: 0.5pt solid #111 !important;
-    border-radius: 0 !important;
+    background: #faf7ee !important;
+    border: 0.75pt solid #c9c0a8 !important;
+    border-radius: 2px !important;
     box-shadow: none !important;
     margin: 1.5em 0 !important;
+    overflow: hidden;
   }
   article .content div[class^='language-'] .code-header {
-    background: transparent !important;
-    border-bottom: 0.25pt dashed #aaa !important;
-    padding: 0.35em 1em !important;
+    background: #f1ecdc !important;
+    border-bottom: 0.5pt solid #c9c0a8 !important;
+    padding: 0.3em 0.9em !important;
     font-family: inherit !important;
     font-style: italic !important;
-    font-size: 0.86em !important;
+    font-size: 0.85em !important;
     color: #555 !important;
   }
   article .content div[class^='language-'] .code-header::before {
     display: none !important;
   }
-  article .content div[class^='language-'] .code-header::after {
-    content: "Listing";
-    font-style: italic;
-    color: #666;
-    font-size: 0.9em;
+  /* 清掉 Chirpy 内部 .highlight / rouge-table 的重复边框/分隔线 */
+  article .content div[class^='language-'] .highlight,
+  article .content div[class^='language-'] .highlight pre,
+  article .content div[class^='language-'] table.rouge-table,
+  article .content div[class^='language-'] table.rouge-table td {
+    border: none !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+  }
+  article .content div[class^='language-'] .highlight {
+    background: transparent !important;
+  }
+  /* 行号列：淡灰分隔 */
+  article .content div[class^='language-'] .rouge-gutter {
+    border-right: 0.25pt solid #d6cfbc !important;
+    color: #a69d86 !important;
+    padding-right: 0.7em !important;
   }
 
   /* ---------- 公式：MathJax / KaTeX display 居中 ---------- */
@@ -1485,6 +1496,17 @@ html[data-mode='dark'] {
   }
   article > header .post-meta + .post-meta {
     margin-top: 0.2em !important;
+  }
+  /* 作者 / 读时那一行：Chirpy 默认 justify-between，强制居中 + bullet 分隔 */
+  article > header .post-meta .d-flex.justify-content-between {
+    justify-content: center !important;
+    gap: 1.2em;
+  }
+  article > header .post-meta .readtime::before {
+    content: "•";
+    color: #aaa;
+    margin-right: 0.9em;
+    font-style: normal;
   }
   /* 标题下的 rule —— \maketitle 之后的 thin rule */
   article > header::after {
