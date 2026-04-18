@@ -1616,6 +1616,23 @@ html:not([data-mode]) {
   content: none !important;
 }
 
+/* 禁用 Chirpy 原生 archive 时间线伪元素（圆点 + 竖线） */
+#archives.journal-archive a::before,
+#archives.journal-archive a::after,
+#archives.journal-archive ul li::before,
+#archives.journal-archive ul li::after,
+#archives.journal-archive .year::before,
+#archives.journal-archive .year::after,
+#archives.journal-archive ul:last-child li:last-child::before {
+  content: none !important;
+  display: none !important;
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
 #archives.journal-archive .ja-entry:hover { transform: translateX(3px); }
 
 #archives.journal-archive .ja-entry-date {
