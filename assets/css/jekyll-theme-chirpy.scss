@@ -1380,7 +1380,7 @@ html[data-mode='dark'] {
     border-radius: 0 !important;
     color: #111 !important;
   }
-  /* 代码块：LaTeX listings 风格 —— 完整细框 */
+  /* 代码块：保留细框 + 奶油底；内部完全交给 Chirpy 默认 */
   article .content div[class^='language-'] {
     background: #faf7ee !important;
     border: 0.75pt solid #c9c0a8 !important;
@@ -1392,32 +1392,17 @@ html[data-mode='dark'] {
   article .content div[class^='language-'] .code-header {
     background: #f1ecdc !important;
     border-bottom: 0.5pt solid #c9c0a8 !important;
-    padding: 0.3em 0.9em !important;
-    font-family: inherit !important;
-    font-style: italic !important;
-    font-size: 0.85em !important;
-    color: #555 !important;
   }
-  article .content div[class^='language-'] .code-header::before {
-    display: none !important;
-  }
-  /* 清掉 Chirpy 内部 .highlight / rouge-table 的重复边框/分隔线 */
-  article .content div[class^='language-'] .highlight,
-  article .content div[class^='language-'] .highlight pre,
-  article .content div[class^='language-'] table.rouge-table,
-  article .content div[class^='language-'] table.rouge-table td {
+  /* 关键：LaTeX booktabs 规则不要误伤代码块里的 rouge-table */
+  article .content table.rouge-table,
+  article .content table.rouge-table thead,
+  article .content table.rouge-table tbody,
+  article .content table.rouge-table tr,
+  article .content table.rouge-table td {
     border: none !important;
-    box-shadow: none !important;
-    margin: 0 !important;
-  }
-  article .content div[class^='language-'] .highlight {
+    border-top: none !important;
+    border-bottom: none !important;
     background: transparent !important;
-  }
-  /* 行号列：淡灰分隔 */
-  article .content div[class^='language-'] .rouge-gutter {
-    border-right: 0.25pt solid #d6cfbc !important;
-    color: #a69d86 !important;
-    padding-right: 0.7em !important;
   }
 
   /* ---------- 公式：MathJax / KaTeX display 居中 ---------- */
