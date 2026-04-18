@@ -363,3 +363,417 @@ h6,
 .tag:hover {
   filter: brightness(1.05);
 }
+
+/* ======================================================================
+   暗色模式 · 终端美学（Terminal × Paper）
+   作用域：html[data-mode='dark']  +  系统 prefers-color-scheme: dark
+   零影响亮色模式
+   ====================================================================== */
+
+@keyframes term-blink {
+  50% { opacity: 0; }
+}
+
+@keyframes term-rise {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@mixin terminal-aesthetic {
+
+  /* ---------- 全局：选中色 / 滚动条 / 扫描线 ---------- */
+  ::selection {
+    background: var(--term-mint);
+    color: var(--term-bg);
+  }
+  ::-webkit-scrollbar-track { background: var(--term-bg); }
+  ::-webkit-scrollbar-thumb {
+    background: var(--term-line);
+    border-radius: 0;
+  }
+  ::-webkit-scrollbar-thumb:hover { background: var(--term-mint); }
+
+  /* 极轻的扫描线（覆盖全屏但不拦截点击） */
+  &::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    background-image: linear-gradient(transparent 50%, rgba(255, 255, 255, 0.012) 50%);
+    background-size: 100% 3px;
+  }
+
+  /* ---------- 侧栏 ---------- */
+  #sidebar {
+    /* 用深色渐变盖住日落油画，留一点隐约的暖色 */
+    background-image:
+      linear-gradient(
+        180deg,
+        rgba(11, 15, 20, 0.94) 0%,
+        rgba(17, 22, 29, 0.90) 50%,
+        rgba(11, 15, 20, 0.97) 100%
+      ),
+      url("https://cdn.jsdelivr.net/gh/HEYWEEN/images@main/images/ground.png");
+    background-size: cover, cover;
+    background-repeat: no-repeat, no-repeat;
+    background-position: top, top;
+    border-right: 1px solid var(--term-line);
+    position: relative;
+  }
+  /* 侧栏顶部伪 tmux 状态条 */
+  #sidebar::before {
+    content: "● ● ●   ~/blog — zsh";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    padding: 6px 14px;
+    font-family: 'Cascadia Code', ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--term-fg-faint);
+    background: rgba(0, 0, 0, 0.45);
+    border-bottom: 1px solid var(--term-line);
+    z-index: 2;
+  }
+
+  /* 砍掉头像 */
+  #sidebar #avatar,
+  #sidebar .profile-wrapper #avatar,
+  #avatar {
+    display: none !important;
+  }
+  #sidebar .profile-wrapper {
+    padding-top: 3rem;
+  }
+
+  /* 站点标题：$ HEYWEEN▊ */
+  #sidebar .site-title {
+    color: var(--term-mint) !important;
+    font-family: 'Cascadia Code', ui-monospace, SFMono-Regular, Menlo, monospace !important;
+    font-weight: 500 !important;
+    font-size: 1.6rem !important;
+    letter-spacing: 0.05em !important;
+    text-shadow: 0 0 12px rgba(86, 212, 196, 0.35),
+                 0 0 28px rgba(86, 212, 196, 0.12) !important;
+    margin-top: 0.4rem !important;
+  }
+  #sidebar .site-title a {
+    color: inherit !important;
+    display: inline-block;
+  }
+  #sidebar .site-title a::before {
+    content: "$ ";
+    color: var(--term-fg-dim);
+    font-weight: 400;
+    margin-right: 2px;
+  }
+  #sidebar .site-title a::after {
+    content: "▊";
+    color: var(--term-mint);
+    margin-left: 6px;
+    animation: term-blink 1.1s steps(2, end) infinite;
+    font-weight: 400;
+  }
+
+  /* 副标题：// 注释风 */
+  #sidebar .site-subtitle {
+    color: var(--term-fg-dim) !important;
+    text-shadow: none !important;
+    font-family: 'LXGW WenKai', 'PingFang SC', sans-serif !important;
+    font-size: 0.92rem !important;
+    letter-spacing: 0.02em !important;
+    line-height: 1.75 !important;
+    padding: 0.2rem 0.2rem 0.2rem 0.8rem;
+    border-left: 2px solid var(--term-line);
+    margin: 1rem 1rem 0 !important;
+    max-width: none !important;
+    text-align: left;
+  }
+  #sidebar .site-subtitle::before {
+    content: "// ";
+    color: var(--term-fg-faint);
+    font-family: 'Cascadia Code', ui-monospace, monospace;
+    font-weight: 400;
+  }
+
+  /* 导航项：▸ 前缀 + hover 高亮 */
+  #sidebar ul li.nav-item a.nav-link {
+    color: var(--term-fg) !important;
+    font-family: 'Cascadia Code', ui-monospace, monospace !important;
+    font-size: 0.9rem !important;
+    letter-spacing: 0.12em;
+    border-radius: 0 !important;
+    padding: 0.5rem 1rem 0.5rem 2.2rem !important;
+    position: relative;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  #sidebar ul li.nav-item a.nav-link i {
+    /* 隐藏默认 fontawesome icon，让 ▸ 接管 */
+    display: none !important;
+  }
+  #sidebar ul li.nav-item a.nav-link::before {
+    content: "▸";
+    position: absolute;
+    left: 1.1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--term-fg-faint);
+    transition: color 0.15s ease, transform 0.15s ease;
+    font-size: 0.95em;
+  }
+  #sidebar ul li.nav-item a.nav-link:hover,
+  #sidebar ul li.nav-item.active a.nav-link {
+    background: rgba(86, 212, 196, 0.08) !important;
+    color: var(--term-mint) !important;
+    box-shadow: inset 2px 0 0 var(--term-mint);
+  }
+  #sidebar ul li.nav-item a.nav-link:hover::before,
+  #sidebar ul li.nav-item.active a.nav-link::before {
+    color: var(--term-mint);
+    transform: translate(2px, -50%);
+  }
+
+  /* 侧栏底部图标 */
+  #sidebar .sidebar-bottom a,
+  #sidebar .sidebar-bottom button {
+    color: var(--term-fg-dim) !important;
+    transition: color 0.2s, text-shadow 0.2s;
+  }
+  #sidebar .sidebar-bottom a:hover,
+  #sidebar .sidebar-bottom button:hover {
+    color: var(--term-mint) !important;
+    text-shadow: 0 0 8px rgba(86, 212, 196, 0.5);
+  }
+
+  /* ---------- 顶栏：伪 shell prompt ---------- */
+  #topbar-wrapper {
+    background: rgba(11, 15, 20, 0.82);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--term-line);
+  }
+  #breadcrumb {
+    font-family: 'Cascadia Code', ui-monospace, monospace;
+    font-size: 0.85rem;
+    color: var(--term-fg-dim);
+  }
+  #breadcrumb a { color: var(--term-mint); }
+  #breadcrumb::before {
+    content: "$ cd ";
+    color: var(--term-fg-faint);
+    margin-right: 4px;
+  }
+
+  /* 搜索框 */
+  #search-wrapper,
+  search {
+    border: 1px solid var(--term-line) !important;
+    background: var(--term-bg-2) !important;
+    border-radius: 3px !important;
+  }
+  #search-wrapper:focus-within,
+  search:focus-within {
+    border-color: var(--term-mint) !important;
+    box-shadow: 0 0 0 1px rgba(86, 212, 196, 0.25);
+  }
+  #search-input {
+    color: var(--term-fg) !important;
+    font-family: 'Cascadia Code', ui-monospace, monospace !important;
+  }
+  #search-input::placeholder {
+    color: var(--term-fg-faint) !important;
+  }
+
+  /* ---------- 首页文章卡片 ---------- */
+  #post-list .card {
+    background: var(--term-bg-2) !important;
+    border: 1px solid var(--term-line) !important;
+    border-radius: 6px !important;
+    box-shadow: none !important;
+    transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.25s ease !important;
+    position: relative;
+    overflow: hidden;
+  }
+  #post-list .card::before {
+    content: "";
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--term-mint);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.3s ease-out;
+  }
+  #post-list .card:hover {
+    transform: translateY(-2px) !important;
+    border-color: var(--term-mint) !important;
+    box-shadow:
+      0 0 0 1px rgba(86, 212, 196, 0.2),
+      0 12px 28px rgba(0, 0, 0, 0.5) !important;
+  }
+  #post-list .card:hover::before {
+    transform: scaleY(1);
+  }
+
+  /* 卡片标题：$ 前缀 */
+  #post-list .card-title {
+    font-family: 'Cascadia Code', 'LXGW WenKai', sans-serif !important;
+    color: var(--term-fg) !important;
+    font-weight: 600 !important;
+    display: flex;
+    align-items: baseline;
+  }
+  #post-list .card-title::before {
+    content: "$";
+    color: var(--term-rose);
+    font-weight: 400;
+    margin-right: 0.55em;
+    flex-shrink: 0;
+  }
+
+  #post-list .card-text {
+    color: var(--term-fg-dim) !important;
+  }
+  #post-list .card .post-meta {
+    color: var(--term-fg-faint) !important;
+    font-family: 'Cascadia Code', 'LXGW WenKai', sans-serif !important;
+    font-size: 0.82rem !important;
+  }
+  #post-list .card .post-meta i {
+    color: var(--term-fg-faint) !important;
+  }
+
+  /* ---------- 文章页 ---------- */
+  /* 主标题尾部闪烁光标（仅当前文章页） */
+  h1.post-title::after {
+    content: "_";
+    color: var(--term-mint);
+    margin-left: 0.4rem;
+    animation: term-blink 1.1s steps(2, end) infinite;
+    font-weight: 300;
+    display: inline-block;
+  }
+
+  .post-meta,
+  #post time,
+  .timeago {
+    font-family: 'Cascadia Code', ui-monospace, monospace;
+    color: var(--term-fg-dim);
+  }
+
+  /* 正文引用块 */
+  blockquote {
+    background: rgba(86, 212, 196, 0.04);
+    border-left: 3px solid var(--term-mint) !important;
+  }
+
+  /* ---------- 代码块：macOS traffic-light ---------- */
+  div[class^='language-'] {
+    background: var(--term-bg) !important;
+    border: 1px solid var(--term-line) !important;
+    border-radius: 6px !important;
+  }
+  div[class^='language-'] .code-header {
+    background: var(--term-bg-3);
+    border-bottom: 1px solid var(--term-line);
+  }
+  div[class^='language-'] .code-header::before {
+    background-color: #ff5f56 !important;
+    box-shadow: 1.25rem 0 0 #ffbd2e, 2.5rem 0 0 #27c93f !important;
+    border: none !important;
+  }
+  /* 行内代码：mint 框 */
+  code.highlighter-rouge {
+    color: var(--term-mint) !important;
+    background: rgba(86, 212, 196, 0.08) !important;
+    border: 1px solid rgba(86, 212, 196, 0.2) !important;
+    border-radius: 3px !important;
+    padding: 1px 6px !important;
+  }
+
+  /* ---------- 标签 ---------- */
+  .tag {
+    background: rgba(86, 212, 196, 0.08) !important;
+    border: 1px solid rgba(86, 212, 196, 0.3) !important;
+    color: var(--term-mint) !important;
+    border-radius: 3px !important;
+    font-family: 'Cascadia Code', ui-monospace, monospace !important;
+    font-size: 0.78rem !important;
+    padding: 0.1rem 0.55rem !important;
+    transition: background 0.15s ease;
+  }
+  .tag::before {
+    content: "#";
+    color: var(--term-fg-dim);
+    margin-right: 1px;
+  }
+  .tag:hover {
+    background: rgba(86, 212, 196, 0.18) !important;
+    filter: none !important;
+  }
+
+  /* ---------- 右栏 panel（Recently / Trending） ---------- */
+  #panel-wrapper .panel-heading,
+  .panel-heading {
+    font-family: 'Cascadia Code', ui-monospace, monospace !important;
+    font-size: 0.82rem !important;
+    letter-spacing: 0.22em !important;
+    color: var(--term-mint) !important;
+    text-transform: lowercase !important;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px dashed var(--term-line);
+  }
+  #panel-wrapper .panel-heading::before,
+  .panel-heading::before {
+    content: "▸ ";
+    color: var(--term-fg-faint);
+  }
+  #access-lastmod a,
+  #access-lastmod ul li a,
+  #access-trending a {
+    color: var(--term-fg) !important;
+    font-family: 'Cascadia Code', 'LXGW WenKai', sans-serif !important;
+    font-size: 0.88rem !important;
+    transition: color 0.15s ease;
+  }
+  #access-lastmod a:hover,
+  #access-lastmod ul li a:hover,
+  #access-trending a:hover {
+    color: var(--term-mint) !important;
+  }
+
+  /* ---------- 目录 TOC ---------- */
+  #toc-wrapper .toc-link {
+    font-family: 'Cascadia Code', 'LXGW WenKai', sans-serif !important;
+    font-size: 0.84rem !important;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  #toc-wrapper .toc-link.is-active-link {
+    color: var(--term-mint) !important;
+    border-left-color: var(--term-mint) !important;
+  }
+
+  /* ---------- 链接微光 ---------- */
+  a:hover:not(.nav-link):not(.btn):not(.tag):not(.card) {
+    text-shadow: 0 0 6px rgba(86, 212, 196, 0.3);
+  }
+
+  /* details 块：mint 边 */
+  details.details-block {
+    border-left-color: var(--term-mint) !important;
+  }
+  details.details-block > summary {
+    background: rgba(86, 212, 196, 0.06) !important;
+    color: var(--term-mint) !important;
+  }
+}
+
+/* 应用：手动切换 + 系统偏好双场景 */
+html[data-mode='dark'] {
+  @include terminal-aesthetic;
+}
+@media (prefers-color-scheme: dark) {
+  html:not([data-mode]) {
+    @include terminal-aesthetic;
+  }
+}

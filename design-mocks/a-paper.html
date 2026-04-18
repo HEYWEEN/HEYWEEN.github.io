@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>HEYWEEN · 宣纸书卷 Mock</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Serif+SC:wght@400;500;700;900&family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/@fontsource/cascadia-code@5.2.3/400.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.css" rel="stylesheet">
+<style>
+  :root{
+    --paper: #f3ece0;
+    --paper-dark: #ece3d3;
+    --ink: #1c1815;
+    --ink-soft: #4b443c;
+    --ink-faint: #9b9384;
+    --rule: #d7cdb8;
+    --vermilion: #a8342a;
+    --vermilion-deep: #7d241c;
+    --jade: #4f7063;
+    --indigo: #2e3954;
+    --serif-cn: "Noto Serif SC", "Songti SC", "Source Han Serif SC", "LXGW WenKai", serif;
+    --display-cn: "ZCOOL XiaoWei", "LXGW WenKai", "Noto Serif SC", serif;
+    --display-en: "Cormorant Garamond", "EB Garamond", "Iowan Old Style", serif;
+    --mono: "Cascadia Code", ui-monospace, monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--paper);color:var(--ink);font-family:var(--serif-cn);line-height:1.75;-webkit-font-smoothing:antialiased}
+
+  /* 纸张纤维纹理：多层叠加 SVG noise */
+  body{
+    background-image:
+      radial-gradient(circle at 15% 20%, rgba(168,52,42,.04) 0 22%, transparent 23%),
+      radial-gradient(circle at 90% 80%, rgba(46,57,84,.05) 0 18%, transparent 19%),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='4'/><feColorMatrix values='0 0 0 0 0.05  0 0 0 0 0.04  0 0 0 0 0.03  0 0 0 0.07 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    background-blend-mode:multiply;
+  }
+
+  /* 顶部古籍鱼尾标记 */
+  .brand-strip{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:22px 56px 12px;border-bottom:1px solid var(--rule);
+  }
+  .brand{
+    display:flex;align-items:baseline;gap:18px;
+  }
+  .brand .sigil{
+    font-family:var(--display-cn);
+    font-size:28px;letter-spacing:.4em;color:var(--ink);
+  }
+  .brand .sigil::first-letter{color:var(--vermilion)}
+  .brand .en{
+    font-family:var(--display-en);font-style:italic;
+    color:var(--ink-soft);font-size:16px;letter-spacing:.08em;
+  }
+  .nav-strip{
+    display:flex;gap:28px;font-family:var(--serif-cn);font-size:13px;
+    color:var(--ink-soft);letter-spacing:.35em;
+  }
+  .nav-strip a{color:inherit;text-decoration:none;padding-bottom:2px;border-bottom:1px solid transparent;transition:.2s}
+  .nav-strip a:hover{color:var(--vermilion);border-color:var(--vermilion)}
+
+  /* 主布局 */
+  .layout{
+    display:grid;grid-template-columns:280px 1fr 260px;
+    gap:64px;padding:48px 56px 80px;max-width:1440px;margin:0 auto;
+  }
+
+  /* 左栏：作者名片 */
+  .author-card{position:sticky;top:32px;align-self:start}
+  .portrait{
+    width:132px;height:132px;border-radius:50%;
+    background:
+      radial-gradient(circle at 35% 35%, #d6b997 0%, #a78564 60%, #6b4d30 100%);
+    position:relative;margin-bottom:20px;
+    box-shadow:0 8px 20px rgba(28,24,21,.18), inset 0 -8px 18px rgba(0,0,0,.15);
+    overflow:hidden;
+  }
+  .portrait::after{
+    content:"";position:absolute;inset:0;
+    background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.18'/></svg>");
+    mix-blend-mode:multiply;
+  }
+  .portrait-label{
+    position:absolute;bottom:8px;right:8px;
+    font-family:var(--display-cn);color:#fff;font-size:14px;
+    text-shadow:0 1px 3px rgba(0,0,0,.6);letter-spacing:.2em;
+  }
+  .author-name{
+    font-family:var(--display-cn);font-size:38px;letter-spacing:.25em;
+    margin-bottom:4px;
+  }
+  .author-en{
+    font-family:var(--display-en);font-style:italic;font-size:18px;
+    color:var(--ink-soft);letter-spacing:.12em;margin-bottom:16px;
+  }
+  .author-couplet{
+    font-family:var(--serif-cn);font-size:15px;color:var(--ink-soft);
+    line-height:1.95;letter-spacing:.08em;
+    padding:12px 0 16px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+    margin-bottom:24px;
+  }
+  .nav-col{display:flex;flex-direction:column;gap:10px;font-size:14px}
+  .nav-col a{
+    display:flex;justify-content:space-between;color:var(--ink);
+    text-decoration:none;padding:6px 0;letter-spacing:.2em;
+    border-bottom:1px dotted var(--rule);
+  }
+  .nav-col a .en{font-family:var(--display-en);font-style:italic;color:var(--ink-faint);letter-spacing:.05em}
+  .nav-col a:hover{color:var(--vermilion)}
+  .nav-col a:hover .en{color:var(--vermilion)}
+
+  /* 中栏：文章卷 */
+  .scroll-header{
+    display:flex;align-items:flex-end;justify-content:space-between;
+    padding-bottom:16px;margin-bottom:36px;
+    border-bottom:2px solid var(--ink);position:relative;
+  }
+  .scroll-header::after{
+    content:"";position:absolute;bottom:-5px;left:0;right:0;height:1px;background:var(--ink);
+  }
+  .scroll-title{
+    font-family:var(--display-cn);font-size:42px;letter-spacing:.3em;
+  }
+  .scroll-meta{
+    font-family:var(--display-en);font-style:italic;color:var(--ink-soft);font-size:15px;
+  }
+  .scroll-meta strong{color:var(--vermilion);font-weight:500;font-size:22px;vertical-align:-1px}
+
+  /* 文章条目 */
+  .entry{
+    display:grid;grid-template-columns:72px 1fr;gap:28px;
+    padding:28px 0;border-bottom:1px solid var(--rule);
+    position:relative;
+  }
+  .entry:last-child{border-bottom:none}
+  .entry-no{
+    font-family:var(--display-en);font-style:italic;color:var(--vermilion);
+    font-size:52px;line-height:1;padding-top:4px;
+  }
+  .entry-no small{display:block;font-size:12px;color:var(--ink-faint);font-style:normal;letter-spacing:.25em;margin-top:4px}
+  .entry-title{
+    font-family:var(--serif-cn);font-weight:700;font-size:24px;
+    letter-spacing:.04em;margin-bottom:10px;color:var(--ink);
+  }
+  .entry-title a{color:inherit;text-decoration:none;background-image:linear-gradient(var(--vermilion),var(--vermilion));background-size:0 1px;background-position:0 100%;background-repeat:no-repeat;transition:background-size .35s;padding-bottom:2px}
+  .entry-title a:hover{background-size:100% 1px;color:var(--vermilion)}
+  .entry-excerpt{color:var(--ink-soft);font-size:15.5px;line-height:1.95;margin-bottom:14px;text-indent:2em}
+  .entry-foot{
+    display:flex;gap:18px;font-family:var(--display-en);font-style:italic;
+    font-size:13px;color:var(--ink-faint);letter-spacing:.08em;align-items:center;
+  }
+  .entry-foot .cat{
+    font-family:var(--serif-cn);font-style:normal;
+    background:var(--paper-dark);padding:3px 10px;border:1px solid var(--rule);
+    color:var(--ink-soft);letter-spacing:.2em;font-size:12px;
+  }
+  .entry-foot .read-time::before{content:"约 ";color:var(--ink-faint)}
+
+  /* 右栏：近录 & 印章 */
+  .side-pane{position:sticky;top:32px;align-self:start;display:flex;flex-direction:column;gap:40px}
+  .pane-title{
+    font-family:var(--display-cn);font-size:18px;letter-spacing:.35em;
+    padding-bottom:10px;margin-bottom:18px;border-bottom:1px solid var(--ink);
+    display:flex;align-items:baseline;justify-content:space-between;
+  }
+  .pane-title .en{font-family:var(--display-en);font-style:italic;font-size:12px;color:var(--ink-faint);letter-spacing:.12em}
+  .recent-list{list-style:none;display:flex;flex-direction:column;gap:14px}
+  .recent-list li{
+    display:grid;grid-template-columns:26px 1fr;gap:10px;align-items:baseline;
+    font-size:14px;line-height:1.6;
+  }
+  .recent-list li .num{font-family:var(--display-en);font-style:italic;color:var(--vermilion)}
+  .recent-list li a{color:var(--ink);text-decoration:none;border-bottom:1px dotted transparent;transition:.2s}
+  .recent-list li a:hover{border-color:var(--vermilion);color:var(--vermilion)}
+
+  .seal-wrap{display:flex;justify-content:center;padding-top:8px}
+  .seal{
+    width:104px;height:104px;background:var(--vermilion);
+    color:#faf1e3;font-family:var(--display-cn);font-size:28px;
+    letter-spacing:.1em;line-height:1;
+    display:grid;grid-template-columns:1fr 1fr;gap:2px;place-items:center;
+    padding:14px;transform:rotate(-4deg);
+    box-shadow:inset 0 0 0 3px var(--vermilion-deep), 0 6px 14px rgba(125,36,28,.35);
+    position:relative;
+  }
+  .seal::before{
+    content:"";position:absolute;inset:0;
+    background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence baseFrequency='1.2' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.35'/></svg>");
+    mix-blend-mode:screen;opacity:.7;
+  }
+  .seal span{position:relative;z-index:1}
+  .seal-caption{
+    font-family:var(--display-en);font-style:italic;color:var(--ink-faint);
+    font-size:12px;letter-spacing:.2em;text-align:center;margin-top:14px;
+  }
+
+  .tag-cloud{display:flex;flex-wrap:wrap;gap:8px}
+  .tag-cloud a{
+    font-size:12px;letter-spacing:.18em;padding:4px 12px;
+    background:transparent;border:1px solid var(--rule);color:var(--ink-soft);
+    text-decoration:none;transition:.2s;
+  }
+  .tag-cloud a:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  .tag-cloud a.hot{border-color:var(--vermilion);color:var(--vermilion)}
+
+  /* 页脚 */
+  footer{
+    max-width:1440px;margin:0 auto;padding:24px 56px 40px;
+    display:flex;justify-content:space-between;
+    font-family:var(--display-en);font-style:italic;color:var(--ink-faint);
+    font-size:13px;border-top:1px solid var(--rule);letter-spacing:.1em;
+  }
+  footer .cn{font-family:var(--serif-cn);font-style:normal;letter-spacing:.3em}
+
+  /* 入场动画 */
+  .entry{opacity:0;transform:translateY(8px);animation:rise .7s ease-out forwards}
+  .entry:nth-child(1){animation-delay:.05s}
+  .entry:nth-child(2){animation-delay:.15s}
+  .entry:nth-child(3){animation-delay:.25s}
+  .entry:nth-child(4){animation-delay:.35s}
+  .entry:nth-child(5){animation-delay:.45s}
+  @keyframes rise{to{opacity:1;transform:none}}
+
+  /* mock 指示牌（不属于设计本身，只是标注） */
+  .mock-badge{
+    position:fixed;left:12px;bottom:12px;z-index:99;
+    background:var(--ink);color:var(--paper);font-size:11px;
+    padding:6px 12px;font-family:var(--mono);letter-spacing:.15em;opacity:.85;
+  }
+  .mock-badge a{color:var(--paper);text-decoration:underline}
+</style>
+</head>
+<body>
+
+<div class="brand-strip">
+  <div class="brand">
+    <div class="sigil">何翊闻</div>
+    <div class="en">· HEYWEEN · Field Notes from a Quiet Study</div>
+  </div>
+  <nav class="nav-strip">
+    <a href="#">卷一 · 笔记</a>
+    <a href="#">卷二 · 随笔</a>
+    <a href="#">年谱</a>
+    <a href="#">其人</a>
+  </nav>
+</div>
+
+<div class="layout">
+
+  <!-- 左栏 -->
+  <aside class="author-card">
+    <div class="portrait">
+      <div class="portrait-label">水豚图</div>
+    </div>
+    <div class="author-name">何翊闻</div>
+    <div class="author-en">Heyween · 丙午</div>
+    <div class="author-couplet">
+      当时只记入山深，<br>
+      青溪几度到云林。
+    </div>
+    <nav class="nav-col">
+      <a href="#"><span>首页</span><span class="en">Home</span></a>
+      <a href="#"><span>分类</span><span class="en">Categories</span></a>
+      <a href="#"><span>标签</span><span class="en">Tags</span></a>
+      <a href="#"><span>年谱</span><span class="en">Archives</span></a>
+      <a href="#"><span>其人</span><span class="en">About</span></a>
+    </nav>
+  </aside>
+
+  <!-- 中栏 -->
+  <main>
+    <div class="scroll-header">
+      <div class="scroll-title">近录</div>
+      <div class="scroll-meta">Recently Scribed · <strong>五</strong> entries</div>
+    </div>
+
+    <article class="entry">
+      <div class="entry-no">i.<small>APR 17</small></div>
+      <div>
+        <h2 class="entry-title"><a href="#">并发控制 · 互斥（Mutual-Exclusion）</a></h2>
+        <p class="entry-excerpt">为什么操作系统课要讲并发？并发不是"多线程编程"的内容吗，为何放在操作系统里讲？原因来自 UNIX 的 fork-execve 模型——在这个模型下，进程之间是不共享内存的，这看起来……</p>
+        <div class="entry-foot">
+          <span class="cat">操作系统</span>
+          <span class="read-time">三十一分</span>
+          <span>2026 · 04 · 17</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="entry-no">ii.<small>APR 16</small></div>
+      <div>
+        <h2 class="entry-title"><a href="#">多处理器编程</a></h2>
+        <p class="entry-excerpt">REVIEW · 问题动机：从零开始的系统。一台刚上电的计算机，什么软件都没运行，谁来决定第一条指令是什么？谁来把操作系统加载进内存？这就是启动链（boot chain）要解决的……</p>
+        <div class="entry-foot">
+          <span class="cat">操作系统</span>
+          <span class="read-time">十八分</span>
+          <span>2026 · 04 · 16</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="entry-no">iii.<small>APR 14</small></div>
+      <div>
+        <h2 class="entry-title"><a href="#">存储管理</a></h2>
+        <p class="entry-excerpt">内存管理相关概念——内存空间的分配与回收。操作系统作为系统资源的管理者，当然需要对内存进行管理：在管理内存的时候，需要管理什么呢？操作系统负责内存空间的分配与回收……</p>
+        <div class="entry-foot">
+          <span class="cat">操作系统</span>
+          <span class="read-time">廿四分</span>
+          <span>2026 · 04 · 14</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="entry-no">iv.<small>APR 13</small></div>
+      <div>
+        <h2 class="entry-title"><a href="#">PAC · 为什么需要这个框架</a></h2>
+        <p class="entry-excerpt">核心问题：训练误差很低，但我们真正关心的是泛化误差。两者之间的关系能被量化吗？具体而言，以下问题都没有严格答案：训练误差 5%，测试误差能保证多少？测试集……</p>
+        <div class="entry-foot">
+          <span class="cat">机器学习</span>
+          <span class="read-time">十二分</span>
+          <span>2026 · 04 · 13</span>
+        </div>
+      </div>
+    </article>
+
+    <article class="entry">
+      <div class="entry-no">v.<small>APR 10</small></div>
+      <div>
+        <h2 class="entry-title"><a href="#">Self-attention</a></h2>
+        <p class="entry-excerpt">从 Seq2Seq 说起。给定一个序列，我们想要得到另一个序列——翻译、摘要、问答，皆是如此。问题在于：上下文信息该如何被恰当地聚合？Attention 的核心洞察便是此处……</p>
+        <div class="entry-foot">
+          <span class="cat">机器学习</span>
+          <span class="read-time">十六分</span>
+          <span>2026 · 04 · 10</span>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <!-- 右栏 -->
+  <aside class="side-pane">
+    <div>
+      <div class="pane-title"><span>近录索引</span><span class="en">Recently</span></div>
+      <ul class="recent-list">
+        <li><span class="num">i</span><a href="#">并发控制：互斥（Mutual-Exclusion）</a></li>
+        <li><span class="num">ii</span><a href="#">多处理器编程</a></li>
+        <li><span class="num">iii</span><a href="#">存储管理</a></li>
+        <li><span class="num">iv</span><a href="#">PAC 框架</a></li>
+        <li><span class="num">v</span><a href="#">Attention is All You Need</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="pane-title"><span>频标</span><span class="en">Tags</span></div>
+      <div class="tag-cloud">
+        <a href="#" class="hot">笔记</a>
+        <a href="#" class="hot">操作系统</a>
+        <a href="#">随笔</a>
+        <a href="#">机器学习</a>
+        <a href="#">论文读</a>
+        <a href="#">插件</a>
+        <a href="#">自作</a>
+      </div>
+    </div>
+
+    <div>
+      <div class="pane-title"><span>钤印</span><span class="en">Seal</span></div>
+      <div class="seal-wrap">
+        <div class="seal">
+          <span>何</span><span>翊</span><span>之</span><span>闻</span>
+        </div>
+      </div>
+      <div class="seal-caption">HEYWEEN · MMXXVI</div>
+    </div>
+  </aside>
+</div>
+
+<footer>
+  <div class="cn">丙午年 · 清明后八日 · 于杭州</div>
+  <div>© 2026 Heyween · Woodblock &amp; pixel</div>
+</footer>
+
+<div class="mock-badge">DIRECTION A · 宣纸书卷 &nbsp;·&nbsp; <a href="index.html">↩ 返回对比</a></div>
+</body>
+</html>

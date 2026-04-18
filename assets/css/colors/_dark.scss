@@ -1,11 +1,104 @@
 @mixin styles {
-    // 定义的颜色
+    /* ---------------- 原有自定义变量 ---------------- */
     --details-border-color: #865ab7;
     --details-bg: #222a3aa6;
-    // 修改了黑暗模式下原主题的颜色
     --prompt-info-bg: rgb(6 36 62);
     --prompt-tip-bg: rgb(32 40 26 / 60%);
     --prompt-tip-icon-color: #568b5b;
     --prompt-warning-bg: rgb(61 48 6 / 88%);
     --prompt-danger-bg: rgb(67 22 7 / 70%);
+
+    /* ---------------- 终端美学调色板 ---------------- */
+    --term-bg:       #0b0f14;
+    --term-bg-2:     #11161d;
+    --term-bg-3:     #161c25;
+    --term-fg:       #c9d1d9;
+    --term-fg-dim:   #7a8494;
+    --term-fg-faint: #4a5565;
+    --term-line:     #1f2733;
+    --term-mint:     #56d4c4;   /* primary accent */
+    --term-rose:     #f07178;   /* $ 提示符 */
+    --term-amber:    #ffb86b;   /* 关键字 */
+    --term-purple:   #c792ea;   /* 次要 */
+
+    /* ---------------- 覆盖 Chirpy 主题变量 ---------------- */
+    /* 主背景 */
+    --main-bg:              var(--term-bg);
+    --mask-bg:              var(--term-bg-2);
+    --main-border-color:    var(--term-line);
+
+    /* 文本 */
+    --text-color:           var(--term-fg);
+    --text-muted-color:     var(--term-fg-dim);
+    --heading-color:        #e6edf3;
+    --blockquote-text-color: var(--term-fg-dim);
+    --blockquote-border-color: var(--term-mint);
+
+    /* 链接 */
+    --link-color:           var(--term-mint);
+    --link-underline-color: rgba(86, 212, 196, 0.4);
+
+    /* 卡片 */
+    --card-bg:              var(--term-bg-2);
+    --card-header-bg:       var(--term-bg-3);
+    --card-border-color:    var(--term-line);
+
+    /* 侧栏 */
+    --sidebar-bg:           var(--term-bg);
+    --sidebar-border-color: transparent;
+    --sidebar-muted-color:  var(--term-fg-dim);
+    --site-title-color:     var(--term-mint);
+    --site-subtitle-color:  var(--term-fg-dim);
+    --nav-cursor-color:     var(--term-mint);
+    --sidebar-active-color: var(--term-mint);
+
+    /* 顶栏 */
+    --topbar-wrapper-bg:    rgba(11, 15, 20, 0.88);
+    --topbar-text-color:    var(--term-fg);
+
+    /* 搜索 */
+    --search-bg:            var(--term-bg-2);
+    --search-border-color:  var(--term-line);
+    --search-icon-color:    var(--term-fg-dim);
+    --input-focus-border-color: var(--term-mint);
+
+    /* 按钮 */
+    --btn-bg:               var(--term-bg-2);
+    --btn-border-color:     var(--term-line);
+    --button-bg:            var(--term-bg-2);
+    --btn-backtotop-color:  var(--term-mint);
+    --btn-backtotop-border-color: var(--term-line);
+
+    /* 代码 */
+    --highlight-bg-color:        var(--term-bg);
+    --highlighter-rouge-color:   var(--term-amber);
+    --highlight-lineno-color:    var(--term-fg-faint);
+    --inline-code-bg:            rgba(86, 212, 196, 0.08);
+    --code-color:                var(--term-amber);
+    --code-header-text-color:    var(--term-fg-dim);
+    --code-header-muted-color:   var(--term-fg-faint);
+    --code-header-icon-color:    var(--term-fg-dim);
+    --clipboard-checked-color:   var(--term-mint);
+    --language-border-color:     var(--term-line);
+
+    /* 标签 & 分类 */
+    --tag-bg:               rgba(86, 212, 196, 0.08);
+    --tag-border:           rgba(86, 212, 196, 0.35);
+    --tag-hover:            rgba(86, 212, 196, 0.2);
+    --categories-border:    var(--term-line);
+    --categories-hover-bg:  var(--term-bg-3);
+
+    /* 表格 */
+    --tb-odd-bg:            var(--term-bg-2);
+    --tb-even-bg:           var(--term-bg-3);
+    --tb-border-color:      var(--term-line);
+
+    /* 右栏 / TOC */
+    --panel-border-color:   var(--term-line);
+    --toc-highlight:        var(--term-mint);
+    --toc-popup-border-color: var(--term-line);
+
+    /* 其他 */
+    --dash-color:           var(--term-line);
+    --hr-border:            var(--term-line);
 }
