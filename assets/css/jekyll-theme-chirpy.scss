@@ -514,12 +514,13 @@ h6,
   #sidebar .site-title {
     color: var(--term-mint) !important;
     font-family: 'Cascadia Code', ui-monospace, monospace !important;
-    font-weight: 600 !important;
-    font-size: 1.55rem !important;
-    letter-spacing: 0.05em !important;
-    text-shadow: 0 0 14px rgba(86, 212, 196, 0.45),
-                 0 0 30px rgba(86, 212, 196, 0.15) !important;
-    margin: 0.5rem 0 0.2rem !important;
+    font-weight: 700 !important;
+    font-size: 2.05rem !important;
+    letter-spacing: 0.03em !important;
+    line-height: 1.1 !important;
+    text-shadow: 0 0 16px rgba(86, 212, 196, 0.5),
+                 0 0 36px rgba(86, 212, 196, 0.18) !important;
+    margin: 0.6rem 0 0.35rem !important;
   }
   #sidebar .site-title a { color: inherit !important; }
   #sidebar .site-title a::before,
@@ -543,12 +544,12 @@ h6,
     color: var(--term-fg-dim) !important;
     text-shadow: none !important;
     font-family: 'LXGW WenKai', 'PingFang SC', sans-serif !important;
-    font-size: 0.88rem !important;
-    letter-spacing: 0.02em !important;
-    line-height: 1.7 !important;
-    padding: 0.1rem 0.2rem 0.1rem 0.7rem !important;
+    font-size: 0.95rem !important;
+    letter-spacing: 0.03em !important;
+    line-height: 1.8 !important;
+    padding: 0.15rem 0.2rem 0.15rem 0.8rem !important;
     border-left: 2px solid var(--term-line);
-    margin: 0.4rem 1.2rem 0 1.2rem !important;
+    margin: 0.5rem 1.15rem 0 1.15rem !important;
     max-width: none !important;
     text-align: left !important;
     font-style: italic;
@@ -564,10 +565,10 @@ h6,
   #sidebar ul li.nav-item a.nav-link {
     color: var(--term-fg) !important;
     font-family: 'Cascadia Code', ui-monospace, monospace !important;
-    font-size: 0.88rem !important;
+    font-size: 0.98rem !important;
     letter-spacing: 0.13em;
     border-radius: 0 !important;
-    padding: 0.55rem 1rem 0.55rem 2.25rem !important;
+    padding: 0.6rem 1rem 0.6rem 2.35rem !important;
     position: relative;
     transition: background 0.15s ease, color 0.15s ease;
   }
@@ -902,40 +903,40 @@ h6,
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    padding: 0.1rem 1.15rem 0.5rem;
-    margin: 0.2rem 0 0.4rem;
+    padding: 0.1rem 1.15rem 0.55rem;
+    margin: 0.3rem 0 0.45rem;
     border-bottom: 1px dashed var(--term-line);
     font-family: 'Cascadia Code', ui-monospace, monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.28em;
+    font-size: 0.78rem;
+    letter-spacing: 0.26em;
     text-transform: uppercase;
     color: var(--term-mint);
   }
   .term-tree-header .tth-count {
     color: var(--term-fg-faint);
-    font-size: 0.7rem;
+    font-size: 0.72rem;
     letter-spacing: 0.15em;
   }
 
   /* ======================================================================
-     左栏 STATS + BUILD（从右栏搬来，替代原假文件区）
+     右栏 panel 顺序：STATS → RECENT → BUILD
+     ====================================================================== */
+  #panel-wrapper .access {
+    display: flex;
+    flex-direction: column;
+  }
+  #term-stats    { order: 1; margin-bottom: 1.8rem; }
+  #access-lastmod{ order: 2; }
+  #term-build    { order: 3; margin-top: 1.8rem; }
+
+  /* ======================================================================
+     STATS + BUILD（右栏宽度 ~260–300px，字号宽松些）
      ====================================================================== */
   #term-stats,
   #term-build {
     display: block !important;
     font-family: 'Cascadia Code', ui-monospace, monospace;
     color: var(--term-fg);
-    margin: 0 1.15rem;
-    padding: 0;
-  }
-  #term-stats {
-    margin-top: 1.25rem;
-    padding-top: 1rem;
-    border-top: 1px dashed var(--term-line);
-  }
-  #term-build {
-    margin-top: 1.1rem;
-    margin-bottom: 0.5rem;
   }
 
   #term-stats .ti-head,
@@ -943,70 +944,70 @@ h6,
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    padding-bottom: 0.35rem;
-    margin-bottom: 0.55rem;
+    padding-bottom: 0.45rem;
+    margin-bottom: 0.75rem;
     border-bottom: 1px dashed var(--term-line);
-    font-size: 0.7rem;
-    letter-spacing: 0.22em;
+    font-size: 0.82rem;
+    letter-spacing: 0.25em;
     text-transform: uppercase;
   }
   #term-stats .ti-label,
-  #term-build .ti-label { color: var(--term-mint); }
+  #term-build .ti-label {
+    color: var(--term-mint);
+    font-weight: 600;
+  }
   #term-stats .ti-cmd,
   #term-build .ti-cmd {
     color: var(--term-fg-faint);
-    font-size: 0.63rem;
-    letter-spacing: 0.14em;
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
   }
 
-  /* STATS：2×2 紧凑格 */
+  /* STATS：2×2 */
   #term-stats .ti-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 0.35rem 0.7rem;
+    gap: 0.75rem 1.1rem;
   }
   #term-stats .ti-cell {
     display: flex;
     flex-direction: column;
-    gap: 1px;
+    gap: 3px;
     min-width: 0;
   }
   #term-stats .ti-k {
     color: var(--term-fg-faint);
-    font-size: 0.64rem;
-    letter-spacing: 0.08em;
+    font-size: 0.74rem;
+    letter-spacing: 0.1em;
     text-transform: lowercase;
   }
   #term-stats .ti-v {
     color: var(--term-amber);
-    font-size: 0.95rem;
+    font-size: 1.35rem;
     font-weight: 500;
-    letter-spacing: 0.02em;
-    line-height: 1.15;
+    letter-spacing: 0.01em;
+    line-height: 1.1;
   }
   #term-stats .ti-v.ti-mint { color: var(--term-mint); }
   #term-stats .ti-v.ti-rose { color: var(--term-rose); }
 
-  /* BUILD：4 条状态列 */
+  /* BUILD */
   #term-build .ti-list {
     list-style: none;
     padding: 0;
     margin: 0;
-    font-size: 0.72rem;
-    line-height: 1.8;
+    font-size: 0.84rem;
+    line-height: 1.95;
     color: var(--term-fg-dim);
   }
   #term-build .ti-list li {
     display: flex;
     align-items: center;
-    gap: 7px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    gap: 8px;
   }
   #term-build .ti-dot {
-    width: 6px;
-    height: 6px;
+    width: 7px;
+    height: 7px;
     border-radius: 50%;
     flex-shrink: 0;
     background: var(--term-fg-faint);
@@ -1014,11 +1015,11 @@ h6,
   #term-build .ti-dot.ti-mint  { background: var(--term-mint);  box-shadow: 0 0 6px rgba(86,212,196,.55); }
   #term-build .ti-dot.ti-amber { background: var(--term-amber); box-shadow: 0 0 6px rgba(255,184,107,.45); }
   #term-build .ti-dot.ti-faint { background: var(--term-fg-faint); }
-  #term-build .ti-dash { color: var(--term-fg-faint); margin: 0 1px; }
+  #term-build .ti-dash { color: var(--term-fg-faint); margin: 0 2px; }
   #term-build .ti-ok    { color: var(--term-mint); }
   #term-build .ti-amber { color: var(--term-amber); }
   #term-build .ti-faint { color: var(--term-fg-faint); }
-  #term-build .ti-t     { color: var(--term-fg-faint); margin-left: auto; font-size: 0.66rem; }
+  #term-build .ti-t     { color: var(--term-fg-faint); margin-left: auto; font-size: 0.76rem; }
   #term-build .ti-faint { color: var(--term-fg-faint); }
   #term-build .ti-t     { color: var(--term-fg-faint); margin-left: auto; font-size: 0.72rem; }
 }
