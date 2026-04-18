@@ -198,6 +198,10 @@ details.details-block[open] > summary{
 @import url('https://cdn.jsdelivr.net/npm/@fontsource/cascadia-code@5.2.3/400.css');
 @import url('https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.css');
 
+/* LaTeX 正文字体：Computer Modern（英文 · 权威 LaTeX 字形）+ Noto Serif SC（中文宋体 · Google Fonts）+ STIX Two Text（数学 / 保底） */
+@import url('https://cdn.jsdelivr.net/gh/dreampulse/computer-modern-web-font/fonts.css');
+@import url('https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400;0,500;0,700;1,400;1,700&family=Noto+Serif+SC:wght@400;500;700;900&display=swap');
+
 /* 全站默认字体栈：英文优先用 Cascadia Code，中文优先用 LXGW WenKai */
 body {
   font-family:
@@ -1030,6 +1034,402 @@ html[data-mode='dark'] {
 @media (prefers-color-scheme: dark) {
   html:not([data-mode]) {
     @include terminal-aesthetic;
+  }
+}
+
+/* ======================================================================
+   亮色模式 · LaTeX 学术论文风（仅 .post-content 正文）
+   作用域：html[data-mode='light']  +  系统 prefers-color-scheme: light
+   暗色模式不触碰
+   ====================================================================== */
+
+@mixin latex-paper {
+
+  /* ---------- 正文基调 ---------- */
+  .post-content {
+    font-family:
+      'Computer Modern Serif',
+      'Latin Modern Roman',
+      'STIX Two Text',
+      'EB Garamond',
+      'Noto Serif SC',
+      'Source Han Serif SC',
+      'Songti SC',
+      'STSong',
+      serif !important;
+    font-size: 1.08rem !important;
+    line-height: 1.72 !important;
+    color: #111;
+    text-align: justify;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+    font-feature-settings: "kern", "liga", "onum";
+    word-spacing: 0.02em;
+  }
+
+  /* 段落：首行缩进 2em，紧密垂直节奏 —— LaTeX book class 默认 */
+  .post-content p {
+    margin: 0 0 0.35em;
+    text-indent: 2em;
+    orphans: 3;
+    widows: 3;
+  }
+  /* 需要取消缩进的语义环境 */
+  .post-content li p,
+  .post-content blockquote p,
+  .post-content figure p,
+  .post-content .footnotes p,
+  .post-content td p,
+  .post-content th p,
+  .post-content details p {
+    text-indent: 0;
+  }
+
+  /* ---------- 章节标题：LaTeX book class 体量 ---------- */
+  .post-content h1,
+  .post-content h2,
+  .post-content h3,
+  .post-content h4,
+  .post-content h5,
+  .post-content h6 {
+    font-family: inherit !important;
+    color: #111;
+    border-bottom: none !important;
+    padding-bottom: 0 !important;
+    text-indent: 0;
+    text-align: left;
+    letter-spacing: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+  .post-content h1 {
+    font-size: 1.78rem !important;
+    font-weight: 700 !important;
+    margin: 2.6em 0 0.7em !important;
+    line-height: 1.28 !important;
+  }
+  .post-content h2 {
+    font-size: 1.46rem !important;
+    font-weight: 700 !important;
+    margin: 2em 0 0.55em !important;
+    line-height: 1.32 !important;
+  }
+  .post-content h3 {
+    font-size: 1.22rem !important;
+    font-weight: 700 !important;
+    margin: 1.5em 0 0.45em !important;
+    line-height: 1.35 !important;
+  }
+  .post-content h4 {
+    font-size: 1.08rem !important;
+    font-weight: 700 !important;
+    font-style: italic !important;
+    margin: 1.2em 0 0.35em !important;
+    line-height: 1.4 !important;
+  }
+  .post-content h5,
+  .post-content h6 {
+    font-size: 1rem !important;
+    font-weight: 700 !important;
+    font-style: italic !important;
+    margin: 1em 0 0.3em !important;
+  }
+
+  /* ---------- 链接：arXiv navy ---------- */
+  .post-content a:not(.anchor):not(.img-link) {
+    color: #0b3d91;
+    text-decoration: underline;
+    text-decoration-thickness: 0.5pt;
+    text-underline-offset: 2px;
+    transition: color 0.15s ease;
+  }
+  .post-content a:not(.anchor):not(.img-link):hover {
+    color: #7a1a1a;
+    text-decoration-thickness: 1pt;
+  }
+
+  /* ---------- 引用块：LaTeX quotation（italic, 两侧缩进，无左竖线） ---------- */
+  .post-content blockquote {
+    font-style: italic;
+    border-left: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    padding: 0.4em 2.5em !important;
+    margin: 1em 0 !important;
+    color: #2a2a2a !important;
+    font-size: 0.98em;
+  }
+  .post-content blockquote p {
+    margin: 0.3em 0;
+  }
+  /* Chirpy 的 prompt 块保持可用，但在 LaTeX 下降权重 */
+  .post-content blockquote[class^='prompt-'] {
+    font-style: normal;
+    padding: 0.9em 1.2em !important;
+    box-shadow: none !important;
+    border-left: 2pt solid #111 !important;
+    background: #f7f4ec !important;
+  }
+
+  /* ---------- 列表 ---------- */
+  .post-content ul,
+  .post-content ol {
+    padding-left: 2.4em;
+    margin: 0.5em 0 0.9em;
+  }
+  .post-content ul { list-style: disc outside; }
+  .post-content ol { list-style: decimal outside; }
+  .post-content li {
+    margin: 0.22em 0;
+    line-height: 1.68;
+  }
+  .post-content li::marker {
+    color: #111;
+    font-variant-numeric: oldstyle-nums;
+  }
+
+  /* ---------- HR：细线 ---------- */
+  .post-content hr {
+    border: none;
+    border-top: 0.5pt solid #111;
+    margin: 2.4em auto;
+    background: transparent;
+    width: 100%;
+  }
+
+  /* ---------- 表格：booktabs (top-rule / mid-rule / bottom-rule) ---------- */
+  .post-content table {
+    border-collapse: collapse;
+    margin: 1.8em auto;
+    font-size: 0.96em;
+    font-family: inherit;
+    min-width: 55%;
+    background: transparent !important;
+    caption-side: top;
+  }
+  .post-content table caption {
+    font-style: italic;
+    font-size: 0.94em;
+    color: #333;
+    padding: 0.3em 0 0.5em;
+    caption-side: top;
+    text-align: center;
+  }
+  .post-content table caption::before {
+    content: "Table: ";
+    font-style: normal;
+  }
+  .post-content table th,
+  .post-content table td {
+    padding: 0.5em 1em;
+    border: none !important;
+    text-align: left;
+    vertical-align: baseline;
+    background: transparent !important;
+  }
+  .post-content table th {
+    font-weight: 700;
+    font-style: italic;
+  }
+  .post-content table thead {
+    border-top: 1.5pt solid #111;
+    border-bottom: 0.75pt solid #111;
+  }
+  .post-content table tbody {
+    border-bottom: 1.5pt solid #111;
+  }
+  .post-content table tbody tr:nth-child(odd),
+  .post-content table tbody tr:nth-child(even) {
+    background: transparent !important;
+  }
+
+  /* ---------- 图：居中 + italic figcaption ---------- */
+  .post-content img {
+    display: block;
+    margin: 1.4em auto 0.35em;
+    max-width: 100%;
+    box-shadow: none;
+    border: none;
+  }
+  .post-content figure {
+    margin: 1.6em auto;
+    text-align: center;
+  }
+  .post-content figure figcaption,
+  .post-content img + em {
+    display: block;
+    text-align: center;
+    font-style: italic;
+    font-size: 0.92em;
+    color: #333;
+    margin: 0.4em auto 1.4em;
+    text-indent: 0;
+    max-width: 88%;
+    line-height: 1.55;
+  }
+  .post-content figure figcaption::before,
+  .post-content img + em::before {
+    content: "Figure: ";
+    font-style: normal;
+    font-weight: 600;
+  }
+
+  /* ---------- 代码：Computer Modern Typewriter ---------- */
+  .post-content code,
+  .post-content pre,
+  .post-content kbd,
+  .post-content samp {
+    font-family:
+      'Computer Modern Typewriter',
+      'Latin Modern Mono',
+      'Cascadia Code',
+      ui-monospace,
+      SFMono-Regular,
+      Menlo,
+      monospace !important;
+  }
+  .post-content code.highlighter-rouge {
+    background: #f4f1e8 !important;
+    border: none !important;
+    padding: 0 4px !important;
+    font-size: 0.93em !important;
+    border-radius: 0 !important;
+    color: #111 !important;
+  }
+  /* 代码块：LaTeX listings 风格 —— 仅上下细边 */
+  .post-content div[class^='language-'] {
+    background: #faf8f2 !important;
+    border: none !important;
+    border-top: 0.5pt solid #111 !important;
+    border-bottom: 0.5pt solid #111 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    margin: 1.5em 0 !important;
+  }
+  .post-content div[class^='language-'] .code-header {
+    background: transparent !important;
+    border-bottom: 0.25pt dashed #aaa !important;
+    padding: 0.35em 1em !important;
+    font-family: inherit !important;
+    font-style: italic !important;
+    font-size: 0.86em !important;
+    color: #555 !important;
+  }
+  .post-content div[class^='language-'] .code-header::before {
+    display: none !important;
+  }
+  .post-content div[class^='language-'] .code-header::after {
+    content: "Listing";
+    font-style: italic;
+    color: #666;
+    font-size: 0.9em;
+  }
+
+  /* ---------- 公式：MathJax / KaTeX display 居中 ---------- */
+  .post-content .katex-display,
+  .post-content mjx-container[display="true"] {
+    margin: 1.5em 0 !important;
+    text-align: center !important;
+  }
+  .post-content mjx-container[display="true"] {
+    padding: 0.4em 0;
+  }
+  .post-content .katex,
+  .post-content mjx-container {
+    font-size: 1.02em !important;
+  }
+
+  /* ---------- 脚注：thematic break + smaller ---------- */
+  .post-content .footnotes {
+    margin-top: 3em;
+    padding-top: 0.9em;
+    border-top: 0.5pt solid #111;
+    font-size: 0.88em;
+    line-height: 1.6;
+  }
+  .post-content .footnotes ol {
+    padding-left: 1.8em;
+  }
+  .post-content .footnotes li {
+    margin: 0.3em 0;
+  }
+  .post-content sup a {
+    color: #0b3d91 !important;
+    text-decoration: none !important;
+  }
+
+  /* ---------- strong / em ---------- */
+  .post-content strong {
+    color: #111;
+    font-weight: 700;
+  }
+  .post-content em {
+    font-style: italic;
+    color: inherit;
+  }
+
+  /* ---------- 文章 title / meta 区：LaTeX \maketitle 风 ---------- */
+  .post-title {
+    font-family:
+      'Computer Modern Serif',
+      'Latin Modern Roman',
+      'STIX Two Text',
+      'Noto Serif SC',
+      'Songti SC',
+      serif !important;
+    font-weight: 700 !important;
+    font-size: clamp(2rem, 3vw + 0.8rem, 2.7rem) !important;
+    line-height: 1.22 !important;
+    text-align: center !important;
+    margin: 1.2em auto 0.5em !important;
+    max-width: 90%;
+    letter-spacing: 0 !important;
+  }
+  #post header .post-meta {
+    text-align: center !important;
+    font-family:
+      'Computer Modern Serif',
+      'Latin Modern Roman',
+      'STIX Two Text',
+      'Noto Serif SC',
+      serif !important;
+    font-style: italic;
+    color: #555 !important;
+    font-size: 0.95em !important;
+    letter-spacing: 0.01em;
+    margin-bottom: 0 !important;
+  }
+  #post header .post-meta + .post-meta {
+    margin-top: 0.2em !important;
+  }
+  /* 标题下的 rule —— \maketitle 之后的 thin rule */
+  #post header::after {
+    content: "";
+    display: block;
+    width: 40%;
+    height: 0.5pt;
+    background: #111;
+    margin: 1.4em auto 1.8em;
+  }
+
+  /* ---------- 细节：段首无缩进规则的清理 ---------- */
+  .post-content > *:first-child {
+    text-indent: 0;
+  }
+
+  /* ---------- 选中色：克制的墨色 ---------- */
+  .post-content ::selection {
+    background: #ffe58a;
+    color: #111;
+  }
+}
+
+/* 作用域：手动亮色 + 系统亮色 */
+html[data-mode='light'] {
+  @include latex-paper;
+}
+html:not([data-mode]) {
+  @media (prefers-color-scheme: light) {
+    @include latex-paper;
   }
 }
 
