@@ -901,6 +901,91 @@ h6,
   }
 
   /* ======================================================================
+     暗色模式：把 LaTeX 默认样式抹回终端风
+     ====================================================================== */
+  .post-content {
+    font-family:
+      'Cascadia Code',
+      'LXGW WenKai',
+      ui-monospace,
+      SFMono-Regular,
+      Menlo,
+      sans-serif !important;
+    font-size: 1.05rem !important;
+    line-height: 1.78 !important;
+    color: var(--term-fg) !important;
+    text-align: left !important;
+    hyphens: manual !important;
+    word-spacing: normal !important;
+  }
+  .post-content p {
+    text-indent: 0 !important;
+    margin: 0 0 1em !important;
+  }
+  .post-content h1,
+  .post-content h2,
+  .post-content h3,
+  .post-content h4,
+  .post-content h5,
+  .post-content h6 {
+    font-family: inherit !important;
+    color: var(--term-fg) !important;
+    font-style: normal !important;
+  }
+  .post-content a:not(.anchor):not(.img-link) {
+    color: var(--term-mint) !important;
+    text-decoration-color: rgba(86, 212, 196, 0.4) !important;
+  }
+  .post-content a:not(.anchor):not(.img-link):hover {
+    color: var(--term-mint) !important;
+  }
+  .post-content blockquote {
+    font-style: normal !important;
+    border-left: 3px solid var(--term-mint) !important;
+    padding: 0.6em 1em !important;
+    background: rgba(86, 212, 196, 0.04) !important;
+    color: var(--term-fg-dim) !important;
+  }
+  .post-content table thead,
+  .post-content table tbody {
+    border-color: var(--term-line) !important;
+  }
+  .post-content figure figcaption::before,
+  .post-content img + em::before {
+    content: none !important;
+  }
+  .post-content table caption::before {
+    content: none !important;
+  }
+  .post-content div[class^='language-'] .code-header::after {
+    content: none !important;
+  }
+  .post-content ::selection {
+    background: var(--term-mint) !important;
+    color: var(--term-bg) !important;
+  }
+  /* 文章标题不居中 —— 回到终端的 \n 式左对齐 */
+  .post-title {
+    text-align: left !important;
+    font-family:
+      'Cascadia Code',
+      'LXGW WenKai',
+      sans-serif !important;
+  }
+  #post header .post-meta {
+    text-align: left !important;
+    font-family:
+      'Cascadia Code',
+      ui-monospace,
+      monospace !important;
+    font-style: normal !important;
+    color: var(--term-fg-dim) !important;
+  }
+  #post header::after {
+    display: none !important;
+  }
+
+  /* ======================================================================
      左栏 NAVIGATOR 头
      ====================================================================== */
   .term-tree-header {
@@ -1423,13 +1508,6 @@ html[data-mode='dark'] {
   }
 }
 
-/* 作用域：手动亮色 + 系统亮色 */
-html[data-mode='light'] {
-  @include latex-paper;
-}
-html:not([data-mode]) {
-  @media (prefers-color-scheme: light) {
-    @include latex-paper;
-  }
-}
+/* 默认全局应用 LaTeX；暗色模式下由 terminal-aesthetic 回写覆盖 */
+@include latex-paper;
 
