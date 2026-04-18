@@ -365,23 +365,27 @@ h6,
 }
 
 /* ======================================================================
-   暗色模式 · 终端美学（Terminal × Paper）
+   终端态 HTML 元素（亮色模式下全部隐藏；暗色模式由下方 mixin 呈现）
+   ====================================================================== */
+
+#term-statusbar,
+#term-hero {
+  display: none;
+}
+
+/* ======================================================================
+   暗色模式 · 终端美学
    作用域：html[data-mode='dark']  +  系统 prefers-color-scheme: dark
-   零影响亮色模式
+   亮色模式零影响
    ====================================================================== */
 
 @keyframes term-blink {
   50% { opacity: 0; }
 }
 
-@keyframes term-rise {
-  from { opacity: 0; transform: translateY(4px); }
-  to   { opacity: 1; transform: none; }
-}
-
 @mixin terminal-aesthetic {
 
-  /* ---------- 全局：选中色 / 滚动条 / 扫描线 ---------- */
+  /* ---------- 全站 ---------- */
   ::selection {
     background: var(--term-mint);
     color: var(--term-bg);
@@ -393,7 +397,15 @@ h6,
   }
   ::-webkit-scrollbar-thumb:hover { background: var(--term-mint); }
 
-  /* 极轻的扫描线（覆盖全屏但不拦截点击） */
+  /* 腾出顶部状态条空间 */
+  body {
+    padding-top: 28px;
+  }
+
+  /* 砍掉 Chirpy 自带的装饰圆点 */
+  #animation { display: none !important; }
+
+  /* 极轻扫描线 */
   &::after {
     content: "";
     position: fixed;
@@ -404,34 +416,82 @@ h6,
     background-size: 100% 3px;
   }
 
-  /* ---------- 侧栏 ---------- */
-  #sidebar {
-    /* 用深色渐变盖住日落油画，留一点隐约的暖色 */
-    background-image:
-      linear-gradient(
-        180deg,
-        rgba(11, 15, 20, 0.94) 0%,
-        rgba(17, 22, 29, 0.90) 50%,
-        rgba(11, 15, 20, 0.97) 100%
-      ),
-      url("https://cdn.jsdelivr.net/gh/HEYWEEN/images@main/images/ground.png");
-    background-size: cover, cover;
-    background-repeat: no-repeat, no-repeat;
-    background-position: top, top;
-    border-right: 1px solid var(--term-line);
-    position: relative;
+  /* ======================================================================
+     顶部 tmux 状态条
+     ====================================================================== */
+  #term-statusbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 28px;
+    padding: 0 14px;
+    background: #000;
+    border-bottom: 1px solid var(--term-line);
+    font-family: 'Cascadia Code', ui-monospace, monospace;
+    font-size: 11.5px;
+    letter-spacing: 0.05em;
+    color: var(--term-fg-dim);
+    z-index: 1050;
   }
-  /* 侧栏顶部伪 tmux 状态条 */
+  #term-statusbar .tsb-left,
+  #term-statusbar .tsb-right {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  #term-statusbar .tsb-mode {
+    background: var(--term-mint);
+    color: #000;
+    font-weight: 700;
+    padding: 1px 9px;
+    letter-spacing: 0.15em;
+  }
+  #term-statusbar .tsb-item { display: inline-flex; align-items: center; gap: 6px; }
+  #term-statusbar .tsb-dim   { color: var(--term-fg-dim); }
+  #term-statusbar .tsb-faint { color: var(--term-fg-faint); }
+  #term-statusbar .tsb-amber { color: var(--term-amber); }
+  #term-statusbar .tsb-mint  { color: var(--term-mint); }
+  #term-statusbar .tsb-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--term-mint);
+    box-shadow: 0 0 8px var(--term-mint);
+    animation: term-blink 2.2s ease-in-out infinite;
+  }
+
+  /* ======================================================================
+     侧栏：彻底盖掉日落油画
+     ====================================================================== */
+  #sidebar {
+    background-color: var(--term-bg) !important;
+    background-image:
+      radial-gradient(circle at 18% 22%, rgba(86, 212, 196, 0.055), transparent 38%),
+      radial-gradient(circle at 82% 78%, rgba(199, 146, 234, 0.04), transparent 42%),
+      linear-gradient(180deg, var(--term-bg-2) 0%, var(--term-bg) 60%, #000 100%) !important;
+    background-size: auto, auto, auto !important;
+    background-repeat: no-repeat, no-repeat, no-repeat !important;
+    background-position: top, bottom, top !important;
+    border-right: 1px solid var(--term-line);
+    top: 28px !important;
+    height: calc(100vh - 28px) !important;
+  }
   #sidebar::before {
-    content: "● ● ●   ~/blog — zsh";
+    content: "● ● ●                 ~/blog — zsh";
     position: absolute;
-    top: 0; left: 0; right: 0;
-    padding: 6px 14px;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 8px 16px;
     font-family: 'Cascadia Code', ui-monospace, monospace;
     font-size: 11px;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.06em;
     color: var(--term-fg-faint);
-    background: rgba(0, 0, 0, 0.45);
+    background: var(--term-bg-3);
     border-bottom: 1px solid var(--term-line);
     z-index: 2;
   }
@@ -443,87 +503,84 @@ h6,
     display: none !important;
   }
   #sidebar .profile-wrapper {
-    padding-top: 3rem;
+    padding-top: 3.5rem !important;
+    padding-bottom: 0.5rem !important;
   }
 
-  /* 站点标题：$ HEYWEEN▊ */
+  /* 站点标题 $ HEYWEEN▊ */
   #sidebar .site-title {
     color: var(--term-mint) !important;
-    font-family: 'Cascadia Code', ui-monospace, SFMono-Regular, Menlo, monospace !important;
-    font-weight: 500 !important;
-    font-size: 1.6rem !important;
+    font-family: 'Cascadia Code', ui-monospace, monospace !important;
+    font-weight: 600 !important;
+    font-size: 1.55rem !important;
     letter-spacing: 0.05em !important;
-    text-shadow: 0 0 12px rgba(86, 212, 196, 0.35),
-                 0 0 28px rgba(86, 212, 196, 0.12) !important;
-    margin-top: 0.4rem !important;
+    text-shadow: 0 0 14px rgba(86, 212, 196, 0.45),
+                 0 0 30px rgba(86, 212, 196, 0.15) !important;
+    margin: 0.5rem 0 0.2rem !important;
   }
-  #sidebar .site-title a {
-    color: inherit !important;
-    display: inline-block;
-  }
-  #sidebar .site-title a::before {
+  #sidebar .site-title a { color: inherit !important; }
+  #sidebar .site-title a::before,
+  #sidebar .site-title:not(:has(a))::before {
     content: "$ ";
     color: var(--term-fg-dim);
     font-weight: 400;
     margin-right: 2px;
   }
-  #sidebar .site-title a::after {
+  #sidebar .site-title a::after,
+  #sidebar .site-title:not(:has(a))::after {
     content: "▊";
     color: var(--term-mint);
-    margin-left: 6px;
+    margin-left: 8px;
     animation: term-blink 1.1s steps(2, end) infinite;
     font-weight: 400;
   }
 
-  /* 副标题：// 注释风 */
+  /* 副标题 */
   #sidebar .site-subtitle {
     color: var(--term-fg-dim) !important;
     text-shadow: none !important;
     font-family: 'LXGW WenKai', 'PingFang SC', sans-serif !important;
-    font-size: 0.92rem !important;
+    font-size: 0.88rem !important;
     letter-spacing: 0.02em !important;
-    line-height: 1.75 !important;
-    padding: 0.2rem 0.2rem 0.2rem 0.8rem;
+    line-height: 1.7 !important;
+    padding: 0.1rem 0.2rem 0.1rem 0.7rem !important;
     border-left: 2px solid var(--term-line);
-    margin: 1rem 1rem 0 !important;
+    margin: 0.4rem 1.2rem 0 1.2rem !important;
     max-width: none !important;
-    text-align: left;
+    text-align: left !important;
+    font-style: italic;
   }
   #sidebar .site-subtitle::before {
     content: "// ";
     color: var(--term-fg-faint);
     font-family: 'Cascadia Code', ui-monospace, monospace;
-    font-weight: 400;
+    font-style: normal;
   }
 
-  /* 导航项：▸ 前缀 + hover 高亮 */
+  /* 导航 ▸ */
   #sidebar ul li.nav-item a.nav-link {
     color: var(--term-fg) !important;
     font-family: 'Cascadia Code', ui-monospace, monospace !important;
-    font-size: 0.9rem !important;
-    letter-spacing: 0.12em;
+    font-size: 0.88rem !important;
+    letter-spacing: 0.13em;
     border-radius: 0 !important;
-    padding: 0.5rem 1rem 0.5rem 2.2rem !important;
+    padding: 0.55rem 1rem 0.55rem 2.25rem !important;
     position: relative;
     transition: background 0.15s ease, color 0.15s ease;
   }
-  #sidebar ul li.nav-item a.nav-link i {
-    /* 隐藏默认 fontawesome icon，让 ▸ 接管 */
-    display: none !important;
-  }
+  #sidebar ul li.nav-item a.nav-link i { display: none !important; }
   #sidebar ul li.nav-item a.nav-link::before {
     content: "▸";
     position: absolute;
-    left: 1.1rem;
+    left: 1.15rem;
     top: 50%;
     transform: translateY(-50%);
     color: var(--term-fg-faint);
     transition: color 0.15s ease, transform 0.15s ease;
-    font-size: 0.95em;
   }
   #sidebar ul li.nav-item a.nav-link:hover,
   #sidebar ul li.nav-item.active a.nav-link {
-    background: rgba(86, 212, 196, 0.08) !important;
+    background: rgba(86, 212, 196, 0.09) !important;
     color: var(--term-mint) !important;
     box-shadow: inset 2px 0 0 var(--term-mint);
   }
@@ -533,7 +590,6 @@ h6,
     transform: translate(2px, -50%);
   }
 
-  /* 侧栏底部图标 */
   #sidebar .sidebar-bottom a,
   #sidebar .sidebar-bottom button {
     color: var(--term-fg-dim) !important;
@@ -542,11 +598,14 @@ h6,
   #sidebar .sidebar-bottom a:hover,
   #sidebar .sidebar-bottom button:hover {
     color: var(--term-mint) !important;
-    text-shadow: 0 0 8px rgba(86, 212, 196, 0.5);
+    text-shadow: 0 0 10px rgba(86, 212, 196, 0.6);
   }
 
-  /* ---------- 顶栏：伪 shell prompt ---------- */
+  /* ======================================================================
+     顶部 topbar（Chirpy 自带）
+     ====================================================================== */
   #topbar-wrapper {
+    top: 28px !important;
     background: rgba(11, 15, 20, 0.82);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
@@ -564,7 +623,6 @@ h6,
     margin-right: 4px;
   }
 
-  /* 搜索框 */
   #search-wrapper,
   search {
     border: 1px solid var(--term-line) !important;
@@ -580,11 +638,92 @@ h6,
     color: var(--term-fg) !important;
     font-family: 'Cascadia Code', ui-monospace, monospace !important;
   }
-  #search-input::placeholder {
-    color: var(--term-fg-faint) !important;
+  #search-input::placeholder { color: var(--term-fg-faint) !important; }
+
+  /* ======================================================================
+     Terminal Hero
+     ====================================================================== */
+  #term-hero {
+    display: block;
+    margin: 0.5rem 0 2rem;
+    padding: 1.5rem 0 1.4rem;
+    font-family: 'Cascadia Code', ui-monospace, monospace;
+    color: var(--term-fg);
+    border-bottom: 1px dashed var(--term-line);
+  }
+  #term-hero .th-line { line-height: 1.9; font-size: 0.95rem; }
+  #term-hero .th-prompt {
+    color: var(--term-mint);
+    font-size: 0.92rem;
+    margin-bottom: 0.6rem;
+    letter-spacing: 0.04em;
+  }
+  #term-hero .th-ps { color: var(--term-fg-faint); margin-right: 6px; }
+  #term-hero .th-cmd { color: var(--term-mint); }
+  #term-hero .th-cursor {
+    display: inline-block;
+    margin-left: 3px;
+    color: var(--term-mint);
+    animation: term-blink 1.1s steps(2, end) infinite;
   }
 
-  /* ---------- 首页文章卡片 ---------- */
+  #term-hero .th-title {
+    font-family: 'Cascadia Code', 'LXGW WenKai', sans-serif;
+    font-weight: 400;
+    font-size: clamp(1.9rem, 3.2vw, 2.6rem);
+    line-height: 1.2;
+    margin: 0.3rem 0 0.9rem;
+    letter-spacing: 0.015em;
+    color: var(--term-fg);
+  }
+  #term-hero .th-hash {
+    color: var(--term-rose);
+    margin-right: 0.5rem;
+    font-family: 'Cascadia Code', ui-monospace, monospace;
+  }
+  #term-hero .th-word {
+    color: var(--term-fg);
+    font-weight: 700;
+  }
+  #term-hero .th-sub {
+    color: var(--term-fg-faint);
+    font-size: 1.05rem;
+    font-weight: 400;
+    margin-left: 0.55rem;
+    font-family: 'Cascadia Code', ui-monospace, monospace;
+  }
+  #term-hero .th-quote {
+    font-family: 'Cascadia Code', 'LXGW WenKai', sans-serif;
+    color: var(--term-fg-dim);
+    margin-top: 0.4rem;
+  }
+  #term-hero .th-comment { color: var(--term-fg-dim); }
+  #term-hero .th-code {
+    font-size: 0.92rem;
+    margin-top: 0.3rem;
+    color: var(--term-fg);
+  }
+  #term-hero .th-kw      { color: var(--term-purple); }
+  #term-hero .th-var     { color: var(--term-amber); }
+  #term-hero .th-op      { color: var(--term-fg-dim); margin: 0 4px; }
+  #term-hero .th-bracket { color: var(--term-fg-dim); }
+  #term-hero .th-str     { color: var(--term-mint); }
+  #term-hero .th-rule {
+    height: 1px;
+    background: linear-gradient(90deg, var(--term-line), transparent 80%);
+    margin: 1.4rem 0 0.9rem;
+  }
+  #term-hero .th-section {
+    color: var(--term-mint);
+    font-size: 0.82rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+  #term-hero .th-arrow { color: var(--term-amber); margin-right: 8px; }
+
+  /* ======================================================================
+     首页卡片
+     ====================================================================== */
   #post-list .card {
     background: var(--term-bg-2) !important;
     border: 1px solid var(--term-line) !important;
@@ -608,14 +747,10 @@ h6,
     transform: translateY(-2px) !important;
     border-color: var(--term-mint) !important;
     box-shadow:
-      0 0 0 1px rgba(86, 212, 196, 0.2),
-      0 12px 28px rgba(0, 0, 0, 0.5) !important;
+      0 0 0 1px rgba(86, 212, 196, 0.22),
+      0 12px 32px rgba(0, 0, 0, 0.5) !important;
   }
-  #post-list .card:hover::before {
-    transform: scaleY(1);
-  }
-
-  /* 卡片标题：$ 前缀 */
+  #post-list .card:hover::before { transform: scaleY(1); }
   #post-list .card-title {
     font-family: 'Cascadia Code', 'LXGW WenKai', sans-serif !important;
     color: var(--term-fg) !important;
@@ -630,21 +765,17 @@ h6,
     margin-right: 0.55em;
     flex-shrink: 0;
   }
-
-  #post-list .card-text {
-    color: var(--term-fg-dim) !important;
-  }
+  #post-list .card-text { color: var(--term-fg-dim) !important; }
   #post-list .card .post-meta {
     color: var(--term-fg-faint) !important;
     font-family: 'Cascadia Code', 'LXGW WenKai', sans-serif !important;
     font-size: 0.82rem !important;
   }
-  #post-list .card .post-meta i {
-    color: var(--term-fg-faint) !important;
-  }
+  #post-list .card .post-meta i { color: var(--term-fg-faint) !important; }
 
-  /* ---------- 文章页 ---------- */
-  /* 主标题尾部闪烁光标（仅当前文章页） */
+  /* ======================================================================
+     文章页
+     ====================================================================== */
   h1.post-title::after {
     content: "_";
     color: var(--term-mint);
@@ -653,21 +784,18 @@ h6,
     font-weight: 300;
     display: inline-block;
   }
-
   .post-meta,
   #post time,
   .timeago {
     font-family: 'Cascadia Code', ui-monospace, monospace;
     color: var(--term-fg-dim);
   }
-
-  /* 正文引用块 */
   blockquote {
     background: rgba(86, 212, 196, 0.04);
     border-left: 3px solid var(--term-mint) !important;
   }
 
-  /* ---------- 代码块：macOS traffic-light ---------- */
+  /* 代码块 */
   div[class^='language-'] {
     background: var(--term-bg) !important;
     border: 1px solid var(--term-line) !important;
@@ -682,7 +810,6 @@ h6,
     box-shadow: 1.25rem 0 0 #ffbd2e, 2.5rem 0 0 #27c93f !important;
     border: none !important;
   }
-  /* 行内代码：mint 框 */
   code.highlighter-rouge {
     color: var(--term-mint) !important;
     background: rgba(86, 212, 196, 0.08) !important;
@@ -691,7 +818,7 @@ h6,
     padding: 1px 6px !important;
   }
 
-  /* ---------- 标签 ---------- */
+  /* 标签 */
   .tag {
     background: rgba(86, 212, 196, 0.08) !important;
     border: 1px solid rgba(86, 212, 196, 0.3) !important;
@@ -712,7 +839,7 @@ h6,
     filter: none !important;
   }
 
-  /* ---------- 右栏 panel（Recently / Trending） ---------- */
+  /* 右栏 panel */
   #panel-wrapper .panel-heading,
   .panel-heading {
     font-family: 'Cascadia Code', ui-monospace, monospace !important;
@@ -742,7 +869,7 @@ h6,
     color: var(--term-mint) !important;
   }
 
-  /* ---------- 目录 TOC ---------- */
+  /* TOC */
   #toc-wrapper .toc-link {
     font-family: 'Cascadia Code', 'LXGW WenKai', sans-serif !important;
     font-size: 0.84rem !important;
@@ -753,12 +880,10 @@ h6,
     border-left-color: var(--term-mint) !important;
   }
 
-  /* ---------- 链接微光 ---------- */
-  a:hover:not(.nav-link):not(.btn):not(.tag):not(.card) {
+  a:hover:not(.nav-link):not(.btn):not(.tag):not(.card):not(.post-preview) {
     text-shadow: 0 0 6px rgba(86, 212, 196, 0.3);
   }
 
-  /* details 块：mint 边 */
   details.details-block {
     border-left-color: var(--term-mint) !important;
   }
@@ -768,7 +893,6 @@ h6,
   }
 }
 
-/* 应用：手动切换 + 系统偏好双场景 */
 html[data-mode='dark'] {
   @include terminal-aesthetic;
 }
@@ -777,3 +901,4 @@ html[data-mode='dark'] {
     @include terminal-aesthetic;
   }
 }
+

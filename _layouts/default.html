@@ -17,6 +17,23 @@ layout: compress
   {% include head.html %}
 
   <body>
+    <!-- 终端状态条（仅暗色模式显示；亮色模式 display:none） -->
+    <div id="term-statusbar" aria-hidden="true">
+      <div class="tsb-left">
+        <span class="tsb-mode">NORMAL</span>
+        <span class="tsb-item"><i class="tsb-dot"></i>heyween@prod</span>
+        <span class="tsb-item tsb-dim">~/blog</span>
+        <span class="tsb-item tsb-faint">master ↑0 ↓0</span>
+      </div>
+      <div class="tsb-right">
+        <span class="tsb-item tsb-dim">utf-8</span>
+        <span class="tsb-item tsb-dim">LF</span>
+        <span class="tsb-item tsb-dim">markdown</span>
+        <span class="tsb-item tsb-amber">42°C</span>
+        <span class="tsb-item tsb-mint" id="tsb-clock">—:—</span>
+      </div>
+    </div>
+
     {% include sidebar.html lang=lang %}
 
     <div id="main-wrapper" class="d-flex justify-content-center">
@@ -86,5 +103,20 @@ layout: compress
     {% endfor %}
 
     {% include_cached search-loader.html lang=lang %}
+
+    <script>
+      (function () {
+        var el = document.getElementById('tsb-clock');
+        if (!el) return;
+        function tick() {
+          var d = new Date();
+          var h = String(d.getHours()).padStart(2, '0');
+          var m = String(d.getMinutes()).padStart(2, '0');
+          el.textContent = h + ':' + m;
+        }
+        tick();
+        setInterval(tick, 30000);
+      })();
+    </script>
   </body>
 </html>
