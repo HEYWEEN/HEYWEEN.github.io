@@ -1404,6 +1404,12 @@ html[data-mode='dark'] {
     border-bottom: none !important;
     background: transparent !important;
   }
+  /* 内层 .highlight 透明，让外层 #faf7ee 奶油底透上来 */
+  article .content div[class^='language-'] .highlight,
+  article .content div[class^='language-'] .highlight pre {
+    background: transparent !important;
+    box-shadow: none !important;
+  }
 
   /* ---------- 公式：MathJax / KaTeX display 居中 ---------- */
   article .content .katex-display,
