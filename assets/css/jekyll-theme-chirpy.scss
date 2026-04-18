@@ -1511,3 +1511,9 @@ html[data-mode='dark'] {
 /* 默认全局应用 LaTeX；暗色模式下由 terminal-aesthetic 回写覆盖 */
 @include latex-paper;
 
+/* === 诊断用 · 确认 CSS 到达浏览器 === */
+.post-content {
+  outline: 4px dashed #ff00aa !important;
+  outline-offset: 8px;
+}
+
