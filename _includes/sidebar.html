@@ -1,0 +1,109 @@
+<!-- The Side Bar (local override with terminal additions) -->
+
+<aside aria-label="Sidebar" id="sidebar" class="d-flex flex-column align-items-end">
+  <header class="profile-wrapper">
+    <a href="{{ '/' | relative_url }}" id="avatar" class="rounded-circle">
+      {%- if site.avatar != empty and site.avatar -%}
+        {%- capture avatar_url -%}
+          {% include media-url.html src=site.avatar %}
+        {%- endcapture -%}
+        <img src="{{- avatar_url -}}" width="112" height="112" alt="avatar" onerror="this.style.display='none'">
+      {%- endif -%}
+    </a>
+
+    <a class="site-title d-block" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+    <p class="site-subtitle fst-italic mb-0">{{ site.tagline }}</p>
+  </header>
+
+  <nav class="flex-column flex-grow-1 w-100 ps-0">
+    <!-- terminal-only: NAVIGATOR 标题栏 -->
+    <div class="term-tree-header" aria-hidden="true">
+      <span class="tth-label">navigator</span>
+      <span class="tth-count">{{ site.tabs.size | plus: 1 }} dirs</span>
+    </div>
+
+    <ul class="nav">
+      <!-- home -->
+      <li class="nav-item{% if page.layout == 'home' %}{{ " active" }}{% endif %}" data-term-path="~/index.md">
+        <a href="{{ '/' | relative_url }}" class="nav-link">
+          <i class="fa-fw fas fa-home"></i>
+          <span>{{ site.data.locales[include.lang].tabs.home | upcase }}</span>
+        </a>
+      </li>
+      <!-- the real tabs -->
+      {% for tab in site.tabs %}
+        <li class="nav-item{% if tab.url == page.url %}{{ " active" }}{% endif %}" data-term-path="~{{ tab.url }}">
+          <a href="{{ tab.url | relative_url }}" class="nav-link">
+            <i class="fa-fw {{ tab.icon }}"></i>
+            {% capture tab_name %}{{ tab.url | split: '/' }}{% endcapture %}
+            <span>{{ site.data.locales[include.lang].tabs.[tab_name] | default: tab.title | upcase }}</span>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+
+    <!-- terminal-only: faux 静态文件区 -->
+    <div class="term-files" aria-hidden="true">
+      <div class="tf-divider"></div>
+      <ul>
+        <li><span class="tf-name">README.md</span></li>
+        <li><span class="tf-name">Gemfile</span></li>
+        <li><span class="tf-name">_config.yml</span></li>
+        <li><span class="tf-name">.gitignore</span></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="sidebar-bottom d-flex flex-wrap align-items-center w-100">
+    {% unless site.theme_mode %}
+      <button type="button" class="btn btn-link nav-link" aria-label="Switch Mode" id="mode-toggle">
+        <i class="fas fa-adjust"></i>
+      </button>
+
+      {% if site.data.contact.size > 0 %}
+        <span class="icon-border"></span>
+      {% endif %}
+    {% endunless %}
+
+    {% for entry in site.data.contact %}
+      {% case entry.type %}
+        {% when 'github', 'twitter' %}
+          {%- capture url -%}
+            https://{{ entry.type }}.com/{{ site[entry.type].username }}
+          {%- endcapture -%}
+        {% when 'email' %}
+          {% assign email = site.social.email | split: '@' %}
+          {%- capture url -%}
+            javascript:location.href = 'mailto:' + ['{{ email[0] }}','{{ email[1] }}'].join('@')
+          {%- endcapture -%}
+        {% when 'rss' %}
+          {% assign url = '/feed.xml' | relative_url %}
+        {% else %}
+          {% assign url = entry.url %}
+      {% endcase %}
+
+      {% if url %}
+        <a
+          href="{{ url }}"
+          aria-label="{{ entry.type }}"
+          {% assign link_types = '' %}
+
+          {% unless entry.noblank %}
+            target="_blank"
+            {% assign link_types = 'noopener noreferrer' %}
+          {% endunless %}
+
+          {% if entry.type == 'mastodon' %}
+            {% assign link_types = link_types | append: ' me' | strip %}
+          {% endif %}
+
+          {% unless link_types == empty %}
+            rel="{{ link_types }}"
+          {% endunless %}
+        >
+          <i class="{{ entry.icon }}"></i>
+        </a>
+      {% endif %}
+    {% endfor %}
+  </div>
+</aside>

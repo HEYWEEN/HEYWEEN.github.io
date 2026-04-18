@@ -369,7 +369,11 @@ h6,
    ====================================================================== */
 
 #term-statusbar,
-#term-hero {
+#term-hero,
+#term-stats,
+#term-build,
+.term-tree-header,
+.term-files {
   display: none;
 }
 
@@ -891,6 +895,142 @@ h6,
     background: rgba(86, 212, 196, 0.06) !important;
     color: var(--term-mint) !important;
   }
+
+  /* ======================================================================
+     左栏终端元素：NAVIGATOR 头 + faux 文件区
+     ====================================================================== */
+  .term-tree-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 0.1rem 1.15rem 0.5rem;
+    margin: 0.2rem 0 0.4rem;
+    border-bottom: 1px dashed var(--term-line);
+    font-family: 'Cascadia Code', ui-monospace, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--term-mint);
+  }
+  .term-tree-header .tth-count {
+    color: var(--term-fg-faint);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+  }
+
+  .term-files {
+    display: block;
+    margin: 0.6rem 0 0.4rem;
+    padding: 0 1.15rem;
+  }
+  .term-files .tf-divider {
+    border-top: 1px dashed var(--term-line);
+    margin: 0.2rem 0 0.6rem;
+  }
+  .term-files ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .term-files li {
+    padding: 0.2rem 0;
+    font-family: 'Cascadia Code', ui-monospace, monospace;
+    font-size: 0.78rem;
+    color: var(--term-fg-dim);
+    letter-spacing: 0.04em;
+  }
+  .term-files .tf-name { color: var(--term-fg-dim); }
+
+  /* ======================================================================
+     右栏终端元素：STATS + BUILD + 顺序
+     ====================================================================== */
+  #panel-wrapper .access {
+    display: flex;
+    flex-direction: column;
+  }
+  #term-stats    { order: 1; display: block !important; margin-bottom: 1.6rem; }
+  #access-lastmod{ order: 2; }
+  #access-trending{ order: 3; }
+  #term-build    { order: 4; display: block !important; margin-top: 1.6rem; }
+
+  #term-stats,
+  #term-build {
+    font-family: 'Cascadia Code', ui-monospace, monospace;
+    color: var(--term-fg);
+  }
+
+  #term-stats .ti-head,
+  #term-build .ti-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding-bottom: 0.4rem;
+    margin-bottom: 0.7rem;
+    border-bottom: 1px dashed var(--term-line);
+    font-size: 0.75rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+  }
+  #term-stats .ti-label,
+  #term-build .ti-label { color: var(--term-mint); }
+  #term-stats .ti-cmd,
+  #term-build .ti-cmd {
+    color: var(--term-fg-faint);
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+  }
+
+  #term-stats .ti-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.35rem 1rem;
+  }
+  #term-stats .ti-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  #term-stats .ti-k {
+    color: var(--term-fg-faint);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+  }
+  #term-stats .ti-v {
+    color: var(--term-amber);
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
+  #term-stats .ti-v.ti-mint { color: var(--term-mint); }
+  #term-stats .ti-v.ti-rose { color: var(--term-rose); }
+
+  #term-build .ti-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.78rem;
+    line-height: 1.95;
+    color: var(--term-fg-dim);
+  }
+  #term-build .ti-list li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  #term-build .ti-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    background: var(--term-fg-faint);
+  }
+  #term-build .ti-dot.ti-mint  { background: var(--term-mint);  box-shadow: 0 0 6px rgba(86,212,196,.55); }
+  #term-build .ti-dot.ti-amber { background: var(--term-amber); box-shadow: 0 0 6px rgba(255,184,107,.45); }
+  #term-build .ti-dot.ti-faint { background: var(--term-fg-faint); }
+  #term-build .ti-dash { color: var(--term-fg-faint); margin: 0 2px; }
+  #term-build .ti-ok    { color: var(--term-mint); }
+  #term-build .ti-amber { color: var(--term-amber); }
+  #term-build .ti-faint { color: var(--term-fg-faint); }
+  #term-build .ti-t     { color: var(--term-fg-faint); margin-left: auto; font-size: 0.72rem; }
 }
 
 html[data-mode='dark'] {

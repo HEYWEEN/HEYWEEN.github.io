@@ -1,0 +1,65 @@
+{%- comment -%}
+  Terminal-mode right inspector panels (STATS + BUILD).
+  Only rendered HTML — visibility is controlled in CSS via html[data-mode='dark'].
+{%- endcomment -%}
+
+{%- assign post_count = site.posts | size -%}
+{%- assign word_total = 0 -%}
+{%- for post in site.posts -%}
+  {%- assign w = post.content | strip_html | number_of_words -%}
+  {%- assign word_total = word_total | plus: w -%}
+{%- endfor -%}
+{%- assign word_k = word_total | divided_by: 1000 -%}
+
+{%- assign first_post = site.posts | last -%}
+{%- if first_post -%}
+  {%- assign now_s = site.time | date: "%s" -%}
+  {%- assign then_s = first_post.date | date: "%s" -%}
+  {%- assign uptime_days = now_s | minus: then_s | divided_by: 86400 -%}
+{%- else -%}
+  {%- assign uptime_days = 0 -%}
+{%- endif -%}
+
+{%- assign last_post = site.posts | first -%}
+
+<aside id="term-stats" aria-hidden="true">
+  <div class="ti-head">
+    <span class="ti-label">stats</span>
+    <span class="ti-cmd">:stat</span>
+  </div>
+  <div class="ti-grid">
+    <div class="ti-cell">
+      <div class="ti-k">posts</div>
+      <div class="ti-v ti-mint">{{ post_count }}</div>
+    </div>
+    <div class="ti-cell">
+      <div class="ti-k">words</div>
+      <div class="ti-v">{{ word_k }}k</div>
+    </div>
+    <div class="ti-cell">
+      <div class="ti-k">uptime</div>
+      <div class="ti-v ti-rose">{{ uptime_days }}d</div>
+    </div>
+    <div class="ti-cell">
+      <div class="ti-k">last push</div>
+      {% if last_post %}
+        <div class="ti-v">{{ last_post.date | date: "%m-%d" }}</div>
+      {% else %}
+        <div class="ti-v">—</div>
+      {% endif %}
+    </div>
+  </div>
+</aside>
+
+<aside id="term-build" aria-hidden="true">
+  <div class="ti-head">
+    <span class="ti-label">build</span>
+    <span class="ti-cmd">:ci</span>
+  </div>
+  <ul class="ti-list">
+    <li><span class="ti-dot ti-mint"></span>jekyll-build <span class="ti-dash">—</span> <span class="ti-ok">OK</span> <span class="ti-t">1m&nbsp;4s</span></li>
+    <li><span class="ti-dot ti-mint"></span>gh-pages <span class="ti-dash">—</span> <span class="ti-ok">deployed</span></li>
+    <li><span class="ti-dot ti-amber"></span>lighthouse <span class="ti-dash">—</span> <span class="ti-amber">98 / 100</span></li>
+    <li><span class="ti-dot ti-faint"></span>rss <span class="ti-dash">—</span> <span class="ti-faint">idle</span></li>
+  </ul>
+</aside>
