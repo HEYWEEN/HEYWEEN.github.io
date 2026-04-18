@@ -1393,7 +1393,8 @@ html[data-mode='dark'] {
     background: #f1ecdc !important;
     border-bottom: 0.5pt solid #c9c0a8 !important;
   }
-  /* 关键：LaTeX booktabs 规则不要误伤代码块里的 rouge-table */
+  /* 关键：LaTeX 表格/段落规则不要误伤代码块里的 rouge-table
+     （rouge 用 <table> 实现行号+代码两列；必须彻底还给 Chirpy 默认） */
   article .content table.rouge-table,
   article .content table.rouge-table thead,
   article .content table.rouge-table tbody,
@@ -1403,6 +1404,17 @@ html[data-mode='dark'] {
     border-top: none !important;
     border-bottom: none !important;
     background: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    vertical-align: top !important;
+    text-indent: 0 !important;
+    line-height: inherit !important;
+  }
+  article .content table.rouge-table pre,
+  article .content table.rouge-table code {
+    margin: 0 !important;
+    padding: 0 !important;
+    text-indent: 0 !important;
   }
   /* 内层 .highlight 透明，让外层 #faf7ee 奶油底透上来 */
   article .content div[class^='language-'] .highlight,
