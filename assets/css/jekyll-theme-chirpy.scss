@@ -901,91 +901,6 @@ article .content {
   }
 
   /* ======================================================================
-     暗色模式：把 LaTeX 默认样式抹回终端风
-     ====================================================================== */
-  article .content {
-    font-family:
-      'Cascadia Code',
-      'LXGW WenKai',
-      ui-monospace,
-      SFMono-Regular,
-      Menlo,
-      sans-serif !important;
-    font-size: 1.05rem !important;
-    line-height: 1.78 !important;
-    color: var(--term-fg) !important;
-    text-align: left !important;
-    hyphens: manual !important;
-    word-spacing: normal !important;
-  }
-  article .content p {
-    text-indent: 0 !important;
-    margin: 0 0 1em !important;
-  }
-  article .content h1,
-  article .content h2,
-  article .content h3,
-  article .content h4,
-  article .content h5,
-  article .content h6 {
-    font-family: inherit !important;
-    color: var(--term-fg) !important;
-    font-style: normal !important;
-  }
-  article .content a:not(.anchor):not(.img-link) {
-    color: var(--term-mint) !important;
-    text-decoration-color: rgba(86, 212, 196, 0.4) !important;
-  }
-  article .content a:not(.anchor):not(.img-link):hover {
-    color: var(--term-mint) !important;
-  }
-  article .content blockquote {
-    font-style: normal !important;
-    border-left: 3px solid var(--term-mint) !important;
-    padding: 0.6em 1em !important;
-    background: rgba(86, 212, 196, 0.04) !important;
-    color: var(--term-fg-dim) !important;
-  }
-  article .content table thead,
-  article .content table tbody {
-    border-color: var(--term-line) !important;
-  }
-  article .content figure figcaption::before,
-  article .content img + em::before {
-    content: none !important;
-  }
-  article .content table caption::before {
-    content: none !important;
-  }
-  article .content div[class^='language-'] .code-header::after {
-    content: none !important;
-  }
-  article .content ::selection {
-    background: var(--term-mint) !important;
-    color: var(--term-bg) !important;
-  }
-  /* 文章标题不居中 —— 回到终端的 \n 式左对齐 */
-  article > header > h1 {
-    text-align: left !important;
-    font-family:
-      'Cascadia Code',
-      'LXGW WenKai',
-      sans-serif !important;
-  }
-  article > header .post-meta {
-    text-align: left !important;
-    font-family:
-      'Cascadia Code',
-      ui-monospace,
-      monospace !important;
-    font-style: normal !important;
-    color: var(--term-fg-dim) !important;
-  }
-  article > header::after {
-    display: none !important;
-  }
-
-  /* ======================================================================
      左栏 NAVIGATOR 头
      ====================================================================== */
   .term-tree-header {
@@ -1358,19 +1273,20 @@ html[data-mode='dark'] {
     font-weight: 600;
   }
 
-  /* ---------- 代码：Computer Modern Typewriter ---------- */
+  /* ---------- 代码：Cascadia Code（原全站风格）+ 更大字号 ---------- */
   article .content code,
   article .content pre,
   article .content kbd,
   article .content samp {
     font-family:
-      'Computer Modern Typewriter',
-      'Latin Modern Mono',
       'Cascadia Code',
+      'JetBrains Mono',
       ui-monospace,
       SFMono-Regular,
       Menlo,
+      Monaco,
       monospace !important;
+    font-size: 0.95rem !important;
   }
   article .content code.highlighter-rouge {
     background: #f4f1e8 !important;
@@ -1393,8 +1309,7 @@ html[data-mode='dark'] {
     background: #f1ecdc !important;
     border-bottom: 0.5pt solid #c9c0a8 !important;
   }
-  /* 关键：LaTeX 表格/段落规则不要误伤代码块里的 rouge-table
-     （rouge 用 <table> 实现行号+代码两列；必须彻底还给 Chirpy 默认） */
+  /* 关键：LaTeX 表格/段落规则不要误伤代码块里的 rouge-table */
   article .content table.rouge-table,
   article .content table.rouge-table thead,
   article .content table.rouge-table tbody,
@@ -1404,11 +1319,17 @@ html[data-mode='dark'] {
     border-top: none !important;
     border-bottom: none !important;
     background: transparent !important;
-    padding: 0 !important;
     margin: 0 !important;
     vertical-align: top !important;
     text-indent: 0 !important;
     line-height: inherit !important;
+  }
+  /* 代码块内部留白：上下 0.85em，左右由两列 td 各自控制 */
+  article .content table.rouge-table td.rouge-gutter {
+    padding: 0.85em 0.7em 0.85em 1.1em !important;
+  }
+  article .content table.rouge-table td.rouge-code {
+    padding: 0.85em 1.1em 0.85em 0.5em !important;
   }
   article .content table.rouge-table pre,
   article .content table.rouge-table code {
@@ -1533,6 +1454,13 @@ html[data-mode='dark'] {
   }
 }
 
-/* 默认全局应用 LaTeX；暗色模式下由 terminal-aesthetic 回写覆盖 */
-@include latex-paper;
+/* 亮色模式应用 LaTeX；暗色由 terminal-aesthetic 独立管 */
+html[data-mode='light'] {
+  @include latex-paper;
+}
+html:not([data-mode]) {
+  @media (prefers-color-scheme: light) {
+    @include latex-paper;
+  }
+}
 
