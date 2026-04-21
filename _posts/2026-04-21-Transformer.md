@@ -45,7 +45,7 @@ math: true
 
 ### 3.1 功能
 
-<img src="https://cdn.jsdelivr.net/gh/HEYWEEN/images@main/images%E6%88%AA%E5%B1%8F2026-04-21%2020.38.27.png" alt="截屏2026-04-21 20.38.27" style="zoom:50%;" />
+<img src="https://cdn.jsdelivr.net/gh/HEYWEEN/images@main/images%E6%88%AA%E5%B1%8F2026-04-21%2020.38.27.png" alt="截屏2026-04-21 20.38.27" style="zoom: 33%;" />
 
 接收输入序列 $x^1, x^2, ..., x^N$，输出等长的上下文感知向量 $h^1, h^2, ..., h^N$。
 
@@ -77,7 +77,7 @@ math: true
 
 ### 3.3 为什么用 Layer Norm 而不是 Batch Norm？
 
-<img src="https://cdn.jsdelivr.net/gh/HEYWEEN/images@main/images%E6%88%AA%E5%B1%8F2026-04-21%2020.43.21.png" alt="截屏2026-04-21 20.43.21" style="zoom:50%;" />
+<img src="https://cdn.jsdelivr.net/gh/HEYWEEN/images@main/images%E6%88%AA%E5%B1%8F2026-04-21%2020.43.21.png" alt="截屏2026-04-21 20.43.21" style="zoom: 33%;" />
 
 - **Batch Norm**：在一个 batch 内，对同一特征维度做归一化
 - **Layer Norm**：对单个样本的所有特征维度做归一化
@@ -121,6 +121,8 @@ $$
 ### 4.1 两种 Decoder 范式对比
 
 #### Autoregressive（AT，自回归）
+
+<img src="https://cdn.jsdelivr.net/gh/HEYWEEN/images@main/images%E6%88%AA%E5%B1%8F2026-04-21%2021.17.59.png" alt="截屏2026-04-21 21.17.59" style="zoom:33%;" />
 
 ```
 输出过程：
@@ -166,6 +168,8 @@ START START START START → 并行输出 → 机 器 学 习
 
 ### 4.4 Transformer Decoder 的结构
 
+<img src="https://cdn.jsdelivr.net/gh/HEYWEEN/images@main/images%E6%88%AA%E5%B1%8F2026-04-21%2021.19.08.png" alt="截屏2026-04-21 21.19.08" style="zoom: 67%;" />
+
 ```
 Outputs (shifted right)
  ↓
@@ -208,14 +212,22 @@ Output Probabilities
 
 ## 五、Cross-Attention（编解码注意力）
 
+<img src="https://cdn.jsdelivr.net/gh/HEYWEEN/images@main/images%E6%88%AA%E5%B1%8F2026-04-21%2022.04.10.png" alt="截屏2026-04-21 22.04.10" style="zoom:33%;" />
+
 ### 5.1 机制
+
+<img src="https://cdn.jsdelivr.net/gh/HEYWEEN/images@main/images%E6%88%AA%E5%B1%8F2026-04-21%2022.07.38.png" alt="截屏2026-04-21 22.07.38" style="zoom:33%;" />
 
 Cross-Attention 是 Encoder 和 Decoder 的桥梁：
 
 - **Query（Q）**：来自 Decoder 当前状态
 - **Key（K）和 Value（V）**：来自 Encoder 的输出
 
-$$\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V$$
+
+$$
+\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V
+$$
+
 
 **直觉**：Decoder 用当前生成的内容作为"问题"，去询问 Encoder 输出的"哪些部分"与当前生成最相关。
 
@@ -250,9 +262,15 @@ Decoder 当前状态 → Masked Self-Attn → q
 
 每个时间步的训练目标：最小化真实 token 和预测分布之间的**交叉熵**。
 
-$$\mathcal{L} = -\sum_t \log P(y_t^* | y_1^*, ..., y_{t-1}^*, x)$$
+
+$$
+\mathcal{L} = -\sum_t \log P(y_t^* | y_1^*, ..., y_{t-1}^*, x)
+$$
+
 
 ### 6.2 Teacher Forcing
+
+<img src="https://cdn.jsdelivr.net/gh/HEYWEEN/images@main/images%E6%88%AA%E5%B1%8F2026-04-21%2022.13.51.png" alt="截屏2026-04-21 22.13.51" style="zoom:33%;" />
 
 **训练时**：Decoder 的输入是 **Ground Truth**，而不是上一步的模型预测输出。
 
