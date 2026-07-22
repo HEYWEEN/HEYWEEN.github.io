@@ -20,6 +20,8 @@ Hi there! I'm Yiwen He, an undergraduate student in Software Engineering at Nanj
 
 ## 🚀 Publications:
 
+* Co-first author: [CoVEBench: Can Video Editing Models Handle Complex Instructions?](https://arxiv.org/abs/2606.08415)
+* Co-author: [ViDiC: Video Difference Captioning](https://arxiv.org/abs/2512.03405)
 * Co-author:[IF-VidCap: Can Video Caption Models Follow Instructions?](https://arxiv.org/abs/2510.18726) accepted by ICLR2026
 
 
