@@ -1,0 +1,19 @@
+---
+layout: default
+---
+<div class="reading-progress" aria-hidden="true"></div>
+<div class="page-shell article-frame">
+  <article class="reading-article">
+    <div class="breadcrumbs"><a href="{{ '/articles/' | relative_url }}">文章</a>{% if page.categories.first %}<span>/</span><a href="{{ '/articles/' | relative_url }}?category={{ page.categories.first | uri_escape }}">{{ page.categories.first | escape }}</a>{% endif %}</div>
+    <header class="article-heading"><h1>{{ page.title | escape }}</h1><div class="post-meta"><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: '%Y.%m.%d' }}</time><span>{{ site.social.name }}</span>{% if page.last_modified_at %}<span>更新于 {{ page.last_modified_at | date: '%Y.%m.%d' }}</span>{% endif %}</div>{% if page.catalog_summary %}<p>{{ page.catalog_summary | escape }}</p>{% endif %}</header>
+    {% if page.toc != false %}<details class="article-mobile-toc" hidden><summary>目录</summary><nav aria-label="目录" data-toc></nav></details>{% endif %}
+    <div class="reading-content" id="article-content">{% include refactor-content.html content=content lang='zh-CN' %}</div>
+    <div class="post-taxonomy">{% for category in page.categories %}<a href="{{ '/articles/' | relative_url }}?category={{ category | uri_escape }}">{{ category | escape }}</a>{% endfor %}</div>
+    <nav class="article-navigation" aria-label="相邻文章">{% if page.previous %}<a href="{{ page.previous.url | relative_url }}" rel="prev"><small>上一篇</small>{{ page.previous.title | escape }}</a>{% endif %}{% if page.next %}<a href="{{ page.next.url | relative_url }}" rel="next"><small>下一篇</small>{{ page.next.title | escape }}</a>{% endif %}</nav>
+    {% assign related = site.posts | where_exp: 'post', 'post.categories contains page.categories.first' %}
+    {% assign related_count = 0 %}{% capture related_html %}{% for post in related %}{% if post.url != page.url and related_count < 3 %}{% assign related_count = related_count | plus: 1 %}<a class="related-post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>{% endif %}{% endfor %}{% endcapture %}
+    {% if related_count > 0 %}<section class="related-posts"><h2>接着读</h2>{{ related_html }}</section>{% endif %}
+    {% if page.comments and site.comments.provider == 'giscus' %}<section class="post-comments" aria-labelledby="comments-title"><h2 id="comments-title">聊一聊</h2><div class="giscus" id="comments" data-repo="{{ site.comments.giscus.repo }}" data-repo-id="{{ site.comments.giscus.repo_id }}" data-category="{{ site.comments.giscus.category }}" data-category-id="{{ site.comments.giscus.category_id }}"></div><noscript><a href="https://github.com/{{ site.comments.giscus.repo }}/discussions">在 GitHub Discussions 留言</a></noscript></section>{% endif %}
+  </article>
+  {% if page.toc != false %}<aside class="reading-toc righttoc" aria-label="目录" hidden><h2>目录</h2><nav data-toc></nav></aside>{% endif %}
+</div>

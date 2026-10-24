@@ -1,0 +1,4 @@
+---
+layout: default
+---
+<div class="page-shell"><div class="breadcrumbs"><a href="{{ '/articles/' | relative_url }}">文章</a></div><div class="page-intro"><h1>{{ page.category_names | join: ' / ' | escape }}</h1><p>共 {{ page.posts.size }} 篇笔记</p></div><div class="post-list">{% for post in page.posts %}{% include blog/post-row.html post=post %}{% endfor %}</div><a class="text-link all-posts" href="{{ '/articles/' | relative_url }}">查看全部文章 ↗</a></div>

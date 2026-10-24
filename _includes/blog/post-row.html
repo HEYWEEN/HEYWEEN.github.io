@@ -1,0 +1,8 @@
+{% assign item = include.post %}
+{% assign category_icon = 'book' %}
+{% for category in site.data.blog_catalog.categories %}{% if category.name == item.categories.first %}{% assign category_icon = category.icon %}{% endif %}{% endfor %}
+<a class="post-row" href="{{ item.url | relative_url }}"{% if include.catalog %} data-categories="{{ item.categories | jsonify | escape }}"{% endif %}>
+  <span class="post-symbol">{% include blog/icon.html name=category_icon %}</span>
+  <div><h3>{{ item.title | escape }}</h3><p>{{ item.catalog_summary | escape }}</p><div class="post-meta"><time datetime="{{ item.date | date_to_xmlschema }}">{{ item.date | date: '%Y.%m.%d' }}</time><span>{{ item.categories | join: '、' | escape }}</span></div></div>
+  <span class="post-arrow" aria-hidden="true">↗</span>
+</a>

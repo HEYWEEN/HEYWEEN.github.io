@@ -1,0 +1,18 @@
+{% assign topic = include.category %}
+{% assign cover = site.data.category_covers[topic.name] %}
+{% assign topic_label = topic.name | replace: 'ⅠⅠ', 'Ⅱ' %}
+{% assign topic_posts = site.data.blog_catalog.posts | where_exp: 'post', 'post.categories contains topic.name' %}
+<article class="topic-card" data-topic-card aria-labelledby="topic-title-{{ include.index }}">
+  <div class="topic-rotor" id="topic-face-{{ include.index }}">
+    <a class="topic-front topic-card-link" href="{{ '/articles/' | relative_url }}?category={{ topic.name | url_encode }}" aria-label="{{ topic_label | escape }}">
+      <div class="topic-image{% if cover.fit == 'cover' %} topic-image-photo{% endif %}">{% if cover.image %}<img src="{{ cover.image | relative_url }}" alt="" width="{{ cover.width }}" height="{{ cover.height }}" loading="lazy" decoding="async"{% if cover.position %} style="object-position:{{ cover.position | escape }}"{% endif %}>{% else %}<span class="topic-image-fallback">{% include blog/icon.html name=topic.icon %}</span>{% endif %}</div>
+      <div class="topic-caption"><span>{{ topic_label | escape }}</span><small>{{ topic.count }} 篇</small></div>
+    </a>
+    <div class="topic-back" inert aria-hidden="true">
+      <h3 id="topic-title-{{ include.index }}">{{ topic_label | escape }}</h3>
+      <ul class="topic-articles">{% for post in topic_posts limit:6 %}<li><a href="{{ post.url }}" title="{{ post.title | escape }}">{{ post.title | escape }}</a></li>{% endfor %}</ul>
+      <div class="topic-back-footer"><span class="topic-back-count">{{ topic.count }} 篇文章</span><a class="topic-enter" href="{{ '/articles/' | relative_url }}?category={{ topic.name | url_encode }}">查看全部<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-5-5 5 5-5 5"/></svg></a></div>
+    </div>
+  </div>
+  <button class="topic-flip" type="button" aria-label="翻看{{ topic_label | escape }}分类" aria-expanded="false" aria-controls="topic-face-{{ include.index }}" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10a8 8 0 1 1 2 8M4 4v6h6"/></svg></button>
+</article>

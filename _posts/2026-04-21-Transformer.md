@@ -2,7 +2,6 @@
 title: "Transformer"
 date: 2026-04-21  # 文章发布时间
 categories: [机器学习] # 你的分类
-tags: [笔记]     # 你的标签
 math: true
 ---
 

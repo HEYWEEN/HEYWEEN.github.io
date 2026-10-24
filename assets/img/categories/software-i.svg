@@ -1,0 +1,109 @@
+<?xml version="1.0" ?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="1200" height="600" xmlns="http://www.w3.org/2000/svg">
+  <title>Bridge-adoptable UML class diagram</title>
+  <defs>
+    <style type="text/css">
+      <![CDATA[
+        g{
+          stroke       : #000;
+        }
+        rect, path, circle{
+          fill         : #fff;
+          fill-opacity : 0;
+        }
+        rect{
+          stroke-width : 6;
+        }
+        path, circle, line{
+          stroke-width : 2;
+        }
+        text{
+          fill         : #000;
+          stroke-width : 0;
+          font-family  : sans-serif;
+        }
+        text.name{
+          font-size    : 25px;
+          font-weight  : bold;
+          text-anchor  : middle;
+        }
+        text.item{
+          font-size    : 25px;
+        }
+        text.visibility{
+          font-size    : 28px;
+          font-family  : monospace;
+          font-weight  : bold;
+          text-anchor  : middle;
+        }
+        text.abstract{
+          font-style   : italic;
+        }
+        text.note{
+          font-size    : 20px;
+        }
+      ]]>
+    </style>
+  </defs>
+  <g transform="translate(480,40)">
+    <rect width="240" height="102" />
+    <line x1="0" x2="240" y1="60" y2="60" />
+    <line x1="0" x2="240" y1="80" y2="80" />
+    <text x="120" y="45" class="name abstract">Dishware</text>
+  </g>
+  <g transform="translate(180,240)">
+    <rect width="240" height="102" />
+    <line x1="0" x2="240" y1="60" y2="60" />
+    <line x1="0" x2="240" y1="80" y2="80" />
+    <text x="120" y="45" class="name abstract">Plate</text>
+  </g>
+  <g transform="translate(780,240)">
+    <rect width="240" height="102" />
+    <line x1="0" x2="240" y1="60" y2="60" />
+    <line x1="0" x2="240" y1="80" y2="80" />
+    <text x="120" y="45" class="name abstract">Bowl</text>
+  </g>
+  <g transform="translate(30,440)">
+    <rect width="240" height="102" />
+    <line x1="0" x2="240" y1="60" y2="60" />
+    <line x1="0" x2="240" y1="80" y2="80" />
+    <text x="120" y="45" class="name">WoodenPlate</text>
+  </g>
+  <g transform="translate(330,440)">
+    <rect width="240" height="102" />
+    <line x1="0" x2="240" y1="60" y2="60" />
+    <line x1="0" x2="240" y1="80" y2="80" />
+    <text x="120" y="45" class="name">GlassPlate</text>
+  </g>
+  <g transform="translate(630,440)">
+    <rect width="240" height="102" />
+    <line x1="0" x2="240" y1="60" y2="60" />
+    <line x1="0" x2="240" y1="80" y2="80" />
+    <text x="120" y="45" class="name">WoodenBowl</text>
+  </g>
+  <g transform="translate(930,440)">
+    <rect width="240" height="102" />
+    <line x1="0" x2="240" y1="60" y2="60" />
+    <line x1="0" x2="240" y1="80" y2="80" />
+    <text x="120" y="45" class="name">GlassBowl</text>
+  </g> 
+  <g transform="translate(600,145)">
+    <desc>Plate and Bowl extend Dishware</desc>
+    <path d="M 0 2 l -15 30 l 30 0 z" />
+    <path d="M 0 32 L 0 70" />
+    <path d="M -300 95 L -300 70 L 300 70 L 300 95" />
+  </g>
+  <g transform="translate(300,345)">
+    <desc>WoodenPlate and GlassPlate extend Plate</desc>
+    <path d="M 0 2 l -15 30 l 30 0 z" />
+    <path d="M 0 32 L 0 70" />
+    <path d="M -150 95 L -150 70 L 150 70 L 150 95" />
+  </g>
+  <g transform="translate(900,345)">
+    <desc>WoodenBowl and GlassBowl extend Bowl</desc>
+    <path d="M 0 2 l -15 30 l 30 0 z" />
+    <path d="M 0 32 L 0 70" />
+    <path d="M -150 95 L -150 70 L 150 70 L 150 95" />
+  </g>
+</svg>

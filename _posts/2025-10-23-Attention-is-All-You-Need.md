@@ -2,7 +2,6 @@
 title: "Attention is All You Need"
 date: 2025-10-23  # 文章发布时间
 categories: [机器学习] # 你的分类
-tags: [笔记]     # 你的标签
 math: true
 ---
 

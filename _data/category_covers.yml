@@ -1,0 +1,296 @@
+"操作系统":
+  image: "/assets/img/categories/operating-systems.svg"
+  width: 815
+  height: 500
+  fit: "contain"
+  position: "50% 50%"
+  description: "从进程到文件，理解系统如何运转。"
+  source_kind: "external-existing-image"
+  source_page: "https://commons.wikimedia.org/wiki/File:Operating_system_architecture.svg"
+  source_title: "Operating system architecture.svg"
+  source_image: "https://upload.wikimedia.org/wikipedia/commons/d/d8/Operating_system_architecture.svg"
+  asset_sha256: "a6394d71aea13194f59a128649403e46a98eebf81b370fcbee533af4ed58e6a4"
+  author: "Skjackey tse"
+  license: "Public domain"
+  source_post: "/posts/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0/"
+
+"软件工程与计算ⅠⅠ":
+  image: "/assets/img/categories/software-ii.png"
+  width: 1152
+  height: 594
+  fit: "contain"
+  position: "50% 50%"
+  description: "从模块边界到事务协作，让设计落到代码。"
+  source_kind: "external-existing-image"
+  source_page: "https://github.com/kgrzybek/modular-monolith-with-ddd#31-high-level-view"
+  source_title: "Modular Monolith with DDD: high-level architecture"
+  source_image: "https://raw.githubusercontent.com/kgrzybek/modular-monolith-with-ddd/master/docs/Images/Architecture_high_level.png"
+  asset_sha256: "f3a30a33d44e3252a446f45574c0787a6d985b1bc10c94f827245f4bbca1c967"
+  author: "Kamil Grzybek"
+  license: "MIT"
+  license_url: "https://github.com/kgrzybek/modular-monolith-with-ddd/blob/master/LICENSE"
+  attribution: "Kamil Grzybek, Modular Monolith with DDD, High-level architecture. Copyright (c) 2019 Kamil Grzybek. MIT License. Used unchanged."
+  license_file: "/assets/credits/ddd-LICENSE.txt"
+  source_post: "/posts/CampusHub-%E5%90%8E%E7%AB%AF%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E7%AC%94%E8%AE%B0/"
+
+"机器学习":
+  image: "/assets/img/categories/machine-learning.png"
+  width: 1394
+  height: 1006
+  fit: "contain"
+  position: "50% 50%"
+  description: "从直觉出发，推到模型与实现。"
+  source_kind: "article-existing-image"
+  source_page: "/posts/Transformer/"
+  source_title: "Transformer"
+  source_image: "https://cdn.jsdelivr.net/gh/HEYWEEN/images@main/images%E6%88%AA%E5%B1%8F2026-04-21%2020.42.10.png"
+  asset_sha256: "cb980dd1f73fe773788ec76477db0b830cd0dccc75967965170644191662f7ec"
+  source_post: "/posts/Transformer/"
+
+"科研":
+  image: "/assets/img/categories/research.png"
+  width: 699
+  height: 518
+  fit: "contain"
+  position: "50% 50%"
+  description: "从问题与论证出发，组织论文、图表和实验。"
+  source_kind: "external-existing-image"
+  source_page: "https://commons.wikimedia.org/wiki/File:Wineglass_model_for_IMRaD_structure..png"
+  source_title: "IMRaD 科研论文写作结构图"
+  source_image: "https://upload.wikimedia.org/wikipedia/commons/7/75/Wineglass_model_for_IMRaD_structure..png"
+  asset_sha256: "3298239c30552c285f67b54dceda26e8f25d7ac25366c4650ae33237f0e33e3a"
+  author: "Tom Toyosaki"
+  license: "CC BY-SA 4.0"
+  license_url: "https://commons.wikimedia.org/wiki/File:Wineglass_model_for_IMRaD_structure..png#Licensing"
+  attribution: "Wineglass model for IMRaD structure — Tom Toyosaki, CC BY-SA 4.0. Unmodified."
+
+"计算机组织与结构":
+  image: "/assets/img/categories/computer-architecture.png"
+  width: 671
+  height: 519
+  fit: "contain"
+  position: "50% 50%"
+  description: "数据表示、指令执行、存储层次与 I/O。"
+  source_kind: "article-existing-image"
+  source_page: "/posts/%E8%AE%A1%E7%BB%84%E6%A6%82%E8%BF%B0/"
+  source_title: "计组概述"
+  source_image: "https://cdn.jsdelivr.net/gh/HEYWEEN/images@main/images/image-20250924195529904.png"
+  asset_sha256: "5b2894b0431de3a8e7f0b0065fd8551aba8122e0eff479c431747116b07235b5"
+  source_post: "/posts/%E8%AE%A1%E7%BB%84%E6%A6%82%E8%BF%B0/"
+
+"互联网计算":
+  image: "/assets/img/categories/networks.png"
+  width: 786
+  height: 392
+  fit: "contain"
+  position: "50% 50%"
+  description: "沿着协议分层，理解数据如何穿过网络。"
+  source_kind: "article-existing-image"
+  source_page: "/posts/%E7%BD%91%E7%BB%9C%E5%B1%82/"
+  source_title: "网络层"
+  source_image: "https://cdn.jsdelivr.net/gh/HEYWEEN/images@main/images%E6%88%AA%E5%B1%8F2025-10-11%2015.16.33.png"
+  asset_sha256: "9eee0c9cff674cc714cf73537fff7c071614e28a9f435be2b8a577811cca65e0"
+  source_post: "/posts/%E7%BD%91%E7%BB%9C%E5%B1%82/"
+
+"数据管理基础":
+  image: "/assets/img/categories/databases.png"
+  width: 1021
+  height: 799
+  fit: "contain"
+  position: "50% 50%"
+  description: "从关系模型到 SQL，理解数据的组织与管理。"
+  source_kind: "article-existing-image"
+  source_page: "/posts/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86%E5%9F%BA%E7%A1%80%E6%A6%82%E8%BF%B0/"
+  source_title: "数据管理基础概述"
+  source_image: "https://cdn.jsdelivr.net/gh/HEYWEEN/images@main/images/image-20250924195404628.png"
+  asset_sha256: "1a47d5e9f828d675686603d1268a367a0a20d4925002f3f701449455340169ca"
+  source_post: "/posts/%E6%95%B0%E6%8D%AE%E7%AE%A1%E7%90%86%E5%9F%BA%E7%A1%80%E6%A6%82%E8%BF%B0/"
+
+"数据结构与算法":
+  image: "/assets/img/categories/algorithms.svg"
+  width: 289
+  height: 253
+  fit: "contain"
+  position: "50% 50%"
+  description: "线性表、树与散列表，梳理结构和算法。"
+  source_kind: "external-existing-image"
+  source_page: "https://commons.wikimedia.org/wiki/File:Binary_search_tree.svg"
+  source_title: "Binary search tree.svg"
+  source_image: "https://upload.wikimedia.org/wikipedia/commons/d/da/Binary_search_tree.svg"
+  asset_sha256: "beedff951e69ea02f729450ab4b476884eb21ea6e961abab14fc9dd82a55d792"
+  author: "No machine-readable author provided. Dcoetzee assumed (based on copyright claims)."
+  license: "Public domain"
+  source_post: "/posts/%E7%89%B9%E6%AE%8A%E7%9A%84%E6%A0%91/"
+
+"TEMU":
+  image: "/assets/img/categories/temu.png"
+  width: 1614
+  height: 805
+  fit: "contain"
+  position: "50% 50%"
+  description: "从指令解释到设备模拟，构建一台玩具计算机。"
+  source_kind: "external-existing-image"
+  source_page: "https://git.kb28.ch/HEL/circuiteria"
+  source_title: "RISC-V single-cycle processor datapath"
+  source_image: "https://git.kb28.ch/HEL/circuiteria/media/branch/main/gallery/test5.png"
+  asset_sha256: "98e769c2fe10fc475bdf1f56dde777fc4c515ccc5768cc402296f527155af1a2"
+  author: "Louis Heredero / Circuiteria; example circuit layout credited by the project to Prof. S. Zahno’s digital design course"
+  license: "Apache-2.0"
+  license_url: "https://git.kb28.ch/HEL/circuiteria/src/branch/main/LICENSE"
+  attribution: "Circuiteria example test5, Louis Heredero; circuit layout based on Prof. S. Zahno’s digital design course. Apache License 2.0. Used unchanged."
+  license_file: "/assets/credits/circuiteria-LICENSE.txt"
+  source_post: "/posts/P0-%E6%A8%A1%E6%8B%9F%E5%99%A8%E5%9F%BA%E7%A1%80/"
+
+"icspa":
+  image: "/assets/img/categories/icspa.png"
+  width: 1568
+  height: 774
+  fit: "contain"
+  position: "50% 50%"
+  description: "从底层程序到处理器和存储，补齐系统基础。"
+  source_kind: "article-existing-image"
+  source_page: "/posts/%E8%99%9A%E6%8B%9F%E5%AD%98%E5%82%A8/"
+  source_title: "虚拟存储"
+  source_image: "https://cdn.jsdelivr.net/gh/HEYWEEN/images@main/images%E6%88%AA%E5%B1%8F2025-12-03%2022.46.56.png"
+  asset_sha256: "21826d050fceae9be0567bc2cc5fefc1c56d1ad717b56cea265e003c22959756"
+  source_post: "/posts/%E8%99%9A%E6%8B%9F%E5%AD%98%E5%82%A8/"
+
+"编译原理":
+  image: "/assets/img/categories/compiler.png"
+  width: 1070
+  height: 350
+  fit: "contain"
+  position: "50% 50%"
+  description: "从词法、语法到语义与中间代码，追踪编译过程。"
+  source_kind: "article-existing-image"
+  source_page: "/posts/%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90/"
+  source_title: "语法分析"
+  source_image: "https://cdn.jsdelivr.net/gh/HEYWEEN/images@main/images%E6%88%AA%E5%B1%8F2026-03-23%2019.25.20.png"
+  asset_sha256: "01acd71b27cc72931a57160fb1ac7d590091d788ea6c89df8efab5d34d903a84"
+  source_post: "/posts/%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90/"
+
+"随笔":
+  image: "/assets/img/categories/essays.png"
+  width: 1280
+  height: 960
+  fit: "cover"
+  position: "50% 50%"
+  description: "记下日常、阶段感受与生活里的小事。"
+  source_kind: "article-existing-image"
+  source_page: "/posts/6.8%E9%9A%8F%E7%AC%94/"
+  source_title: "6.8随笔"
+  source_image: "https://cdn.jsdelivr.net/gh/HEYWEEN/images@main/images/image-20250929110013725.png"
+  asset_sha256: "03a3b8121d8c2bf3f49359dac01ade3311e99eafbde231324a4afaf8bafb8f2d"
+  source_post: "/posts/6.8%E9%9A%8F%E7%AC%94/"
+
+"软件工程与计算Ⅰ":
+  image: "/assets/img/categories/software-i.svg"
+  width: 1200
+  height: 600
+  fit: "contain"
+  position: "50% 50%"
+  description: "从需求与系统模型出发，理解软件工程基础。"
+  source_kind: "external-existing-image"
+  source_page: "https://commons.wikimedia.org/wiki/File:Bridge-adoptable_UML_class_diagram_example.svg"
+  source_title: "Bridge-adoptable UML class diagram example.svg"
+  source_image: "https://upload.wikimedia.org/wikipedia/commons/d/d9/Bridge-adoptable_UML_class_diagram_example.svg"
+  asset_sha256: "1a3a7051d2f609822aa96bede5ff2c37f8ed58bed72491f105af0846d9a8e416"
+  author: "Trashtoy"
+  license: "Public domain"
+  source_post: "/posts/%E8%BD%AF%E5%B7%A5%E4%B8%80%E5%A4%8D%E4%B9%A0/"
+
+"TEML":
+  image: "/assets/img/categories/teml.svg"
+  width: 309
+  height: 100
+  fit: "contain"
+  position: "50% 50%"
+  description: "从标量自动微分到 MLP，亲手实现训练基础。"
+  source_kind: "external-existing-image"
+  source_page: "https://classic.d2l.ai/chapter_multilayer-perceptrons/backprop.html"
+  source_title: "Computational graph of forward propagation"
+  source_image: "https://raw.githubusercontent.com/d2l-ai/d2l-en/master/img/forward.svg"
+  asset_sha256: "c4eb7926e5a85bfb964b877717d5711eff3450b847e5fc620dcdb6c72c8089f2"
+  author: "Dive into Deep Learning authors / d2l-ai"
+  license: "CC-BY-SA-4.0"
+  license_url: "https://github.com/d2l-ai/d2l-en/blob/master/LICENSE"
+  attribution: "Dive into Deep Learning, Computational graph of forward propagation (forward.svg). CC BY-SA 4.0. Used unchanged."
+  license_file: "/assets/credits/d2l-LICENSE.txt"
+  source_post: "/posts/P0-%E6%A0%87%E9%87%8F%E8%87%AA%E5%8A%A8%E5%BE%AE%E5%88%86/"
+
+"插件":
+  image: "/assets/img/categories/plugins.webp"
+  width: 1448
+  height: 742
+  fit: "contain"
+  position: "50% 50%"
+  description: "在笔记里嵌入交互工具，边读边试。"
+  source_kind: "external-existing-image"
+  source_page: "https://blog.jupyter.org/posts/2021/jupyterlite-jupyter-webassembly-python/"
+  source_title: "JupyterLite 浏览器端插件、服务及 Python 内核架构图"
+  source_image: "https://blog.jupyter.org/posts/2021/jupyterlite-jupyter-webassembly-python/images/013-1_f7viaaS4SYTBpjA6DTPsDQ.webp"
+  asset_sha256: "cc457554fc7f52284abe1a4321662b77e017bce7b0da8ed262998bfddd0d45ec"
+  author: "Jeremy Tuloup"
+  attribution: "Overview of the plugin-based architecture of JupyterLite — Jeremy Tuloup, Project Jupyter Blog, 2021-07-13. Unmodified image."
+
+"需求与商业模式创新":
+  image: "/assets/img/categories/business-models.png"
+  width: 1532
+  height: 868
+  fit: "contain"
+  position: "50% 50%"
+  description: "把需求、价值主张与商业模式放到一起思考。"
+  source_kind: "external-existing-image"
+  source_page: "https://commons.wikimedia.org/wiki/File:Business_Model_Canvass_template.png"
+  source_title: "Business Model Canvass template.png"
+  source_image: "https://upload.wikimedia.org/wikipedia/commons/e/e6/Business_Model_Canvass_template.png"
+  asset_sha256: "1f1f0cd3c453050e436f100370c2bdd8060fd6c75c38f381044d567555ff60bf"
+  author: "Authenticdemand"
+  license: "CC BY-SA 4.0"
+  license_url: "https://creativecommons.org/licenses/by-sa/4.0"
+  source_post: "/posts/%E5%95%86%E4%B8%9A%E6%A8%A1%E5%BC%8F%E6%88%98%E7%95%A5/"
+
+"WEB开发":
+  image: "/assets/img/categories/web.png"
+  width: 1566
+  height: 926
+  fit: "contain"
+  position: "50% 50%"
+  description: "前后端协作、Git 分支与 Web 开发实践。"
+  source_kind: "article-existing-image"
+  source_page: "/posts/WEB%E5%BC%80%E5%8F%91/"
+  source_title: "WEB开发"
+  source_image: "https://cdn.jsdelivr.net/gh/HEYWEEN/images@main/images%E6%88%AA%E5%B1%8F2026-01-31%2012.01.15.png"
+  asset_sha256: "7d8faa0fb6a1a97670791850308e962422b025c05f35137415776998b01aa24e"
+  source_post: "/posts/WEB%E5%BC%80%E5%8F%91/"
+
+"csapp":
+  image: "/assets/img/categories/csapp.png"
+  width: 958
+  height: 583
+  fit: "contain"
+  position: "50% 50%"
+  description: "用处理器、内存和 I/O，串起计算机系统。"
+  source_kind: "article-existing-image"
+  source_page: "/posts/overview/"
+  source_title: "overview"
+  source_image: "https://cdn.jsdelivr.net/gh/HEYWEEN/images@main/images/image-20250929105005528.png"
+  asset_sha256: "0c948e5c80dfe9647d1a4eb0d3f87267007d4eb910c79a68e7d225541bbd8663"
+  source_post: "/posts/overview/"
+
+"工具":
+  image: "/assets/img/categories/tools.svg"
+  width: 900
+  height: 600
+  fit: "contain"
+  position: "50% 50%"
+  description: "记录 SQL 等工具的用法与常见操作。"
+  source_kind: "external-existing-image"
+  source_page: "https://commons.wikimedia.org/wiki/File:PostgreSQL%27s_Internal_Architecture.svg"
+  source_title: "PostgreSQL 数据库的客户端、进程、内存与文件架构图"
+  source_image: "https://upload.wikimedia.org/wikipedia/commons/b/b0/PostgreSQL%27s_Internal_Architecture.svg"
+  asset_sha256: "793128de5a18d30ddbc47da4da598d8564e0fb7e6460fe496aa901249339704f"
+  author: "Kelti"
+  license: "CC BY-SA 4.0"
+  license_url: "https://commons.wikimedia.org/wiki/File:PostgreSQL%27s_Internal_Architecture.svg#Licensing"
+  attribution: "PostgreSQL's Internal Architecture — Kelti, CC BY-SA 4.0. Unmodified."

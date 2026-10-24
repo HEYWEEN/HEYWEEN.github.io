@@ -1,0 +1,14 @@
+---
+layout: page
+title: 分类封面图源
+sitemap: false
+---
+<p>以下为分类封面的原始来源与许可。图像文件保留原样，结构图在卡片内完整展示。</p>
+{% for category in site.data.blog_catalog.categories %}
+{% assign cover = site.data.category_covers[category.name] %}
+<h2>{{ category.name | escape }}</h2>
+<p>{% assign source_start = cover.source_page | slice: 0, 1 %}<a href="{% if source_start == '/' %}{{ cover.source_page | relative_url }}{% else %}{{ cover.source_page }}{% endif %}">{{ cover.source_title | default: '原始页面' | escape }}</a>{% if cover.author %}<br>作者：{{ cover.author | escape }}{% endif %}{% if cover.license %}<br>许可：{% if cover.license_url %}<a href="{{ cover.license_url }}">{{ cover.license | escape }}</a>{% else %}{{ cover.license | escape }}{% endif %}{% if cover.license_file %} · <a href="{{ cover.license_file | relative_url }}">许可全文</a>{% endif %}{% endif %}{% if cover.attribution %}<br>{{ cover.attribution | escape }}{% endif %}</p>
+{% endfor %}
+
+<h2>社交图标</h2>
+<p>GitHub、邮件与 bilibili 图标来自 <a href="https://github.com/FortAwesome/Font-Awesome/tree/6.7.2">Font Awesome Free 6.7.2</a>，图标采用 CC BY 4.0，保留原始文件。<a href="{{ '/assets/credits/fontawesome-LICENSE.txt' | relative_url }}">许可全文</a></p>

@@ -1,0 +1,11 @@
+---
+layout: default
+---
+<div class="page-shell catalog-layout" id="catalog">
+  <div class="page-intro"><h1>文章</h1></div>
+  <div class="catalog-controls"><div class="category-select"><label for="category-filter">全部分类</label><select id="category-filter"><option value="">全部文章</option>{% for category in site.data.blog_catalog.categories %}<option value="{{ category.name | escape }}">{{ category.name | replace: 'ⅠⅠ', 'Ⅱ' | escape }}（{{ category.count }}）</option>{% endfor %}</select></div><label class="article-search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.5"/><path d="m16 16 4.4 4.4"/></svg><input type="search" id="list-search" placeholder="搜索" aria-label="筛选文章标题和摘要"></label></div>
+  <p class="catalog-count" id="catalog-count" aria-live="polite">共 {{ site.data.blog_catalog.total }} 篇</p>
+  <div id="article-list" class="article-grid">{% for post in site.posts %}{% unless post.hidden %}{% include blog/post-row.html post=post catalog=true %}{% endunless %}{% endfor %}</div>
+  <div id="catalog-empty" class="catalog-empty" hidden><h2>暂时没找到</h2><p>换个关键词，或者看看其他分类。</p><button type="button" id="reset-catalog">查看全部文章</button></div>
+  <noscript><p>全部文章已列在下方；启用 JavaScript 后可以按分类筛选和搜索。</p></noscript>
+</div>

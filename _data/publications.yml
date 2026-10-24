@@ -1,0 +1,91 @@
+- id: covebench
+  title: "CoVEBench: Can Video Editing Models Handle Complex Instructions?"
+  url: https://arxiv.org/abs/2606.08415
+  venue: arXiv 2026
+  role: Co-first author
+  equal_contribution: true
+  authors:
+    - { name: Jiangtao Wu, equal: true }
+    - { name: Jiaming Wang, equal: true }
+    - { name: Yiwen He, equal: true }
+    - { name: Yuanxing Zhang }
+    - { name: Shihao Li }
+    - { name: Dunyuan Liu }
+    - { name: Xuedong Zhao }
+    - { name: Jialu Chen }
+    - { name: Zekun Moore Wang }
+    - { name: Jiaheng Liu }
+  summary: A benchmark for compositional video editing that evaluates instruction compliance, video quality, and fidelity to unedited content.
+  image: /assets/img/publications/covebench.png
+  image_width: 1148
+  image_height: 624
+  image_alt: CoVEBench 复合视频编辑指令与诊断评测框架
+  image_source: https://arxiv.org/html/2606.08415v2/overview.png
+  metadata_source: https://arxiv.org/html/2606.08415v2
+
+- id: vidic
+  short_title: ViDiC
+  title: "ViDiC: Video Difference Captioning"
+  url: https://neurips.cc/virtual/2026/loc/sydney/poster/139291
+  venue: NeurIPS 2026
+  role: Co-author
+  equal_contribution: true
+  equal_contribution_source: https://arxiv.org/pdf/2512.03405v1
+  authors:
+    - { name: Jiangtao Wu, equal: true }
+    - { name: Shihao Li, equal: true }
+    - { name: Zhaozhou Bian, equal: true }
+    - { name: Jialu Chen }
+    - { name: Yiwen He }
+    - { name: Runzhe Wen }
+    - { name: An Ping }
+    - { name: Jiakai Wang }
+    - { name: Yuanxing Zhang }
+    - { name: Jiaheng Liu }
+  summary: A benchmark for fine-grained video comparison, using paired similarity and difference checklists to evaluate how multimodal models understand changes in subjects, motion, camera work, and more.
+  image: /assets/img/publications/vidic.png
+  image_width: 1219
+  image_height: 689
+  image_alt: ViDiC 七类视频差异与双清单评测示例
+  image_source: https://arxiv.org/html/2512.03405v3/page2.png
+  metadata_source: https://neurips.cc/virtual/2026/loc/sydney/poster/139291
+
+- id: if-vidcap
+  short_title: IF-VidCap
+  title: "IF-VidCap: Can Video Caption Models Follow Instructions?"
+  url: https://proceedings.iclr.cc/paper_files/paper/2026/hash/27befed4547edcb4bdeacef9472cadee-Abstract-Conference.html
+  venue: ICLR 2026
+  role: Co-author
+  equal_contribution: true
+  equal_contribution_source: https://openreview.net/pdf?id=lBXJexaC8a
+  authors:
+    - { name: Shihao Li, equal: true }
+    - { name: Yuanxing Zhang, equal: true }
+    - { name: Jiangtao Wu, equal: true }
+    - { name: Zhide Lei, equal: true }
+    - { name: Yiwen He }
+    - { name: Runzhe Wen }
+    - { name: Chenxi Liao }
+    - { name: Chengkang Jiang }
+    - { name: An Ping }
+    - { name: Shuo Gao }
+    - { name: Suhan Wang }
+    - { name: Zhaozhou Bian }
+    - { name: Zijun Zhou }
+    - { name: Jingyi Xie }
+    - { name: Jiayi Zhou }
+    - { name: Jing Wang }
+    - { name: Yifan Yao }
+    - { name: Weihao Xie }
+    - { name: Yingshui Tan }
+    - { name: Yanghai Wang }
+    - { name: Qianqian Xie }
+    - { name: Zhaoxiang Zhang }
+    - { name: Jiaheng Liu }
+  summary: A 1,400-example benchmark for instruction-following video captioning that evaluates both format compliance and content accuracy under user-specified constraints.
+  image: /assets/img/publications/if-vidcap.png
+  image_width: 2790
+  image_height: 1512
+  image_alt: IF-VidCap 对比视频描述模型遵循格式与内容指令的表现
+  image_source: https://if-vidcap.github.io/static/images/first_page.png
+  metadata_source: https://proceedings.iclr.cc/paper_files/paper/2026/hash/27befed4547edcb4bdeacef9472cadee-Abstract-Conference.html

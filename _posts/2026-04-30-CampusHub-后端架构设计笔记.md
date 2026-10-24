@@ -2,7 +2,6 @@
 title: "CampusHub 后端架构设计笔记"
 date: 2026-04-30  # 文章发布时间
 categories: [软件工程与计算ⅠⅠ] # 你的分类
-tags: [笔记]     # 你的标签
 math: true
 ---
 

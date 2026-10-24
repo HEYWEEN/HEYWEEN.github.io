@@ -1,0 +1,10 @@
+<a class="skip-link" href="#main">跳到正文</a>
+<header class="site-header{% unless page.layout == 'home' %} inner-page{% endunless %}" id="site-header">
+  <a class="wordmark" href="{{ '/' | relative_url }}" aria-label="HEYWEEN 首页">HEYWEEN</a>
+  <nav aria-label="主导航">
+    <a href="{{ '/' | relative_url }}"{% if page.layout == 'home' %} aria-current="page"{% endif %}>首页</a>
+    <a href="{{ '/about/' | relative_url }}"{% if page.layout == 'about' %} aria-current="page"{% endif %}>关于</a>
+    <a href="{{ '/articles/' | relative_url }}"{% if page.layout == 'articles' or page.layout == 'post' or page.layout == 'categories' or page.layout == 'category' %} aria-current="page"{% endif %}>文章</a>
+    <span class="nav-indicator" aria-hidden="true"></span>
+  </nav>
+</header>

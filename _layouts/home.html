@@ -1,151 +1,28 @@
 ---
 layout: default
-refactor: true
 ---
-
-{% include lang.html %}
-
-{% assign all_pinned = site.posts | where: 'pin', 'true' %}
-{% assign all_normal = site.posts | where_exp: 'item', 'item.pin != true and item.hidden != true' %}
-
-{% assign posts = '' | split: '' %}
-
-<!-- Get pinned posts on current page -->
-
-{% assign visible_start = paginator.page | minus: 1 | times: paginator.per_page %}
-{% assign visible_end = visible_start | plus: paginator.per_page %}
-
-{% if all_pinned.size > visible_start %}
-  {% if all_pinned.size > visible_end %}
-    {% assign pinned_size = paginator.per_page %}
-  {% else %}
-    {% assign pinned_size = all_pinned.size | minus: visible_start %}
-  {% endif %}
-
-  {% for i in (visible_start..all_pinned.size) limit: pinned_size %}
-    {% assign posts = posts | push: all_pinned[i] %}
-  {% endfor %}
-{% else %}
-  {% assign pinned_size = 0 %}
-{% endif %}
-
-<!-- Get normal posts on current page -->
-
-{% assign normal_size = paginator.posts | size | minus: pinned_size %}
-
-{% if normal_size > 0 %}
-  {% if pinned_size > 0 %}
-    {% assign normal_start = 0 %}
-  {% else %}
-    {% assign normal_start = visible_start | minus: all_pinned.size %}
-  {% endif %}
-
-  {% assign normal_end = normal_start | plus: normal_size | minus: 1 %}
-
-  {% for i in (normal_start..normal_end) %}
-    {% assign posts = posts | push: all_normal[i] %}
-  {% endfor %}
-{% endif %}
-
-<!-- 终端 Hero（仅暗色可见；亮色模式 display:none） -->
-<section id="term-hero" aria-hidden="true">
-  <div class="th-line th-prompt">
-    <span class="th-ps">$</span>
-    <span class="th-cmd">whoami</span>
-    <span class="th-cursor">▊</span>
-  </div>
-  <h1 class="th-title">
-    <span class="th-hash">#</span><span class="th-word">HEYWEEN</span>
-    <span class="th-sub">— engineer / student / reader</span>
-  </h1>
-  <div class="th-line th-quote">
-    <span class="th-comment">// &ldquo;当时只记入山深，青溪几度到云林&rdquo;</span>
-  </div>
-  <div class="th-line th-code">
-    <span class="th-kw">const</span>
-    <span class="th-var">focus</span>
-    <span class="th-op">=</span>
-    <span class="th-bracket">[</span><span class="th-str">&ldquo;operating-systems&rdquo;</span>,
-    <span class="th-str">&ldquo;deep-learning&rdquo;</span>,
-    <span class="th-str">&ldquo;papers&rdquo;</span><span class="th-bracket">]</span><span class="th-op">;</span>
-  </div>
-  <div class="th-rule"></div>
-  <div class="th-section">
-    <span class="th-arrow">▸</span>
-    <span class="th-section-label">ls -lt posts/</span>
-  </div>
+<section class="hero">
+  <img class="hero-image" src="{{ site.blog.background | relative_url }}" alt="" fetchpriority="high" width="3841" height="2161">
+  <div class="hero-shade"></div><div class="hero-copy"><img class="hero-avatar" src="{{ site.blog.avatar | relative_url }}" alt="HEYWEEN 的头像" width="2048" height="2048"><h1><span class="sr-only">HEYWEEN's Blog</span>{% include blog/hero-title.svg %}</h1><p class="hero-poem"><span class="sr-only">{{ site.tagline | escape }}</span><span class="poem-line" aria-hidden="true">{% include blog/poem-line-1.svg %}</span><span class="poem-divider" aria-hidden="true">，</span><span class="poem-line" aria-hidden="true">{% include blog/poem-line-2.svg %}</span></p></div>
+  <svg class="hero-wave" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true"><path d="M-40 22C220 75 420 0 700 32S1190 85 1480 16V100H-40Z" fill="#fff" opacity=".38"/><path d="M-40 50C230 12 390 76 660 46S1190 20 1480 54V100H-40Z" fill="#fff" opacity=".6"/><path d="M-40 58C270 83 400 35 700 56S1150 83 1480 57V100H-40Z" fill="#fffdf9"/></svg>
 </section>
-
-<div id="post-list" class="flex-grow-1 px-xl-1">
-  {% for post in posts %}
-    <article class="card-wrapper card">
-      <a href="{{ post.url | relative_url }}" class="post-preview row g-0 flex-md-row-reverse">
-        {% assign card_body_col = '12' %}
-
-        {% if post.image %}
-          {% assign src = post.image.path | default: post.image %}
-          {% unless src contains '//' %}
-            {% assign src = post.media_subpath | append: '/' | append: src | replace: '//', '/' %}
-          {% endunless %}
-
-          {% assign alt = post.image.alt | xml_escape | default: 'Preview Image' %}
-
-          {% assign lqip = null %}
-
-          {% if post.image.lqip %}
-            {% capture lqip %}lqip="{{ post.image.lqip }}"{% endcapture %}
-          {% endif %}
-
-          <div class="col-md-5">
-            <img src="{{ src }}" alt="{{ alt }}" {{ lqip }}>
-          </div>
-
-          {% assign card_body_col = '7' %}
-        {% endif %}
-
-        <div class="col-md-{{ card_body_col }}">
-          <div class="card-body d-flex flex-column">
-            <h1 class="card-title my-2 mt-md-0">{{ post.title }}</h1>
-
-            <div class="card-text content mt-0 mb-3">
-              <p>{% include post-description.html %}</p>
-            </div>
-
-            <div class="post-meta flex-grow-1 d-flex align-items-end">
-              <div class="me-auto">
-                <!-- posted date -->
-                <i class="far fa-calendar fa-fw me-1"></i>
-                {% include datetime.html date=post.date lang=lang %}
-
-                <!-- categories -->
-                {% if post.categories.size > 0 %}
-                  <i class="far fa-folder-open fa-fw me-1"></i>
-                  <span class="categories">
-                    {% for category in post.categories %}
-                      {{ category }}
-                      {%- unless forloop.last -%},{%- endunless -%}
-                    {% endfor %}
-                  </span>
-                {% endif %}
-              </div>
-
-              {% if post.pin %}
-                <div class="pin ms-1">
-                  <i class="fas fa-thumbtack fa-fw"></i>
-                  <span>{{ site.data.locales[lang].post.pin_prompt }}</span>
-                </div>
-              {% endif %}
-            </div>
-            <!-- .post-meta -->
-          </div>
-          <!-- .card-body -->
-        </div>
-      </a>
-    </article>
-  {% endfor %}
+<div class="home-content" id="discover-content">
+  <div class="home-lower"><section aria-labelledby="home-categories-title"><div class="section-heading"><h2 id="home-categories-title">文章分类</h2><a href="{{ '/articles/' | relative_url }}">全部文章 ↗</a></div><div class="topic-grid">
+    {% for category in site.data.blog_catalog.categories %}{% include blog/category-card.html category=category index=forloop.index %}{% endfor %}
+  </div></section>
+  <aside class="home-side">
+    <div class="profile-note">
+      <img src="{{ site.blog.avatar | relative_url }}" alt="何翌闻" width="2048" height="2048" loading="lazy">
+      <h3>何翌闻</h3>
+      <p>南京大学软件学院</p>
+      <nav class="profile-social" aria-label="社交链接">
+        <a href="https://github.com/HEYWEEN" aria-label="GitHub" title="GitHub" target="_blank" rel="noopener noreferrer"><img src="{{ '/assets/img/icons/github.svg' | relative_url }}" alt="" width="20" height="20"></a>
+        <a href="mailto:yiwenhe@smail.nju.edu.cn" aria-label="邮件" title="邮件"><img src="{{ '/assets/img/icons/envelope.svg' | relative_url }}" alt="" width="20" height="20"></a>
+        {% assign bilibili = site.data.contact | where: 'type', 'bilibili' | first %}<a href="{{ bilibili.url }}" aria-label="bilibili" title="bilibili" target="_blank" rel="noopener noreferrer"><img src="{{ '/assets/img/icons/bilibili.svg' | relative_url }}" alt="" width="20" height="20"></a>
+      </nav>
+      <a class="text-link profile-action" href="{{ '/about/' | relative_url }}"><img src="{{ '/assets/img/icons/capybara-head.webp' | relative_url }}" alt="" width="32" height="32" loading="lazy">关于我</a>
+      <a id="relax" class="text-link profile-action" href="#relax"><img src="{{ '/assets/img/icons/sacabambaspis-head.webp' | relative_url }}" alt="" width="32" height="32" loading="lazy">放松一下</a>
+    </div>
+  </aside>
+  </div>
 </div>
-<!-- #post-list -->
-
-{% if paginator.total_pages > 1 %}
-  {% include post-paginator.html %}
-{% endif %}

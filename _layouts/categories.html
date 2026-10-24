@@ -1,0 +1,4 @@
+---
+layout: default
+---
+<div class="page-shell"><div class="page-intro"><h1>按分类读</h1><p>{{ site.data.blog_catalog.total }} 篇笔记，{{ site.data.blog_catalog.categories.size }} 个分类。</p></div><div class="categories">{% for category in site.data.blog_catalog.categories %}<a class="category" href="{{ '/articles/' | relative_url }}?category={{ category.name | uri_escape }}"><span class="category-icon">{% include blog/icon.html name=category.icon %}</span><div class="category-top"><h3>{{ category.name | escape }}</h3><span class="category-count">{{ category.count }} 篇</span></div></a>{% endfor %}</div></div>
