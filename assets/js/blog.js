@@ -280,40 +280,130 @@
     observer.observe(comments);
   }
 
-  // Loading and voluntary replay have separate lifetimes; previews never delay entry.
+  // Select once per page change; explicit previews default to the original rider.
   const intro = $('#intro'), character = $('.intro-character', intro);
   const background = [header, $('#main'), $('.site-footer'), $('.skip-link')].filter(Boolean);
-  const sprite = new Image();
-  sprite.src = `${base}/assets/img/capybara-sprint.webp`;
-  const spriteReady = sprite.decode ? sprite.decode().catch(() => {}) : Promise.resolve();
+  const relaxScene = character.firstElementChild.cloneNode(true);
+  const variants = {
+    'fish-hug': {kind: 'sheet', label: '卡皮巴拉与小鱼的手绘动画'},
+    'fish-sip': {kind: 'sheet', label: '卡皮巴拉与小鱼的手绘动画'},
+    watermelon: {kind: 'sheet', label: '卡皮巴拉与西瓜的手绘动画'},
+    'together-spin': {kind: 'spin', duration: '1.4s', label: '一起转圈的卡皮巴拉和萨卡班班甲鱼'},
+    relax: {kind: 'rider', label: '暖焦糖色卡皮巴拉骑着萨卡班班甲鱼，向右冲刺'},
+    'fish-sleep': {kind: 'sheet', duration: '1.6s', label: '漂在水面睡觉、呼吸冒泡的萨卡班班甲鱼'}
+  };
+  const variantIds = Object.keys(variants), preparedVariants = new Map();
+  const chooseVariant = () => variantIds[Math.floor(Math.random() * variantIds.length)];
+  const variantUrl = id => `${base}/assets/img/${id === 'relax' ? 'capybara-sprint.webp' : `loaders/${id}.webp`}`;
+  const prepareVariant = id => {
+    if (preparedVariants.has(id)) return preparedVariants.get(id);
+    const ready = new Promise(resolve => {
+      const image = new Image();
+      image.onload = () => { if (!image.decode) resolve(true); };
+      image.onerror = () => resolve(false);
+      image.src = variantUrl(id);
+      if (image.decode) image.decode().then(() => resolve(true), () => resolve(false));
+    }).then(loaded => {
+      if (!loaded) preparedVariants.delete(id);
+      return loaded;
+    });
+    preparedVariants.set(id, ready);
+    return ready;
+  };
+  const renderVariant = id => {
+    if (id === 'relax') {
+      const scene = relaxScene.cloneNode(true);
+      $('.capybara-frames', scene).style.backgroundImage = `url("${variantUrl(id)}")`;
+      character.replaceChildren(scene);
+      return;
+    }
+    const variant = variants[id], scene = document.createElement('div');
+    scene.className = `intro-loader intro-loader--${id === 'fish-sleep' ? 'sleep' : variant.kind}`;
+    scene.setAttribute('role', 'img'); scene.setAttribute('aria-label', variant.label);
+    if (id === 'fish-sleep') {
+      const fish = document.createElement('div');
+      fish.className = 'intro-loader__fish'; fish.setAttribute('aria-hidden', 'true');
+      fish.style.backgroundImage = `url("${variantUrl(id)}")`;
+      scene.append(fish);
+    } else scene.style.backgroundImage = `url("${variantUrl(id)}")`;
+    if (variant.duration) scene.style.setProperty('--intro-loader-duration', variant.duration);
+    character.replaceChildren(scene);
+  };
+
+  // A one-use, tab-local handoff keeps native navigation's two documents in sync.
+  const handoffKey = `heyween-loader-handoff:${base || '/'}`, handoffLifetime = 30000;
+  const destinationKey = url => `${url.pathname.replace(/\/+$/, '') || '/'}${url.search}`;
+  const readHandoff = () => {
+    try { return JSON.parse(sessionStorage.getItem(handoffKey)); } catch (_) { return null; }
+  };
+  const discardHandoff = token => {
+    try {
+      if (!token || readHandoff()?.token === token) sessionStorage.removeItem(handoffKey);
+    } catch (_) { /* Storage can be unavailable; native navigation remains usable. */ }
+  };
+  const consumeHandoff = () => {
+    const handoff = readHandoff();
+    discardHandoff();
+    const age = Date.now() - handoff?.createdAt;
+    return handoff && variantIds.includes(handoff.id) && typeof handoff.token === 'string' &&
+      handoff.destination === destinationKey(new URL(location.href)) && age >= 0 && age < handoffLifetime ? handoff.id : null;
+  };
+  let navigationToken, navigationExpiryTimer;
+  const clearNavigationHandoff = () => {
+    clearTimeout(navigationExpiryTimer);
+    if (navigationToken) discardHandoff(navigationToken);
+    navigationToken = null;
+  };
+  const writeHandoff = (id, destination) => {
+    clearNavigationHandoff();
+    navigationToken = `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+    try {
+      sessionStorage.setItem(handoffKey, JSON.stringify({id, destination: destinationKey(destination), createdAt: Date.now(), token: navigationToken}));
+    } catch (_) { /* The selected scene still works when storage is blocked. */ }
+    const token = navigationToken;
+    navigationExpiryTimer = setTimeout(() => { if (navigationToken === token) clearNavigationHandoff(); }, handoffLifetime);
+  };
+  const pageVariant = consumeHandoff() || chooseVariant();
   let introActive = false, introMode, introTimer, autoIntroDelay, lastFocus, exitAnimation, introCycle = 0;
   const finishIntro = () => {
     intro.hidden = true; intro.style.opacity = '';
+    exitAnimation = null;
     document.body.style.overflow = '';
     background.forEach(element => { element.inert = false; });
     const returnFocus = lastFocus?.isConnected && !intro.contains(lastFocus) && lastFocus !== document.body ? lastFocus : $('#main');
     returnFocus?.focus({preventScroll: true});
   };
-  const closeIntro = () => {
+  const closeIntro = (preserveNavigation = false) => {
+    // Only the navigation watchdog preserves its handoff; DOM events are not flags.
+    if (preserveNavigation !== true) clearNavigationHandoff();
     // A second click during the fade must not invalidate its cleanup callback.
     if (!introActive && !introMode) return;
     const closing = ++introCycle;
     introMode = null; clearTimeout(introTimer); clearTimeout(autoIntroDelay);
     if (location.hash === '#intro-preview' || location.hash === '#relax') history.replaceState(null, '', `${location.pathname}${location.search}`);
-    if (!introActive) return;
+    if (!introActive) {
+      if (!intro.hidden) { exitAnimation?.pause(); finishIntro(); }
+      return;
+    }
     introActive = false;
     if (reduced.matches || !window.anime) { finishIntro(); return; }
     exitAnimation = window.anime.animate(intro, {opacity: [1, 0], duration: 420, ease: 'inOutQuad', onComplete: () => { if (closing === introCycle) finishIntro(); }});
   };
-  const showIntro = async (duration = 0, mode = 'preview') => {
+  const showIntro = async (duration = 0, mode = 'preview', variantId = 'relax') => {
     const opening = ++introCycle;
     clearTimeout(introTimer); exitAnimation?.pause();
     if (mode !== 'loading') clearTimeout(autoIntroDelay);
+    if (mode !== 'navigation') clearNavigationHandoff();
     introMode = mode;
-    await spriteReady;
+    const openingNavigationToken = mode === 'navigation' ? navigationToken : null;
+    // Slow native navigation can outlive the UI watchdog and still use its handoff.
+    if (duration > 0) introTimer = setTimeout(() => { if (opening === introCycle) closeIntro(mode === 'navigation'); }, duration);
+    const loaded = await prepareVariant(variantId);
+    if (!loaded && openingNavigationToken && navigationToken === openingNavigationToken) clearNavigationHandoff();
     if (opening !== introCycle) return;
+    if (!loaded) { closeIntro(); return; }
     if (imageDialog.open) {
-      if (mode === 'loading') { introMode = null; return; }
+      if (mode === 'loading') { closeIntro(); return; }
       imageDialog.close();
     }
     if (!intro.contains(document.activeElement)) lastFocus = document.activeElement;
@@ -321,10 +411,8 @@
     background.forEach(element => { element.inert = true; });
     intro.hidden = false; intro.style.opacity = '1';
     document.body.style.overflow = 'hidden';
-    // Reinsert the owned scene to restart its CSS frame cycle on replay.
-    character.replaceChildren(character.firstElementChild.cloneNode(true));
+    renderVariant(variantId);
     intro.focus({preventScroll: true});
-    if (duration > 0) introTimer = setTimeout(closeIntro, duration);
   };
   intro.addEventListener('click', event => {
     if (!character.contains(event.target)) closeIntro();
@@ -334,11 +422,15 @@
     if (event.key === 'Tab') { event.preventDefault(); intro.focus(); }
   });
   const previewRequested = () => location.hash === '#relax' || location.hash === '#intro-preview';
+  const previewVariant = () => {
+    const requested = new URLSearchParams(location.search).get('loader');
+    return location.hash === '#intro-preview' && variantIds.includes(requested) ? requested : 'relax';
+  };
   window.addEventListener('hashchange', () => {
-    if (previewRequested()) showIntro();
+    if (previewRequested()) showIntro(0, 'preview', previewVariant());
     else if (introMode === 'preview') closeIntro();
   });
-  if (previewRequested()) showIntro();
+  if (previewRequested()) showIntro(0, 'preview', previewVariant());
   if (!reduced.matches && !previewRequested()) {
     // Only initial/visible images belong to the page load; lazy images stay lazy.
     const images = $$('img', $('#main')).filter(image => {
@@ -349,7 +441,7 @@
     });
     const pageLoaded = document.readyState === 'complete' ? Promise.resolve() : new Promise(resolve => window.addEventListener('load', resolve, {once: true}));
     const decoded = Promise.allSettled([pageLoaded, ...images.map(image => image.decode ? image.decode() : Promise.resolve())]);
-    autoIntroDelay = setTimeout(() => showIntro(8000, 'loading'), 100);
+    autoIntroDelay = setTimeout(() => showIntro(8000, 'loading', pageVariant), 100);
     decoded.finally(() => {
       clearTimeout(autoIntroDelay); if (introMode === 'loading') closeIntro();
       if (isHome) motion('.hero-copy > *', {opacity: [0, 1], y: [12, 0], duration: 650, delay: window.anime?.stagger(80), ease: 'outCubic'});
@@ -364,13 +456,19 @@
     const destination = new URL(link.href);
     if (!/^https?:$/.test(destination.protocol) || destination.origin !== location.origin) return;
     if (destination.pathname === location.pathname && destination.search === location.search) return;
-    queueMicrotask(() => { if (!event.defaultPrevented) showIntro(8000, 'navigation'); });
+    queueMicrotask(() => {
+      if (event.defaultPrevented) return;
+      const variantId = chooseVariant();
+      writeHandoff(variantId, destination);
+      showIntro(8000, 'navigation', variantId);
+    });
   });
 
   // A cached document must not retain the outgoing navigation's overlay or locks.
   window.addEventListener('pageshow', event => {
     if (!event.persisted) return;
     ++introCycle; clearTimeout(introTimer); clearTimeout(autoIntroDelay); exitAnimation?.pause();
+    clearNavigationHandoff(); consumeHandoff();
     introActive = false; introMode = null; finishIntro();
   });
 

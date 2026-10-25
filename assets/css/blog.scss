@@ -2898,7 +2898,7 @@ dialog::backdrop {
 .capybara-charge { animation: capy-charge 1.28s ease-in-out infinite; }
 
 .capybara-frames {
-  background: url('{{ '/assets/img/capybara-sprint.webp' | relative_url }}') no-repeat;
+  background-repeat: no-repeat;
   background-size: 400% 200%;
   animation: capy-sprint .64s steps(1, end) infinite;
 }
@@ -2955,6 +2955,100 @@ dialog::backdrop {
 
 @media (prefers-reduced-motion: reduce) {
   .capybara-wind { display: none; }
+}
+
+/* Only the selected scene receives its image URL from the loader registry. */
+.intro-loader {
+  width: 100%;
+  aspect-ratio: 1;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+}
+
+.intro-loader--sheet {
+  background-size: 400% 200%;
+  background-position: 0 0;
+  animation: intro-loader-frames var(--intro-loader-duration, 1s) steps(1, end) infinite;
+}
+
+.intro-loader--spin {
+  animation: intro-loader-turn var(--intro-loader-duration, 1.4s) linear infinite;
+  transform-origin: center;
+}
+
+.intro-character .intro-loader--spin {
+  width: 60%;
+  margin-inline: auto;
+}
+
+.intro-loader--sleep {
+  position: relative;
+  isolation: isolate;
+}
+
+.intro-loader--sleep::before,
+.intro-loader--sleep::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+}
+
+.intro-loader--sleep::before {
+  z-index: 0;
+  top: 32%;
+  left: 5%;
+  width: 90%;
+  height: 62%;
+  border-radius: 42% 58% 46% 54% / 10% 12% 42% 44%;
+  background: #d8f1fb;
+  box-shadow: inset 0 0 10px rgba(240, 249, 250, .65);
+}
+
+.intro-loader--sleep::after {
+  z-index: 2;
+  top: 30%;
+  left: 5%;
+  width: 90%;
+  height: 64%;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 192' preserveAspectRatio='none'%3E%3Cpath d='M4 6C22 2 39 10 58 5S91 9 111 5S145 11 165 5S203 10 234 4C243 57 242 111 232 151C216 181 170 190 120 192C63 191 20 181 8 151C0 109 0 58 4 6Z' fill='%23d8f1fb' fill-opacity='.17'/%3E%3Cpath d='M4 6C22 2 39 10 58 5S91 9 111 5S145 11 165 5S203 10 234 4M31 21C52 15 69 26 89 20S125 25 148 20S185 24 207 19' fill='none' stroke='%2384adbe' stroke-opacity='.8' stroke-width='1.7' stroke-linecap='round'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+}
+
+.intro-loader__fish {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  background-size: 400% 200%;
+  transform-origin: 50% 58%;
+  animation: intro-loader-frames var(--intro-loader-duration, 1.6s) steps(1, end) infinite,
+    intro-loader-drift 5.6s cubic-bezier(.45, 0, .55, 1) infinite;
+}
+
+@keyframes intro-loader-drift {
+  0%, 100% { transform: translate(-4%, 0) rotate(-1deg); }
+  50% { transform: translate(4%, 1.5%) rotate(1deg); }
+}
+
+@keyframes intro-loader-frames {
+  0%, 100% { background-position: 0 0; }
+  12.5% { background-position: 33.333333% 0; }
+  25% { background-position: 66.666667% 0; }
+  37.5% { background-position: 100% 0; }
+  50% { background-position: 0 100%; }
+  62.5% { background-position: 33.333333% 100%; }
+  75% { background-position: 66.666667% 100%; }
+  87.5% { background-position: 100% 100%; }
+}
+
+@keyframes intro-loader-turn {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro-loader,
+  .intro-loader__fish { animation: none !important; }
 }
 
 /* Expanded text keeps tables and code within the reading column. */
