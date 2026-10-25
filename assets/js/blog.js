@@ -280,7 +280,7 @@
     observer.observe(comments);
   }
 
-  // Select once per page change; explicit previews default to the original rider.
+  // Select once per page change; relaxation draws again on every opening.
   const intro = $('#intro'), character = $('.intro-character', intro);
   const background = [header, $('#main'), $('.site-footer'), $('.skip-link')].filter(Boolean);
   const relaxScene = character.firstElementChild.cloneNode(true);
@@ -423,6 +423,7 @@
   });
   const previewRequested = () => location.hash === '#relax' || location.hash === '#intro-preview';
   const previewVariant = () => {
+    if (location.hash === '#relax') return chooseVariant();
     const requested = new URLSearchParams(location.search).get('loader');
     return location.hash === '#intro-preview' && variantIds.includes(requested) ? requested : 'relax';
   };
